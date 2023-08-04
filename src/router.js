@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard.vue"
 import Home from "@/components/Home.vue";
 import Sync from "@/components/Sync.vue";
 import Control from "@/components/Control.vue";
+import Login from "@/components/Login.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ VueRouter.prototype.push = function push(location) {
 const routes = [
     {
         path: "/",
+        name: "login",
+        component: Login,
+    },
+    {
+        path: "/home",
         name: "home",
         component: Home,
         redirect: "/dashboard",
@@ -60,22 +66,22 @@ const router = new VueRouter({
     base: '/'
 });
 
-//
-// router.beforeEach((to, from, next) => {
-//     let token = localStorage.getItem("token")
-//     if (token == null || token === '') {
-//         if (to.path === '/' || to.path === '/passwordreset') {
-//             next();
-//         } else {
-//             next({name: 'login'});
-//         }
-//     } else {
-//         if (to.path === '/') {
-//             next({name: 'admin'});
-//         } else {
-//             next();
-//         }
-//     }
-// })
+
+router.beforeEach((to, from, next) => {
+    let token = localStorage.getItem("token")
+    if (token == null || token === '') {
+        if (to.path === '/' || to.path === '/passwordreset') {
+            next();
+        } else {
+            next({name: 'login'});
+        }
+    } else {
+        if (to.path === '/') {
+            next({name: 'home'});
+        } else {
+            next();
+        }
+    }
+})
 
 export default router;

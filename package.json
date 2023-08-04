@@ -1,5 +1,5 @@
 {
-  "name": "industrial-design",
+  "name": "cloud-platform",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -24,6 +24,7 @@
     "qrcode": "^1.5.1",
     "qs": "^6.11.0",
     "roboto-fontface": "*",
+    "superagent": "5.3.1",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.2",
     "vue-json-viewer": "^2.2.22",
@@ -70,7 +71,12 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "no-unused-vars": "off"
+      "no-unused-vars": "off",
+      "no-prototype-builtins": "off",
+      "no-extra-semi": "off",
+      "no-redeclare": "off",
+      "no-useless-escape": "off",
+      "no-empty": "off"
     }
   },
   "browserslist": [

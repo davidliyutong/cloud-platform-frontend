@@ -4,7 +4,7 @@
             <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title class="text-h6">APIServer</v-list-item-title>
-                    <v-list-item-subtitle>WebUI For Azure Kinect APIServer</v-list-item-subtitle>
+                    <v-list-item-subtitle>UI For Cloud Platform APIServer</v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
@@ -17,22 +17,22 @@
                         <v-list-item-title>Dashboard</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-                <v-list-item link to="/sync">
-                    <v-list-item-action>
-                        <v-icon>mdi-sync</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Time Sync</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
-                <v-list-item link to="/control">
-                    <v-list-item-action>
-                        <v-icon>mdi-camera-control</v-icon>
-                    </v-list-item-action>
-                    <v-list-item-content>
-                        <v-list-item-title>Control Panel</v-list-item-title>
-                    </v-list-item-content>
-                </v-list-item>
+<!--                <v-list-item link to="/sync">-->
+<!--                    <v-list-item-action>-->
+<!--                        <v-icon>mdi-sync</v-icon>-->
+<!--                    </v-list-item-action>-->
+<!--                    <v-list-item-content>-->
+<!--                        <v-list-item-title>Time Sync</v-list-item-title>-->
+<!--                    </v-list-item-content>-->
+<!--                </v-list-item>-->
+<!--                <v-list-item link to="/control">-->
+<!--                    <v-list-item-action>-->
+<!--                        <v-icon>mdi-camera-control</v-icon>-->
+<!--                    </v-list-item-action>-->
+<!--                    <v-list-item-content>-->
+<!--                        <v-list-item-title>Control Panel</v-list-item-title>-->
+<!--                    </v-list-item-content>-->
+<!--                </v-list-item>-->
                 <!--        <v-list-item link to="/policies">-->
                 <!--          <v-list-item-action>-->
                 <!--            <v-icon>mdi-router</v-icon>-->
