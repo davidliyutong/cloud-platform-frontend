@@ -13,3 +13,8 @@
 
 import ApiClient from '../ApiClient';
 // TODO: add anyof model support
+export default class Email {
+    static constructFromObject(v) {
+        return v
+    }
+}

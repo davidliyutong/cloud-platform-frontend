@@ -5,6 +5,10 @@ import Home from "@/components/Home.vue";
 import Sync from "@/components/Sync.vue";
 import Control from "@/components/Control.vue";
 import Login from "@/components/Login.vue";
+import Profile from "@/components/Profile.vue";
+import Pod from "@/components/Pod.vue";
+import Template from "@/components/Template.vue";
+import User from "@/components/User.vue";
 
 Vue.use(VueRouter);
 
@@ -31,14 +35,24 @@ const routes = [
                 component: Dashboard,
             },
             {
-                path: "/sync",
-                name: "sync",
-                component: Sync,
+                path: "/users",
+                name: "users",
+                component: User,
             },
             {
-                path: "/control",
-                name: "control",
-                component: Control,
+                path: "/templates",
+                name: "templates",
+                component: Template,
+            },
+            {
+                path: "/pods",
+                name: "pods",
+                component: Pod,
+            },
+            {
+                path: "/profile",
+                name: "profile",
+                component: Profile,
             }
         ]
     },

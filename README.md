@@ -29,3 +29,12 @@ yarn lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## TODO
+
+- pod management
+- template management
+- user management
+- ~~profile management~~
+- ~~home~~
+- ~~login~~

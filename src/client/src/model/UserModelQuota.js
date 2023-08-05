@@ -14,3 +14,10 @@
 import ApiClient from '../ApiClient';
 import QuotaModel from './QuotaModel';
 // TODO: add anyof model support
+export default class UserModelQuota {
+    constructor() {
+    }
+    static constructFromObject(v) {
+        return v
+    }
+}

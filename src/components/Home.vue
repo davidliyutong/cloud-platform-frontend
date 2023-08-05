@@ -17,49 +17,41 @@
                         <v-list-item-title>Dashboard</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
-<!--                <v-list-item link to="/sync">-->
-<!--                    <v-list-item-action>-->
-<!--                        <v-icon>mdi-sync</v-icon>-->
-<!--                    </v-list-item-action>-->
-<!--                    <v-list-item-content>-->
-<!--                        <v-list-item-title>Time Sync</v-list-item-title>-->
-<!--                    </v-list-item-content>-->
-<!--                </v-list-item>-->
-<!--                <v-list-item link to="/control">-->
-<!--                    <v-list-item-action>-->
-<!--                        <v-icon>mdi-camera-control</v-icon>-->
-<!--                    </v-list-item-action>-->
-<!--                    <v-list-item-content>-->
-<!--                        <v-list-item-title>Control Panel</v-list-item-title>-->
-<!--                    </v-list-item-content>-->
-<!--                </v-list-item>-->
-                <!--        <v-list-item link to="/policies">-->
-                <!--          <v-list-item-action>-->
-                <!--            <v-icon>mdi-router</v-icon>-->
-                <!--          </v-list-item-action>-->
-                <!--          <v-list-item-content>-->
-                <!--            <v-list-item-title>Policies</v-list-item-title>-->
-                <!--          </v-list-item-content>-->
-                <!--        </v-list-item>-->
-                <!--        <v-list-item link to="/admin/secrets">-->
-                <!--          <v-list-item-action>-->
-                <!--            <v-icon>mdi-key-variant</v-icon>-->
-                <!--          </v-list-item-action>-->
-                <!--          <v-list-item-content>-->
-                <!--            <v-list-item-title>Secrets</v-list-item-title>-->
-                <!--          </v-list-item-content>-->
-                <!--        </v-list-item>-->
+              <v-list-item link to="/pods">
+                <v-list-item-action>
+                  <v-icon>mdi-console</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>Pods</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item link to="/users" v-show="isAdmin">
+                <v-list-item-action>
+                  <v-icon>mdi-account</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>Users</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item link to="/templates" v-show="isAdmin">
+                <v-list-item-action>
+                  <v-icon>mdi-file-edit</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>Templates</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
             <template v-slot:append>
                 <v-list dense nav>
-                    <!--          <v-list-item link to="/profile">-->
-                    <!--            <v-list-item-action>-->
-                    <!--              <v-icon>mdi-account</v-icon>-->
-                    <!--            </v-list-item-action>-->
-                    <!--            <v-list-item-content>-->
-                    <!--              <v-list-item-title>Profile</v-list-item-title>-->
-                    <!--            </v-list-item-content>-->
-                    <!--          </v-list-item>-->
+                              <v-list-item link to="/profile">
+                                <v-list-item-action>
+                                  <v-icon>mdi-account</v-icon>
+                                </v-list-item-action>
+                                <v-list-item-content>
+                                  <v-list-item-title>Profile</v-list-item-title>
+                                </v-list-item-content>
+                              </v-list-item>
                     <!--          <v-list-item link to="/settings">-->
                     <!--            <v-list-item-action>-->
                     <!--              <v-icon>mdi-cog</v-icon>-->
@@ -153,9 +145,7 @@ export default {
     data: function () {
         return {
             drawer: null,
-            // snackbar: false,
-            // snackbarText: "",
-            // username: localStorage.getItem('username').slice(0,2)
+            isAdmin: localStorage.getItem('user_role') === 'admin' || localStorage.getItem('user_role') === 'super_admin',
         };
     },
     methods: {

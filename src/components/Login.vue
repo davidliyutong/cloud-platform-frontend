@@ -30,7 +30,7 @@
                   <v-card-actions>
                     <v-btn class="mt-4" @click="resetForm">Clear</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn type="submit" class="mt-4" color="primary" value="log in">Login</v-btn>
+                    <v-btn type="submit" class="mt-4" color="success" value="log in">Login</v-btn>
                   </v-card-actions>
                   <v-snackbar
                       v-model="snackbarFail"
@@ -66,23 +66,6 @@
               </v-card-text>
             </v-card>
 
-            <v-card
-                class="mx-auto my-8 elevation-12"
-                link to="/passwordreset"
-                color="success"
-            >
-              <v-container>
-                <v-row>
-                  <v-card-title class="mx-4">
-                    <div class="white--text">
-                      Self Managed Password Reset
-                    </div>
-                  </v-card-title>
-                  <v-spacer></v-spacer>
-                  <v-icon color="white" class="mx-4">mdi-arrow-right</v-icon>
-                </v-row>
-              </v-container>
-            </v-card>
 
           </v-flex>
         </v-layout>
@@ -95,35 +78,10 @@
 <script>
 import qs from 'qs'
 import axios from 'axios';
-var api = require( '../client/src');
-async function getToken(username, password) {
 
-  let params = {
-    username: username,
-    password: password
-  };
+var api = require('../client/src');
+import {checkLogin, logIn} from "@/utils/tool";
 
-  // console.log("username: ", params.username, "password: ", params.password)
-
-  let paramStr = JSON.stringify(params);
-  let loginUrl = window.document.location.href + "v1/auth/jwt/login";
-
-  let loginSucceed = false
-  try {
-    await axios.post(loginUrl, paramStr
-    ).then(response => {
-      if (response.status === 200) {
-        localStorage.setItem('username', username);
-        localStorage.setItem('token', response.data.token)
-        loginSucceed = true
-      }
-    })
-  } catch (err) {
-    loginSucceed = false
-  }
-
-  return loginSucceed
-}
 
 export default {
   name: "Login",
@@ -141,7 +99,7 @@ export default {
       this.$refs.form.reset()
     },
     login: async function () {
-      let loginSucceed = await getToken(this.username, this.password)
+      let loginSucceed = await logIn(this.username, this.password)
 
       // console.log(loginSucceed)
       if (loginSucceed !== true) {
@@ -153,5 +111,10 @@ export default {
 
     }
   },
+  created() {
+    if (!checkLogin()) {
+      this.$router.push('/home')
+    }
+  }
 };
 </script>

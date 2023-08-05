@@ -59,16 +59,15 @@ import axios from "axios";
 // import {mdiAlarmLight} from "@mdi/js";
 var Api = require('../client/src');
 var defaultClient = Api.ApiClient.instance;
+import {getRootPath} from "@/utils/tool";
+
 defaultClient.basePath = getRootPath();
 
-{
-}
-import {getRootPath} from "@/utils/tool";
 
 export default {
   name: "Dashboard",
   data: () => ({
-    // username: localStorage.getItem("username"),
+    username: localStorage.getItem("username"),
     version: "",
     // healthOK: false,
     // healthTimeout: "-1ms",
@@ -84,13 +83,13 @@ export default {
       // this.getHealth()
     },
     getVersion() {
-      console.log("getVersion")
+      // console.log("getVersion")
       var apiInstance = new Api.DefaultApi();
       apiInstance.getv1Health((error, data, response) => {
         if (error) {
           console.error(error);
         } else {
-          console.log('API called successfully. Returned data: ' + response);
+          // console.log('API called successfully. Returned data: ' + response);
           this.version = response.body.version;
         }
       });
