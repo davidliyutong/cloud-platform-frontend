@@ -14,3 +14,10 @@
 import ApiClient from '../ApiClient';
 import FieldTypeEnum from './FieldTypeEnum';
 // TODO: add anyof model support
+export default class Fields2 {
+    constructor() {
+    }
+    static constructFromObject(v) {
+        return v
+    }
+}

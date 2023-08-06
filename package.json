@@ -25,6 +25,7 @@
     "qrcode": "^1.5.1",
     "qs": "^6.11.0",
     "roboto-fontface": "*",
+    "socket.io-client": "^4.7.2",
     "superagent": "5.3.1",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.2",

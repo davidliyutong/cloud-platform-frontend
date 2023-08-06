@@ -2,8 +2,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Dashboard from "./components/Dashboard.vue"
 import Home from "@/components/Home.vue";
-import Sync from "@/components/Sync.vue";
-import Control from "@/components/Control.vue";
 import Login from "@/components/Login.vue";
 import Profile from "@/components/Profile.vue";
 import Pod from "@/components/Pod.vue";

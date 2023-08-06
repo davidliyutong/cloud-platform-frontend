@@ -13,6 +13,7 @@
         <v-card-text class="black--text">
           <h4>Role: {{ role }}</h4>
           <h4>Email: {{ email }}</h4>
+          <h4>Quota: {{ quota }}</h4>
         </v-card-text>
 
 
@@ -136,6 +137,7 @@ export default {
     formTitle: "Edit Profile",
     username: "",
     role: "",
+    quota: null,
     password: "",
     passwordConfirm: "",
     email: null
@@ -209,6 +211,7 @@ export default {
           this.username = data.user.username;
           this.email = data.user.email;
           this.role = data.user.role;
+          this.quota = data.user.quota
         }
       });
     },

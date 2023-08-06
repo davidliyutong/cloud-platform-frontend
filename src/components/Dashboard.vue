@@ -13,13 +13,24 @@
       <v-card class="mx-auto  my-4">
         <v-list-item three-line>
           <v-list-item-content>
-            <v-list-item-title class="headline mb-1">Version</v-list-item-title>
-            <v-list-item-subtitle>{{ version }}</v-list-item-subtitle>
+            <v-list-item-title class="headline mb-1">Notice</v-list-item-title>
+            <v-list-item-subtitle>Do not store your files in directories other than /root. They will be deleted when
+              your pod is restarted.
+            </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
         <!--        <v-card-actions>-->
         <!--          <v-btn text @click="getVersion()">Refresh</v-btn>-->
         <!--        </v-card-actions>-->
+      </v-card>
+
+      <v-card class="mx-auto  my-4">
+        <v-list-item three-line>
+          <v-list-item-content>
+            <v-list-item-title class="headline mb-1">Version</v-list-item-title>
+            <v-list-item-subtitle>{{ version }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
       </v-card>
 
       <!--      <v-card class="mx-auto my-4" >-->
@@ -69,9 +80,6 @@ export default {
   data: () => ({
     username: localStorage.getItem("username"),
     version: "",
-    // healthOK: false,
-    // healthTimeout: "-1ms",
-    // healthColor: "red"
   }),
 
   mounted: function () {
@@ -80,7 +88,6 @@ export default {
   methods: {
     initialize() {
       this.getVersion()
-      // this.getHealth()
     },
     getVersion() {
       // console.log("getVersion")

@@ -36,7 +36,7 @@ export default {
   },
   computed: {},
   created() {
-    this.initialize()
+    this.initialize();
   },
 };
 </script>

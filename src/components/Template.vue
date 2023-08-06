@@ -30,7 +30,7 @@ export default {
       if (!checkLogin()) {
         this.$router.push('/')
       }
-      this.getPod()
+      this.listPod()
     },
     setGlobalTitle: function () {
       var myElement = document.getElementById("global-title");

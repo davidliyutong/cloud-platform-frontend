@@ -80,7 +80,7 @@ class UserCreateResponseUser {
                 obj['uid'] = ApiClient.convertToType(data['uid'], 'Number');
             }
             if (data.hasOwnProperty('uuid')) {
-                obj['uuid'] = data['uuid'];
+                obj['uuid'] = Uuid.constructFromObject(data['uuid']);
             }
             if (data.hasOwnProperty('username')) {
                 obj['username'] = ApiClient.convertToType(data['username'], 'String');
