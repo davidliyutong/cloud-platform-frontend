@@ -78,9 +78,10 @@
             <!--            <v-btn icon link to="/dashboard">-->
             <!--                <v-icon>mdi-home</v-icon>-->
             <!--            </v-btn>-->
-            <v-avatar color="indigo" size="36">
+            <v-avatar color="indigo" size="36" class="mx-4">
               <span class="white--text headline">{{ username[0] }}</span>
             </v-avatar>
+            <v-toolbar-title>  {{ username }}  </v-toolbar-title>
             <v-menu bottom left>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
