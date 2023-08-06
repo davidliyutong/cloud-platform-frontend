@@ -72,33 +72,33 @@
       <v-toolbar-title id="global-title"></v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <!--      &lt;!&ndash;            <v-btn icon>&ndash;&gt;-->
-      <!--      &lt;!&ndash;                <v-icon>mdi-magnify</v-icon>&ndash;&gt;-->
-      <!--      &lt;!&ndash;            </v-btn>&ndash;&gt;-->
-      <!--      &lt;!&ndash;            <v-btn icon link to="/dashboard">&ndash;&gt;-->
-      <!--      &lt;!&ndash;                <v-icon>mdi-home</v-icon>&ndash;&gt;-->
-      <!--      &lt;!&ndash;            </v-btn>&ndash;&gt;-->
-      <!--      <v-avatar color="indigo" size="36">-->
-      <!--        <span class="white&#45;&#45;text headline">{{ username }}</span>-->
-      <!--      </v-avatar>-->
-      <!--      <v-menu bottom left>-->
-      <!--        <template v-slot:activator="{ on, attrs }">-->
-      <!--          <v-btn-->
-      <!--              dark-->
-      <!--              icon-->
-      <!--              v-bind="attrs"-->
-      <!--              v-on="on"-->
-      <!--          >-->
-      <!--            <v-icon>mdi-dots-vertical</v-icon>-->
-      <!--          </v-btn>-->
-      <!--        </template>-->
+            <!--            <v-btn icon>-->
+            <!--                <v-icon>mdi-magnify</v-icon>-->
+            <!--            </v-btn>-->
+            <!--            <v-btn icon link to="/dashboard">-->
+            <!--                <v-icon>mdi-home</v-icon>-->
+            <!--            </v-btn>-->
+            <v-avatar color="indigo" size="36">
+              <span class="white--text headline">{{ username[0] }}</span>
+            </v-avatar>
+            <v-menu bottom left>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                    dark
+                    icon
+                    v-bind="attrs"
+                    v-on="on"
+                >
+                  <v-icon>mdi-dots-vertical</v-icon>
+                </v-btn>
+              </template>
 
-      <!--        <v-list>-->
-      <!--          <v-list-item @click="logout">-->
-      <!--            <v-list-item-title>Logout</v-list-item-title>-->
-      <!--          </v-list-item>-->
-      <!--        </v-list>-->
-      <!--      </v-menu>-->
+              <v-list>
+                <v-list-item @click="logOut">
+                  <v-list-item-title>Logout</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
 
     </v-app-bar>
 
@@ -140,7 +140,7 @@
 import axios from "axios";
 import {mdiAlarmLight} from "@mdi/js";
 import io from 'socket.io-client';
-import {getRootPath, getRootWSPath, refreshToken} from "@/utils/tool";
+import {getRootPath, getRootWSPath, logOut, refreshToken} from "@/utils/tool";
 import SocketClient from "@/utils/SocketClient";
 
 export default {
@@ -151,6 +151,8 @@ export default {
       drawer: null,
       timerID: null,
       isAdmin: localStorage.getItem('user_role') === 'admin' || localStorage.getItem('user_role') === 'super_admin',
+      username: localStorage.getItem('username'),
+      logOut: logOut
     };
   },
   methods: {},

@@ -27,9 +27,9 @@ export function logOut() {
     localStorage.removeItem('username');
     localStorage.removeItem('user_uid');
     localStorage.removeItem('user_role');
-    this.$router.push('/');
     // refresh window
     window.location.reload();
+    this.$router.push('/');
 }
 
 export async function logIn(username, password) {
