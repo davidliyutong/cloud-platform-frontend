@@ -1,21 +1,35 @@
 <template>
   <v-container fluid>
     <v-container>
+
       <v-card class="mx-auto" elevatoin="2">
-        <!--          <v-img-->
-        <!--              class="white&#45;&#45;text align-end"-->
-        <!--              height="200px"-->
-        <!--              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"-->
-        <!--          >-->
-        <v-card-title>{{ username }}</v-card-title>
-        <!--          </v-img>-->
+        <v-list-item three-line>
+          <v-list-item-content>
+            <!--          <v-img-->
+            <!--              class="white&#45;&#45;text align-end"-->
+            <!--              height="200px"-->
+            <!--              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"-->
+            <!--          >-->
+            <div class="title mb-1 text-h3" v-text="username.toUpperCase()"></div>
+            <!--          </v-img>-->
 
-        <v-card-text class="black--text">
-          <h4>Role: {{ role }}</h4>
-          <h4>Email: {{ email }}</h4>
-          <h4>Quota: {{ quota }}</h4>
-        </v-card-text>
+            <div class="overline mb-2 text-h6">
+              Role: <span class="font-weight-bold">{{ role }}</span>
+            </div>
 
+            <v-list-item-subtitle class="subtitle-1">
+              <div><b>CPU Quota: </b> {{ quota.cpu_m }} mCPU</div>
+            </v-list-item-subtitle>
+            <v-list-item-subtitle class="subtitle-1">
+              <div><b>Memory Quota: </b> {{ quota.memory_mb }} MB</div>
+            </v-list-item-subtitle>
+            <v-list-item-subtitle class="subtitle-1">
+              <div><b>Storage Quota: </b> {{ quota.storage_mb }} MB</div>
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
 
         <v-card-actions class="justify-end">
 
@@ -121,12 +135,12 @@
 
 <script>
 
-import axios from "axios";
-import {mdiAlarmLight} from "@mdi/js";
+// import axios from "axios";
+// import {mdiAlarmLight} from "@mdi/js";
 
 var Api = require('../client/src');
 var defaultClient = Api.ApiClient.instance;
-import {getRootPath, checkLogin, logIn, logOut} from "@/utils/tool";
+import {getRootPath, checkLogin, logOut} from "@/utils/tool";
 
 defaultClient.basePath = getRootPath();
 export default {
@@ -137,7 +151,11 @@ export default {
     formTitle: "Edit Profile",
     username: "",
     role: "",
-    quota: null,
+    quota: {
+      "cpu_m": "unlimited",
+      "memory_mb": "unlimited",
+      "storage_mb": "unlimited"
+    },
     password: "",
     passwordConfirm: "",
     email: null
@@ -211,7 +229,9 @@ export default {
           this.username = data.user.username;
           this.email = data.user.email;
           this.role = data.user.role;
-          this.quota = data.user.quota
+          if (data.user.quota !== null) {
+            this.quota = data.user.quota
+          }
         }
       });
     },

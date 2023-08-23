@@ -65,7 +65,7 @@ export async function logIn(username, password) {
     return loginSucceed
 }
 
-export async function refreshToken(username) {
+export async function refreshToken() {
 
 
     let oldToken = localStorage.getItem('token');
@@ -89,7 +89,6 @@ export async function refreshToken(username) {
         ).then(response => {
             if (response.status === 200) {
                 // console.log("refreshToken:" + response.data.token);
-                localStorage.setItem('username', username);
                 localStorage.setItem('token', response.data.token);
                 let decoded = jwt_decode(response.data.token);
                 localStorage.setItem('user_uid', decoded.uid);

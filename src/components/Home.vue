@@ -138,10 +138,10 @@
 </template>
 
 <script>
-import axios from "axios";
-import {mdiAlarmLight} from "@mdi/js";
-import io from 'socket.io-client';
-import {getRootPath, getRootWSPath, logOut, refreshToken} from "@/utils/tool";
+// import axios from "axios";
+// import {mdiAlarmLight} from "@mdi/js";
+// import io from 'socket.io-client';
+import { getRootWSPath, logOut, refreshToken} from "@/utils/tool";
 import SocketClient from "@/utils/SocketClient";
 
 export default {
@@ -150,7 +150,7 @@ export default {
     return {
       socketClient: null,
       drawer: null,
-      timerID: null,
+      refreshTokenTimerID: null,
       isAdmin: localStorage.getItem('user_role') === 'admin' || localStorage.getItem('user_role') === 'super_admin',
       username: localStorage.getItem('username'),
       logOut: logOut
@@ -165,11 +165,11 @@ export default {
   },
   mounted() {
     // Set the timer to call the function every 10 minutes (600000 ms = 10 minutes)
-    this.timerID = setInterval(refreshToken, 600000);
+    this.refreshTokenTimerID = setInterval(refreshToken, 600000);
   },
   beforeDestroy() {
     // Clear the timer when the component is destroyed
-    clearInterval(this.timerID);
+    clearInterval(this.refreshTokenTimerID);
   }
 };
 </script>

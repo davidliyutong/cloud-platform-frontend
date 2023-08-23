@@ -44,7 +44,7 @@
                         updatingPod.name = pod.name;
                         updatingPod.description=pod.description;
                         updatingPod.timeout_s=pod.timeout_s;
-                        updatingPod.target_status=pod.target_status,
+                        updatingPod.target_status=pod.target_status;
                         updatingPod.pod_id=pod.pod_id;"
                     >
                       <v-icon> mdi-pencil</v-icon>
@@ -60,7 +60,10 @@
 
                     <v-card-text>
                       <v-form ref="updatingForm" @submit.prevent="saveUpdateForm()">
-                        <v-text-field label="Name" hint="not necessary" v-model="updatingPod.name"></v-text-field>
+                        <v-text-field
+                            label="Name"
+                            hint="not necessary"
+                            v-model="updatingPod.name"></v-text-field>
                         <v-text-field
                             label="Description"
                             hint="not necessary"
@@ -276,11 +279,11 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 // import {mdiAlarmLight} from "@mdi/js";
 var Api = require('../client/src');
 var defaultClient = Api.ApiClient.instance;
-import {checkLogin, getRootPath, logOut, addDateStrSeconds, refreshToken} from "@/utils/tool";
+import {checkLogin, getRootPath, logOut, addDateStrSeconds} from "@/utils/tool";
 
 defaultClient.basePath = getRootPath();
 
@@ -315,11 +318,12 @@ export default {
     createFormTitle: "Create Pod",
     updateFormTitle: "Edit Pod",
     target_status_list: ['running', 'stopped'],
-    timerID: null,
+    keepAliveTimerID: null,
   }),
 
   mounted: function () {
     this.setGlobalTitle();
+    this.getHostname();
   },
   methods: {
     addDateStrSeconds,
@@ -327,9 +331,8 @@ export default {
       if (!checkLogin()) {
         this.$router.push('/')
       }
-      this.getHostname();
       this.listPod();
-      this.timerID = setInterval(this.listPod, 60000);
+      this.keepAliveTimerID = setInterval(this.listPod, 60000);
       this.listTemplates();
     },
     redirect(pod_id, type) {
@@ -459,10 +462,15 @@ export default {
       let token = defaultClient.authentications['token'];
       token.accessToken = localStorage.getItem("token");
 
+      if (template_ref === null || template_ref === "") {
+        this.$message.bottom().error('Please Select Template');
+        return;
+      }
+
       let payload = {
         'podCreateRequest': {
-          name: name,
-          description: description,
+          name: name || "",
+          description: description || "",
           template_ref: template_ref,
           cpu_lim_m_cpu: parseInt(cpu_lim_m_cpu),
           mem_lim_mb: parseInt(mem_lim_mb),
@@ -479,7 +487,7 @@ export default {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Pod Create Failed');
+            this.$message.bottom().error('Pod Create Failed' + error);
           }
         } else {
           console.log('API called successfully. Returned data: ' + data);
@@ -517,7 +525,7 @@ export default {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Pod Update Failed');
+            this.$message.bottom().error('Pod Update Failed' + error);
           }
         } else {
           console.log('API called successfully. Returned data: ' + data);
@@ -543,7 +551,7 @@ export default {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Pod Delete Failed');
+            this.$message.bottom().error('Pod Delete Failed' + error);
           }
         } else {
           console.log('API called successfully. Returned data: ' + data);
@@ -561,7 +569,7 @@ export default {
   },
   beforeDestroy() {
     // Clear the timer when the component is destroyed
-    clearInterval(this.timerID);
+    clearInterval(this.keepAliveTimerID);
   }
 };
 </script>
