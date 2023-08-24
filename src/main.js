@@ -61,6 +61,24 @@ Vue.use(message, {
 
 Vue.use(JsonViewer);
 
+// import { basicSetup } from 'codemirror'
+// import VueCodemirror from 'vue-codemirror'
+// import 'codemirror/lib/codemirror.css'
+// Vue.use(VueCodemirror)
+//
+//
+// Vue.use(VueCodemirror, {
+//     // optional default global options
+//     autofocus: true,
+//     disabled: false,
+//     indentWithTab: false,
+//     tabSize: 4,
+//     placeholder: 'Code goes here...',
+//     extensions: [basicSetup]
+//     // ...
+// })
+
+
 new Vue({
     vuetify,
     router,

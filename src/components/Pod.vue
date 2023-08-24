@@ -109,6 +109,7 @@
                         class="mx-2"
                         v-bind="attrs"
                         v-on="on"
+                        @click="deletingPod = pod"
                     >
                       <v-icon> mdi-delete</v-icon>
                       Delete
@@ -118,7 +119,7 @@
                     <v-card-title class="text-h5">
                       Delete this Pod?
                     </v-card-title>
-                    <v-card-text>Warning: All data will be lost</v-card-text>
+                    <v-card-text>Warning: All data of pod ({{ deletingPod.pod_id }}) will be lost</v-card-text>
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn
@@ -131,7 +132,7 @@
                       <v-btn
                           color="red darken-1"
                           text
-                          @click="actionDeletePod(pod.pod_id)"
+                          @click="actionDeletePod(deletingPod.pod_id)"
                       >
                         Confirm
                       </v-btn>
@@ -222,7 +223,11 @@
 
           <v-card-text>
             <v-form ref="creatingForm" @submit.prevent="saveCreateForm()">
-              <v-text-field label="Name" hint="not necessary" v-model="creatingPod.name"></v-text-field>
+              <v-text-field
+                  label="Name"
+                  hint="not necessary"
+                  v-model="creatingPod.name"
+              ></v-text-field>
               <v-text-field
                   label="Description"
                   hint="not necessary"
@@ -230,25 +235,26 @@
                   v-model="creatingPod.description"
               ></v-text-field>
               <v-text-field
-                  label="Timeout (s)"
+                  label="Timeout (s) *"
                   hint="timeout < 86400"
                   placeholder="3600"
                   v-model="creatingPod.timeout_s"
               ></v-text-field>
               <v-text-field
-                  label="CPU Limit (m)"
-                  hint="1000 = 1 CPU"
+                  label="CPU Limit (m) *"
+                  hint="1000 = 1 CPU, cpu limit must > 500"
                   placeholder="1000"
                   v-model="creatingPod.cpu_lim_m_cpu"
               ></v-text-field>
               <v-text-field
-                  label="Memory Limit (MiB)"
+                  label="Memory Limit (MiB) *"
+                  hint="memory limit must > 512"
                   placeholder="1024"
                   v-model="creatingPod.mem_lim_mb"
               ></v-text-field>
               <v-text-field
-                  label="Storage Limit (MiB)"
-                  hint="storage limit > 10240 MiB"
+                  label="Storage Limit (MiB) *"
+                  hint="storage limit must > 10240 MiB"
                   placeholder="10240"
                   v-model="creatingPod.storage_lim_mb"
               ></v-text-field>
@@ -257,7 +263,7 @@
                   :items="templates"
                   item-text="name"
                   item-value="template_id"
-                  label="Template"
+                  label="Template *"
               ></v-select>
 
             </v-form>
@@ -314,6 +320,9 @@ export default {
       cpu_lim_m_cpu: 1000,
       mem_lim_mb: 1024,
       storage_lim_mb: 10240,
+    },
+    deletingPod: {
+      "pod_id": "",
     },
     createFormTitle: "Create Pod",
     updateFormTitle: "Edit Pod",
@@ -452,17 +461,17 @@ export default {
     async createPod(
         name,
         description,
-        template_ref,
-        cpu_lim_m_cpu,
-        mem_lim_mb,
-        storage_lim_mb,
+        templateRef,
+        cpuLimMCpu,
+        memLimMB,
+        storageLimMB,
         timeout_s
     ) {
       let apiInstance = new Api.NonadminPodApi();
       let token = defaultClient.authentications['token'];
       token.accessToken = localStorage.getItem("token");
 
-      if (template_ref === null || template_ref === "") {
+      if (templateRef === null || templateRef === "") {
         this.$message.bottom().error('Please Select Template');
         return;
       }
@@ -471,10 +480,10 @@ export default {
         'podCreateRequest': {
           name: name || "",
           description: description || "",
-          template_ref: template_ref,
-          cpu_lim_m_cpu: parseInt(cpu_lim_m_cpu),
-          mem_lim_mb: parseInt(mem_lim_mb),
-          storage_lim_mb: parseInt(storage_lim_mb),
+          template_ref: templateRef,
+          cpu_lim_m_cpu: parseInt(cpuLimMCpu),
+          mem_lim_mb: parseInt(memLimMB),
+          storage_lim_mb: parseInt(storageLimMB),
           timeout_s: parseInt(timeout_s),
         }
       }
@@ -487,7 +496,7 @@ export default {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Pod Create Failed' + error);
+            this.$message.bottom().error('Pod Create Failed: ' + JSON.parse(response.text).message);
           }
         } else {
           console.log('API called successfully. Returned data: ' + data);
@@ -498,34 +507,34 @@ export default {
     },
 
     async updatePod(
-        pod_id = null,
+        podID = null,
         name = null,
         description = null,
-        timeout_s = null,
-        target_status = null) {
+        timeoutS = null,
+        targetStatus = null) {
       let apiInstance = new Api.NonadminPodApi();
       let token = defaultClient.authentications['token'];
       token.accessToken = localStorage.getItem("token");
 
       let payload = {
         'podUpdateRequest': {
-          pod_id: pod_id,
+          pod_id: podID,
           name: name,
           description: description,
-          timeout_s: parseInt(timeout_s),
-          target_status: target_status,
+          timeout_s: parseInt(timeoutS),
+          target_status: targetStatus,
         }
       }
 
       // console.log( defaultClient.authentications['token'] );
-      apiInstance.putnonadminPodNonadminPodUpdate(pod_id, payload, (error, data, response) => {
+      apiInstance.putnonadminPodNonadminPodUpdate(podID, payload, (error, data, response) => {
         if (error) {
           console.error(error);
           if (response.status === 401) {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Pod Update Failed' + error);
+            this.$message.bottom().error('Pod Update Failed: ' + JSON.parse(response.text).message);
           }
         } else {
           console.log('API called successfully. Returned data: ' + data);
@@ -536,7 +545,7 @@ export default {
 
     },
     async deletePod(
-        pod_id = null,
+        podID = null,
     ) {
       let apiInstance = new Api.NonadminPodApi();
       let token = defaultClient.authentications['token'];
@@ -544,14 +553,14 @@ export default {
 
 
       // console.log( defaultClient.authentications['token'] );
-      apiInstance.deletenonadminPodNonadminPodDelete(pod_id, (error, data, response) => {
+      apiInstance.deletenonadminPodNonadminPodDelete(podID, (error, data, response) => {
         if (error) {
           console.error(error);
           if (response.status === 401) {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Pod Delete Failed' + error);
+            this.$message.bottom().error('Pod Delete Failed: ' + JSON.parse(response.text).message);
           }
         } else {
           console.log('API called successfully. Returned data: ' + data);

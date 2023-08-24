@@ -26,14 +26,14 @@ axios.interceptors.response.use(response => {
         let { response } = error
         let error_msg = ''
         if (response) {
-            switch (response.status) {
-                case 401:
-                    error_msg = 'Unauthorized'
-                    logOut();
-                    break
-                default:
-                    break
-            }
+            // switch (response.status) {
+            //     case 401:
+            //         error_msg = 'Unauthorized'
+            //         logOut();
+            //         break
+            //     default:
+            //         break
+            // }
             if(error.includes("timeout")) {
                 error_msg = 'Request Timeout'
             }

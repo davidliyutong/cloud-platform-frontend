@@ -80,7 +80,7 @@ import qs from 'qs'
 import axios from 'axios';
 
 var api = require('../client/src');
-import {checkLogin, logIn} from "@/utils/tool";
+import {checkLogin, logIn, logOut} from "@/utils/tool";
 
 
 export default {
@@ -96,24 +96,24 @@ export default {
   },
   methods: {
     resetForm: function () {
-      this.$refs.form.reset()
+      this.$refs.form.reset();
     },
     login: async function () {
-      let loginSucceed = await logIn(this.username, this.password)
+      let loginSucceed = await logIn(this.username, this.password);
 
       // console.log(loginSucceed)
       if (loginSucceed !== true) {
-        this.snackbarFail = true
+        this.snackbarFail = true;
       } else {
-        this.snackbarOK = true
-        await this.$router.push('/home')
+        this.snackbarOK = true;
+        await this.$router.push('/home');
       }
 
     }
   },
   created() {
     if (!checkLogin()) {
-      this.$router.push('/home')
+      this.$router.push('/home');
     }
   }
 };

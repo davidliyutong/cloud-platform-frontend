@@ -55,11 +55,12 @@ export async function logIn(username, password) {
                 localStorage.setItem('user_uid', decoded.uid);
                 localStorage.setItem('user_role', decoded.role);
                 loginSucceed = true;
+            } else {
+                loginSucceed = false;
             }
         })
     } catch (err) {
         loginSucceed = false;
-        logOut();
     }
 
     return loginSucceed
