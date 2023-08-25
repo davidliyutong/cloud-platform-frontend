@@ -66,6 +66,7 @@
                         updatingPod.description=pod.description;
                         updatingPod.timeout_s=pod.timeout_s;
                         updatingPod.target_status=pod.target_status;
+                        updatingPod.template_ref=pod.template_ref;
                         updatingPod.pod_id=pod.pod_id;"
                     >
                       <v-icon> mdi-pencil</v-icon>
@@ -102,6 +103,11 @@
                             :items="target_status_list"
                             label="Target Status"
                         ></v-select>
+                        <v-text-field
+                            label="Template Reference (s)"
+                            disabled
+                            v-model="updatingPod.template_ref"
+                        ></v-text-field>
 
                       </v-form>
                     </v-card-text>
@@ -282,7 +288,7 @@
               <v-select
                   v-model="creatingPod.template_ref"
                   :items="templates"
-                  item-text="name"
+                  item-text="friendlyName"
                   item-value="template_id"
                   label="Template *"
                   :rules="notNullRule"
@@ -331,6 +337,7 @@ export default {
       name: "",
       description: "",
       timeout_s: "",
+      template_ref: "",
       target_status: "",
       pod_id: "",
     },
@@ -451,7 +458,10 @@ export default {
           }
         } else {
           // console.log('API called successfully. Returned data: ' + data);
-          this.templates = data.templates;
+          this.templates = data.templates.map((item) => {
+            item.friendlyName = item.name + ' (' + item.template_id + ')';
+            return item
+          });
         }
       });
     },

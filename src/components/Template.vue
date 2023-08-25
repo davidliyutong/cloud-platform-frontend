@@ -37,6 +37,7 @@
                 <v-dialog
                     v-model="updateDialog"
                     persistent
+                    :retain-focus="false"
                     max-width="800px"
                 >
                   <template v-slot:activator="{ on, attrs }">
@@ -87,6 +88,11 @@
                             placeholder="Provide the image"
                             v-model="updatingTemplate.image_ref"
                         ></v-text-field>
+                        <v-textarea
+                            label="Template String"
+                            disabled
+                            v-model="updatingTemplate.template_str">
+                        </v-textarea>
                       </v-form>
                     </v-card-text>
 
@@ -333,7 +339,7 @@ export default {
       }
     },
     resetCreateForm: function () {
-      this.$refs.creatingForm.reset();
+      // this.$refs.creatingForm.reset();
       this.createDialog = false;
     },
     saveCreateForm: function () {
@@ -350,9 +356,9 @@ export default {
       // this.$refs.updatingForm.reset();
       this.updateDialog = false;
     },
-    saveUpdateForm: function () {
+    async saveUpdateForm() {
       // console.log(this.updatingPod);
-      this.updateTemplate(
+      await this.updateTemplate(
           this.updatingTemplate.template_id,
           this.updatingTemplate.name,
           this.updatingTemplate.description,
@@ -360,7 +366,6 @@ export default {
           null
       );
       this.updateDialog = false;
-      this.listTemplates();
     },
     actionDeleteTemplate: function (template_id) {
       this.deleteTemplate(template_id);
@@ -453,7 +458,6 @@ export default {
         } else {
           console.log('API called successfully. Returned data: ' + data);
           this.$message.bottom().success('Pod Update Succeed');
-          this.listPod();
         }
       });
 
@@ -479,7 +483,6 @@ export default {
         } else {
           console.log('API called successfully. Returned data: ' + data);
           this.$message.bottom().success('Template Delete Succeed');
-          this.listPod();
         }
       });
     },

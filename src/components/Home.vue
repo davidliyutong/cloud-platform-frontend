@@ -146,6 +146,9 @@ import { logOut, refreshToken} from "@/utils/tool";
 import KeepAliveClient from "@/utils/KeepAliveClient";
 import md5 from 'md5';
 
+var Api = require('../client/src');
+var defaultClient = Api.ApiClient.instance;
+
 export default {
   name: "Home",
   data: function () {
@@ -159,7 +162,20 @@ export default {
       email: ''
     };
   },
-  methods: {},
+  methods: {
+    async getUser() {
+      let apiInstance = new Api.NonadminUserApi();
+      let token = defaultClient.authentications['token'];
+      token.accessToken = localStorage.getItem("token");
+      let local_username = localStorage.getItem("username");
+      apiInstance.getnonadminUserNonadminUserGet(local_username, (error, data, response) => {
+        if (error) { console.error(error);
+          if (response.status === 401) { this.$message.bottom().error('Please Login'); logOut();
+          } else { this.$message.bottom().error('Profile Get Failed: ' + JSON.parse(response.text).message); }
+        } else { console.log('API called successfully. Returned data: ' + data);}
+      });
+    },
+  },
   computed: {
     gravatarUrl() {
       // If the email is empty, return a default Gravatar image
@@ -173,6 +189,7 @@ export default {
   },
   created() {
     this.socketClient = new KeepAliveClient();
+    this.getUser();
   },
   mounted() {
     // Set the timer to call the function every 10 minutes (600000 ms = 10 minutes)
