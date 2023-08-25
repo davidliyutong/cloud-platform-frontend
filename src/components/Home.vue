@@ -9,7 +9,7 @@
       </v-list-item>
       <v-divider></v-divider>
       <v-list dense nav>
-        <v-list-item link to="/dashboard">
+        <v-list-item link to="/dashboard" v-show="isAdmin">
           <v-list-item-action>
             <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-action>

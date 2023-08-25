@@ -25,7 +25,7 @@ const routes = [
         path: "/home",
         name: "home",
         component: Home,
-        redirect: "/dashboard",
+        redirect: "/pods",
         children: [
             {
                 path: "/dashboard",
