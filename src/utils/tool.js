@@ -54,6 +54,7 @@ export async function logIn(username, password) {
                 let decoded = jwt_decode(response.data.token);
                 localStorage.setItem('user_uid', decoded.uid);
                 localStorage.setItem('user_role', decoded.role);
+                localStorage.setItem('email', decoded.email);
                 loginSucceed = true;
             } else {
                 loginSucceed = false;
@@ -94,6 +95,7 @@ export async function refreshToken() {
                 let decoded = jwt_decode(response.data.token);
                 localStorage.setItem('user_uid', decoded.uid);
                 localStorage.setItem('user_role', decoded.role);
+                localStorage.setItem('email', decoded.email);
                 loginSucceed = true
             }
         })

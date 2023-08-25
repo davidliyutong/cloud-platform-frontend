@@ -79,7 +79,8 @@
             <!--                <v-icon>mdi-home</v-icon>-->
             <!--            </v-btn>-->
             <v-avatar color="indigo" size="36" class="mx-4">
-              <span class="white--text headline">{{ username[0] }}</span>
+<!--              <span class="white&#45;&#45;text headline">{{ username[0] }}</span>-->
+              <img :src="gravatarUrl" :alt="email">
             </v-avatar>
             <v-toolbar-title>  {{ username }}  </v-toolbar-title>
             <v-menu bottom left>
@@ -141,8 +142,9 @@
 // import axios from "axios";
 // import {mdiAlarmLight} from "@mdi/js";
 // import io from 'socket.io-client';
-import { getRootWSPath, logOut, refreshToken} from "@/utils/tool";
-import SocketClient from "@/utils/SocketClient";
+import { logOut, refreshToken} from "@/utils/tool";
+import KeepAliveClient from "@/utils/KeepAliveClient";
+import md5 from 'md5';
 
 export default {
   name: "Home",
@@ -153,19 +155,30 @@ export default {
       refreshTokenTimerID: null,
       isAdmin: localStorage.getItem('user_role') === 'admin' || localStorage.getItem('user_role') === 'super_admin',
       username: localStorage.getItem('username'),
-      logOut: logOut
+      logOut: logOut,
+      email: ''
     };
   },
   methods: {},
-  computed: {},
+  computed: {
+    gravatarUrl() {
+      // If the email is empty, return a default Gravatar image
+      if (this.email.trim() === '') {
+        return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+      }
+
+      // Otherwise, generate the Gravatar URL
+      return 'https://2.gravatar.com/avatar/' + md5(this.email.trim().toLowerCase());
+    },
+  },
   created() {
-    let token = localStorage.getItem('token');
-    let uri = getRootWSPath() + '/v1/heartbeat/user?token=' + token;
-    this.socketClient = new SocketClient(uri);
+    this.socketClient = new KeepAliveClient();
   },
   mounted() {
     // Set the timer to call the function every 10 minutes (600000 ms = 10 minutes)
     this.refreshTokenTimerID = setInterval(refreshToken, 600000);
+    this.email = localStorage.getItem('email') || '';
+
   },
   beforeDestroy() {
     // Clear the timer when the component is destroyed

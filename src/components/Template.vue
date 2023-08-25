@@ -1,5 +1,16 @@
 <template>
   <div>
+    <v-card class="mx-auto  my-4">
+      <v-list-item three-line>
+        <v-list-item-content>
+          <v-list-item-title class="headline mb-1">Notice</v-list-item-title>
+          <v-list-item-subtitle>
+            - Follow the directives of https://github.com/davidliyutong/cloud-platform-apiserver/blob/main/tests/templates/default.yaml when building template strings
+          </v-list-item-subtitle>
+
+        </v-list-item-content>
+      </v-list-item>
+    </v-card>
     <v-container>
       <template v-for="(template, index) in templates">
         <v-list-item :key="template.name">
@@ -216,10 +227,6 @@
 
 <style>
 /* This is for documentation purposes and will not be needed in your application */
-#lateral .create-form {
-  width: 800px; /* Adjust as needed */
-}
-
 #lateral .create-form-textarea textarea {
   line-height: 1.1; /* Adjust as needed */
 }
@@ -299,7 +306,7 @@ export default {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Template List Failed');
+            this.$message.bottom().error('Template List Failed: ' + JSON.parse(response.text).message);
           }
         } else {
           // console.log('API called successfully. Returned data: ' + data);
@@ -467,7 +474,7 @@ export default {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Template Delete Failed' + JSON.parse(response.text.message));
+            this.$message.bottom().error('Template Delete Failed: ' + JSON.parse(response.text.message));
           }
         } else {
           console.log('API called successfully. Returned data: ' + data);

@@ -1,5 +1,26 @@
 <template>
   <div>
+    <v-card class="mx-auto  my-4">
+      <v-list-item three-line>
+        <v-list-item-content>
+          <v-list-item-title class="headline mb-1">Notice</v-list-item-title>
+          <v-list-item-subtitle>
+            - Do not store your files in directories other than /root. They will be deleted when
+            your pod restarts
+          </v-list-item-subtitle>
+          <v-list-item-subtitle>
+            - Pod may not be ready after creation or startup, wait for at least 60 seconds.
+          </v-list-item-subtitle>
+          <v-list-item-subtitle>
+            - Click connect and connect to WebIDE or VNC (GUI) of Pod, you will be asked to provide your credentials.
+          </v-list-item-subtitle>
+          <v-list-item-subtitle>
+            - If you close this page, the pod will automatically shutdown after timeout.
+          </v-list-item-subtitle>
+
+        </v-list-item-content>
+      </v-list-item>
+    </v-card>
     <v-container>
       <template v-for="(pod, index) in pods">
         <v-list-item :key="pod.name">
@@ -264,6 +285,7 @@
                   item-text="name"
                   item-value="template_id"
                   label="Template *"
+                  :rules="notNullRule"
               ></v-select>
 
             </v-form>
@@ -425,7 +447,7 @@ export default {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Template List Failed');
+            this.$message.bottom().error('Template List Failed: ' + JSON.parse(response.text).message);
           }
         } else {
           // console.log('API called successfully. Returned data: ' + data);
@@ -446,7 +468,7 @@ export default {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Pod List Failed');
+            this.$message.bottom().error('Pod List Failed: ' + JSON.parse(response.text).message);
           }
         } else {
           // console.log('API called successfully. Returned data: ' + data);
@@ -572,7 +594,13 @@ export default {
     }
 
   },
-  computed: {},
+  computed: {
+    notNullRule() {
+      const rules = []
+      rules.push(v => ((v != null) && (v !== "")) || 'This field is required')
+      return rules
+    }
+  },
   created() {
     this.initialize()
   },

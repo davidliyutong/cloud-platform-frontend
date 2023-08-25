@@ -29,7 +29,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-divider></v-divider>
+<!--        <v-divider></v-divider>-->
 
         <v-card-actions class="justify-end">
 
@@ -57,7 +57,7 @@
 
 
               <v-card-text>
-                <v-form ref="form" @submit.prevent="save()">
+                <v-form v-model=formIsValid ref="form" @submit.prevent="save()">
                   <v-text-field label="Email" hint="not necessary" v-model="email" :rules="emailRules"></v-text-field>
                   <v-text-field label="New Password" placeholder="password" v-model="password" :rules="passwordRules"
                                 type="password"></v-text-field>
@@ -69,13 +69,13 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-checkbox
-                    v-model="confirm"
-                    label="Confirm"
-                ></v-checkbox>
+<!--                <v-checkbox-->
+<!--                    v-model="confirm"-->
+<!--                    label="Confirm"-->
+<!--                ></v-checkbox>-->
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="reset">Cancel</v-btn>
-                <v-btn :disabled="!confirm" color="blue darken-1" text @click="save">Save</v-btn>
+                <v-btn :disabled="!formIsValid" color="blue darken-1" text @click="save">Save</v-btn>
               </v-card-actions>
 
             </v-card>
@@ -146,6 +146,7 @@ defaultClient.basePath = getRootPath();
 export default {
   name: "Profile",
   data: () => ({
+    formIsValid: false,
     confirm: "",
     dialog: false,
     formTitle: "Edit Profile",
@@ -156,8 +157,8 @@ export default {
       "memory_mb": "unlimited",
       "storage_mb": "unlimited"
     },
-    password: "",
-    passwordConfirm: "",
+    password: null,
+    passwordConfirm: null,
     email: null
   }),
   methods: {
@@ -195,12 +196,14 @@ export default {
               this.$message.bottom().error('Please Login');
               logOut();
             } else {
-              this.$message.bottom().error('Profile Change Failed');
+              this.$message.bottom().error('Profile Change Failed: ' + JSON.parse(response.text).message);
             }
 
           } else {
             console.log('API called successfully. Returned data: ' + data);
-            this.$message.bottom().success('Password Changed');
+            this.$message.bottom().success('Profile Changed');
+
+            localStorage.setItem('email', this.email);
           }
         });
         this.dialog=false;
@@ -222,7 +225,7 @@ export default {
             this.$message.bottom().error('Please Login');
             logOut();
           } else {
-            this.$message.bottom().error('Profile Get Failed');
+            this.$message.bottom().error('Profile Get Failed: ' + JSON.parse(response.text).message);
           }
         } else {
           // console.log('API called successfully. Returned data: ' + data);

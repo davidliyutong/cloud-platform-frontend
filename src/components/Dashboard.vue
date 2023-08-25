@@ -13,22 +13,6 @@
       <v-card class="mx-auto  my-4">
         <v-list-item three-line>
           <v-list-item-content>
-            <v-list-item-title class="headline mb-1">Notice</v-list-item-title>
-            <v-list-item-subtitle>
-              - Do not store your files in directories other than /root. They will be deleted when
-              your pod restarts <br>
-              - Pod may not be ready after creation or startup, wait for at least 60 seconds.
-            </v-list-item-subtitle>
-          </v-list-item-content>>
-        </v-list-item>
-        <!--        <v-card-actions>-->
-        <!--          <v-btn text @click="getVersion()">Refresh</v-btn>-->
-        <!--        </v-card-actions>-->
-      </v-card>
-
-      <v-card class="mx-auto  my-4">
-        <v-list-item three-line>
-          <v-list-item-content>
             <v-list-item-title class="headline mb-1">Backend Version</v-list-item-title>
             <v-list-item-subtitle>{{ version }}</v-list-item-subtitle>
           </v-list-item-content>
