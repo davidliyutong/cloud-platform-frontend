@@ -4,13 +4,11 @@ build.docker:
 	docker build -t davidliyutong/clpl-frontend:latest .
 
 build.docker.buildx:
-	docker buildx build --platform=linux/amd64,linux/arm64 -t davidliyutong/clpl-frontend:${GIT_VERSION} -f manifests/docker/Dockerfile .
-	docker buildx build --platform=linux/amd64,linux/arm64 -t davidliyutong/clpl-frontend:latest -f manifests/docker/Dockerfile .
+	docker buildx build --platform=linux/amd64,linux/arm64 -t davidliyutong/clpl-frontend:${GIT_VERSION} -t davidliyutong/clpl-frontend:latest -f manifests/docker/Dockerfile .
 	docker buildx build --load -t davidliyutong/clpl-frontend:latest -f manifests/docker/Dockerfile .
 
 push.docker.buildx:
-	docker buildx build --push --platform=linux/amd64,linux/arm64 -t davidliyutong/clpl-frontend:${GIT_VERSION} -f manifests/docker/Dockerfile .
-	docker buildx build --push --platform=linux/amd64,linux/arm64 -t davidliyutong/clpl-frontend:latest -f manifests/docker/Dockerfile .
+	docker buildx build --push --platform=linux/amd64,linux/arm64 -t davidliyutong/clpl-frontend:${GIT_VERSION} -t davidliyutong/clpl-frontend:latest -f manifests/docker/Dockerfile .
 
 test.docker:
 	docker run --rm -it -p 8080:80 -e CLPL_BACKEND_URL=https://apiserver.speit.site -e CLPL_DNS_RESOLVER=10.43.0.10 davidliyutong/clpl-frontend:latest
