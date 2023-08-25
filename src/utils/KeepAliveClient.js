@@ -1,78 +1,61 @@
-import {getRootWSPath} from "@/utils/tool";
+import { getRootWSPath } from "@/utils/tool";
 
 function sleep(ms) {
-    return new Promise(function (resolve) {
-        setTimeout(resolve, ms);
-    });
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 class KeepAliveClient {
     constructor() {
-        let token = localStorage.getItem('token');
-        this.uri = getRootWSPath() + '/v1/heartbeat/user?token=' + token;
+        this.uri = this.getConnectionUri();
+
+        this.handlers = {
+            onOpen: event => console.log('KeepAlive connection established', event),
+            onError: event => {
+                console.log('KeepAlive Error: ', event);
+                this.reconnect();
+            },
+            onMessage: event => console.log('KeepAlive Message: ', event.data),
+            onClose: event => {
+                console.log('KeepAlive connection closed', event);
+                this.reconnect();
+            }
+        };
+
+        this.openConnection();
+    }
+
+    getConnectionUri() {
+        const token = localStorage.getItem('token');
+        return getRootWSPath() + '/v1/heartbeat/user?token=' + token;
+    }
+
+    openConnection() {
         this.socket = new WebSocket(this.uri);
 
-        this.socket.onopen = this.onOpen;
-        this.socket.onerror = this.onError;
-        this.socket.onmessage = this.onMessage;
-        this.socket.onclose = this.onClose;
+        this.socket.onopen = this.handlers.onOpen;
+        this.socket.onerror = this.handlers.onError;
+        this.socket.onmessage = this.handlers.onMessage;
+        this.socket.onclose = this.handlers.onClose;
     }
 
-    onOpen(event) {
-        console.log('KeepAlive connection established', event);
-    }
-
-    async onError(error) {
-        console.log('KeepAlive Error: ', error);
-        // eslint-disable-next-line no-constant-condition
-        while (true) {
-            let token = localStorage.getItem('token');
-            this.uri = getRootWSPath() + '/v1/heartbeat/user?token=' + token;
-            this.socket = new WebSocket(this.uri);
-            if (this.socket.readyState === WebSocket.OPEN) {
-                this.socket.onopen = this.onOpen;
-                this.socket.onerror = this.onError;
-                this.socket.onmessage = this.onMessage;
-                this.socket.onclose = this.onClose;
-                break
-            } else {
-                console.log('KeepAlive Retry Failed');
-                await sleep(2000);
-            }
+    async reconnect() {
+        await sleep(1000);
+        if (!this.socket || this.socket.readyState !== WebSocket.OPEN) {
+            console.log('KeepAlive Retry....');
+            this.uri = this.getConnectionUri();
+            this.openConnection();
         }
-    }
-
-    onMessage(event) {
-        console.log('KeepAlive Message: ', event.data);
-    }
-
-    async onClose(event) {
-        console.log('KeepAlive connection closed', event);
-        // eslint-disable-next-line no-constant-condition
-        while (true) {
-            let token = localStorage.getItem('token');
-            this.uri = getRootWSPath() + '/v1/heartbeat/user?token=' + token;
-            this.socket = new WebSocket(this.uri);
-            if (this.socket.readyState === WebSocket.OPEN) {
-                this.socket.onopen = this.onOpen;
-                this.socket.onerror = this.onError;
-                this.socket.onmessage = this.onMessage;
-                this.socket.onclose = this.onClose;
-                break
-            } else {
-                console.log('KeepAlive Retry Failed');
-                await sleep(2000);
-            }
-        }
-
     }
 
     send(message) {
-        this.socket.send(message);
+        if (this.socket.readyState === WebSocket.OPEN)
+            this.socket.send(message);
+        else
+            console.log("Message not sent. Socket isn't open");
     }
 
     close() {
-        this.socket.close();
+        if (this.socket) this.socket.close();
     }
 }
 
