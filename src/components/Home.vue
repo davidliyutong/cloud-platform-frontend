@@ -3,8 +3,8 @@
     <v-navigation-drawer v-model="drawer" app bottom>
       <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="text-h6">APIServer</v-list-item-title>
-          <v-list-item-subtitle>UI For Cloud Platform APIServer</v-list-item-subtitle>
+          <v-list-item-title class="text-h6">{{ config.name }}</v-list-item-title>
+          <v-list-item-subtitle>{{ config.description }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-divider></v-divider>
@@ -131,7 +131,7 @@
     </v-main>
 
     <v-footer color="primary" app>
-      <span class="white--text">&copy; 2023 davidliyutong@sjtu.edu.cn</span>
+      <span class="white--text">&copy; 2023 {{ config.authorEmail }}</span>
       <!--      <v-spacer></v-spacer>-->
       <!--      <span class="white&#45;&#45;text">{{ username }}</span>-->
     </v-footer>
@@ -145,6 +145,7 @@
 import { logOut, refreshToken} from "@/utils/tool";
 import KeepAliveClient from "@/utils/KeepAliveClient";
 import md5 from 'md5';
+import ProjectConfig from "@/utils/config";
 
 var Api = require('../client/src');
 var defaultClient = Api.ApiClient.instance;
@@ -159,7 +160,8 @@ export default {
       isAdmin: localStorage.getItem('user_role') === 'admin' || localStorage.getItem('user_role') === 'super_admin',
       username: localStorage.getItem('username'),
       logOut: logOut,
-      email: ''
+      email: '',
+      config: ProjectConfig
     };
   },
   methods: {

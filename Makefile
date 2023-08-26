@@ -1,4 +1,4 @@
-GIT_VERSION := $(shell git describe --tags --always)
+GIT_VERSION := $(shell git describe --abbrev=0 --tags)
 
 build.docker:
 	docker build -t davidliyutong/clpl-frontend:latest .
