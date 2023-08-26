@@ -14,7 +14,7 @@
         <v-list-item three-line>
           <v-list-item-content>
             <v-list-item-title class="headline mb-1">Backend Version</v-list-item-title>
-            <v-list-item-subtitle>{{ version }}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ backendVersion }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-card>
@@ -65,7 +65,7 @@ export default {
   name: "Dashboard",
   data: () => ({
     username: localStorage.getItem("username"),
-    version: "",
+    backendVersion: "",
   }),
 
   mounted: function () {
@@ -82,8 +82,8 @@ export default {
         if (error) {
           console.error(error);
         } else {
-          // console.log('API called successfully. Returned data: ' + response);
-          this.version = response.body.version;
+          console.log('API called successfully. Returned data: ' + response);
+          this.backendVersion = response.body.version;
         }
       });
     },

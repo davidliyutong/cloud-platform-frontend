@@ -29,7 +29,7 @@
           </v-list-item-content>
         </v-list-item>
 
-<!--        <v-divider></v-divider>-->
+        <!--        <v-divider></v-divider>-->
 
         <v-card-actions class="justify-end">
 
@@ -69,10 +69,6 @@
               </v-card-text>
 
               <v-card-actions>
-<!--                <v-checkbox-->
-<!--                    v-model="confirm"-->
-<!--                    label="Confirm"-->
-<!--                ></v-checkbox>-->
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="reset">Cancel</v-btn>
                 <v-btn :disabled="!formIsValid" color="blue darken-1" text @click="save">Save</v-btn>
@@ -170,7 +166,7 @@ export default {
     },
     reset: function () {
       this.$refs.form.reset()
-      this.dialog=false;
+      this.dialog = false;
     },
     save: async function () {
       let apiInstance = new Api.NonadminUserApi();
@@ -206,7 +202,7 @@ export default {
             localStorage.setItem('email', this.email);
           }
         });
-        this.dialog=false;
+        this.dialog = false;
 
       }
     },
@@ -228,7 +224,7 @@ export default {
             this.$message.bottom().error('Profile Get Failed: ' + JSON.parse(response.text).message);
           }
         } else {
-          // console.log('API called successfully. Returned data: ' + data);
+          console.log('API called successfully. Returned data: ' + data);
           this.username = data.user.username;
           this.email = data.user.email;
           this.role = data.user.role;

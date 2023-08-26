@@ -72,35 +72,35 @@
       <v-toolbar-title id="global-title"></v-toolbar-title>
       <v-spacer></v-spacer>
 
-            <!--            <v-btn icon>-->
-            <!--                <v-icon>mdi-magnify</v-icon>-->
-            <!--            </v-btn>-->
-            <!--            <v-btn icon link to="/dashboard">-->
-            <!--                <v-icon>mdi-home</v-icon>-->
-            <!--            </v-btn>-->
-            <v-avatar color="indigo" size="36" class="mx-4">
-<!--              <span class="white&#45;&#45;text headline">{{ username[0] }}</span>-->
-              <img :src="gravatarUrl" :alt="email">
-            </v-avatar>
-            <v-toolbar-title>  {{ username }}  </v-toolbar-title>
-            <v-menu bottom left>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                    dark
-                    icon
-                    v-bind="attrs"
-                    v-on="on"
-                >
-                  <v-icon>mdi-dots-vertical</v-icon>
-                </v-btn>
-              </template>
+      <!--            <v-btn icon>-->
+      <!--                <v-icon>mdi-magnify</v-icon>-->
+      <!--            </v-btn>-->
+      <!--            <v-btn icon link to="/dashboard">-->
+      <!--                <v-icon>mdi-home</v-icon>-->
+      <!--            </v-btn>-->
+      <v-avatar color="indigo" size="36" class="mx-4">
+        <!--              <span class="white&#45;&#45;text headline">{{ username[0] }}</span>-->
+        <img :src="gravatarUrl" :alt="email">
+      </v-avatar>
+      <v-toolbar-title> {{ username }}</v-toolbar-title>
+      <v-menu bottom left>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+              dark
+              icon
+              v-bind="attrs"
+              v-on="on"
+          >
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
 
-              <v-list>
-                <v-list-item @click="logOut">
-                  <v-list-item-title>Logout</v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </v-menu>
+        <v-list>
+          <v-list-item @click="logOut">
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
 
     </v-app-bar>
 
@@ -132,8 +132,8 @@
 
     <v-footer color="primary" app>
       <span class="white--text">&copy; 2023 {{ config.authorEmail }}</span>
-      <!--      <v-spacer></v-spacer>-->
-      <!--      <span class="white&#45;&#45;text">{{ username }}</span>-->
+      <v-spacer></v-spacer>
+      <span class="white--text">{{ config.version }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -142,7 +142,7 @@
 // import axios from "axios";
 // import {mdiAlarmLight} from "@mdi/js";
 // import io from 'socket.io-client';
-import { logOut, refreshToken} from "@/utils/tool";
+import {logOut, refreshToken} from "@/utils/tool";
 import KeepAliveClient from "@/utils/KeepAliveClient";
 import md5 from 'md5';
 import ProjectConfig from "@/utils/config";
@@ -171,10 +171,17 @@ export default {
       token.accessToken = localStorage.getItem("token");
       let local_username = localStorage.getItem("username");
       apiInstance.getnonadminUserNonadminUserGet(local_username, (error, data, response) => {
-        if (error) { console.error(error);
-          if (response.status === 401) { this.$message.bottom().error('Please Login'); logOut();
-          } else { this.$message.bottom().error('Profile Get Failed: ' + JSON.parse(response.text).message); }
-        } else { console.log('API called successfully. Returned data: ' + data);}
+        if (error) {
+          console.error(error);
+          if (response.status === 401) {
+            this.$message.bottom().error('Please Login');
+            logOut();
+          } else {
+            this.$message.bottom().error('Profile Get Failed: ' + JSON.parse(response.text).message);
+          }
+        } else {
+          console.log('API called successfully. Returned data: ' + data);
+        }
       });
     },
   },

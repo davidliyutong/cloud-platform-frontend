@@ -5,7 +5,10 @@
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">Notice</v-list-item-title>
           <v-list-item-subtitle>
-            - Follow the directives of https://github.com/davidliyutong/cloud-platform-apiserver/blob/main/tests/templates/default.yaml when building template strings
+            - Follow the directives of
+            https://github.com/davidliyutong/cloud-platform-apiserver/blob/main/tests/templates/default.yaml when
+            building template strings
+            - Be careful when deleting templates, it will not affect the pods associated with the template.
           </v-list-item-subtitle>
 
         </v-list-item-content>
@@ -128,7 +131,8 @@
                     <v-card-title class="text-h5">
                       Delete this Template ?
                     </v-card-title>
-                    <v-card-text>Warning: The template ({{ deletingTemplate.name }}) will be removed forever, pods will not be
+                    <v-card-text>Warning: The template ({{ deletingTemplate.name }}) will be removed forever, pods will
+                      not be
                       affected
                     </v-card-text>
                     <v-card-actions>
@@ -315,7 +319,7 @@ export default {
             this.$message.bottom().error('Template List Failed: ' + JSON.parse(response.text).message);
           }
         } else {
-          // console.log('API called successfully. Returned data: ' + data);
+          console.log('API called successfully. Returned data: ' + data);
           this.templates = data.templates;
         }
       });

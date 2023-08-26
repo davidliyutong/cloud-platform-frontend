@@ -49,15 +49,6 @@
             <v-icon>mdi-download</v-icon>
           </v-btn>
           <v-dialog v-model="editDialog" max-width="800px">
-            <!--            <template v-slot:activator="{ on, attrs }">-->
-            <!--              <v-btn-->
-            <!--                  color="primary"-->
-            <!--                  dark-->
-            <!--                  class="mb-2"-->
-            <!--                  v-bind="attrs"-->
-            <!--                  v-on="on"-->
-            <!--              >New User</v-btn>-->
-            <!--            </template>-->
             <v-card>
               <v-card-title>
                 <span class="headline">{{ editFormTitle }}</span>
@@ -294,7 +285,7 @@ export default {
             this.$message.bottom().error('User List Failed: ' + JSON.parse(error.response.text).message);
           }
         } else {
-          // console.log('API called successfully. Returned data: ' + data);
+          console.log('API called successfully. Returned data: ' + data);
           this.userItems = data.users;
         }
       });

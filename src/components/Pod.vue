@@ -21,6 +21,104 @@
         </v-list-item-content>
       </v-list-item>
     </v-card>
+    <v-data-table
+        v-show="isAdmin"
+        v-model="selectedItems"
+        class="elevation-1 my-4"
+        :headers="podHeaders"
+        :items="podItems"
+        :items-per-page=30
+        item-key="pod_id"
+        show-select
+        :search="search"
+    >
+      <template v-slot:top>
+        <v-toolbar flat color="white">
+          <v-toolbar-title>All Pods</v-toolbar-title>
+          <v-divider
+              class="mx-4"
+              inset
+              vertical
+          ></v-divider>
+          <v-text-field
+              v-model="search"
+              append-icon="mdi-magnify"
+              label="Search"
+              single-line
+              hide-details
+          ></v-text-field>
+          <v-spacer></v-spacer>
+          <v-btn color="success" @click="listGlobalPod()" class="mx-2">
+            <v-icon>mdi-refresh</v-icon>
+          </v-btn>
+          <v-btn color="error" @click="actionDeleteSelectedPods()" class="mx-2" :disabled="selectedItems.length === 0">
+            <v-icon>mdi-delete</v-icon>
+          </v-btn>
+          <v-dialog v-model="editDialog" max-width="800px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">{{ editFormTitle }}</span>
+              </v-card-title>
+
+              <v-card-text>
+                <v-form ref="editingFrom" @submit.prevent="saveEditForm()" v-model="formIsValid">
+                  <v-text-field
+                      label="Pod ID"
+                      v-model="editingPod.pod_id"
+                      disabled
+                  ></v-text-field>
+                  <v-text-field
+                      label="Name"
+                      hint="not necessary"
+                      v-model="editingPod.name"></v-text-field>
+                  <v-text-field
+                      label="Description"
+                      hint="not necessary"
+                      placeholder="Describe the pod"
+                      v-model="editingPod.description"
+                  ></v-text-field>
+                  <v-text-field
+                      label="Timeout (s)"
+                      hint="timeout < 86400"
+                      placeholder="3600"
+                      v-model="editingPod.timeout_s"
+                  ></v-text-field>
+                  <v-select
+                      v-model="editingPod.target_status"
+                      :items="target_status_list"
+                      label="Target Status"
+                  ></v-select>
+                  <v-text-field
+                      label="Template Reference (s)"
+                      disabled
+                      v-model="editingPod.template_ref"
+                  ></v-text-field>
+
+                </v-form>
+
+
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="resetEditForm">Cancel</v-btn>
+                <v-btn color="blue darken-1" text @click="saveEditForm" :disabled="!formIsValid">Save</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-toolbar>
+      </template>
+      <template v-slot:item.actions="{ item }">
+        <v-icon
+            small
+            class="mx-2"
+            @click="editItem(item)"
+        >
+          mdi-pencil
+        </v-icon>
+      </template>
+    </v-data-table>
+    <v-divider v-show="isAdmin"></v-divider>
     <v-container>
       <template v-for="(pod, index) in pods">
         <v-list-item :key="pod.name">
@@ -219,7 +317,6 @@
         ></v-divider>
       </template>
     </v-container>
-
     <div class="float-right">
       <v-dialog
           v-model="createDialog"
@@ -308,7 +405,6 @@
 
 
     </div>
-
   </div>
 </template>
 
@@ -333,6 +429,9 @@ export default {
     deleteDialog: false,
     createDialog: false,
     updateDialog: false,
+    editDialog: false,
+    editFormTitle: "Edit Pod",
+    formIsValid: false,
     updatingPod: {
       name: "",
       description: "",
@@ -353,10 +452,33 @@ export default {
     deletingPod: {
       "pod_id": "",
     },
+    editingPod: {
+      name: "",
+      description: "",
+      timeout_s: "",
+      template_ref: "",
+      target_status: "",
+      pod_id: "",
+    },
     createFormTitle: "Create Pod",
     updateFormTitle: "Edit Pod",
     target_status_list: ['running', 'stopped'],
     keepAliveTimerID: null,
+    isAdmin: localStorage.getItem('user_role') === 'admin' || localStorage.getItem('user_role') === 'super_admin',
+    podItems: [],
+    selectedItems: [],
+    podHeaders: [
+      {text: 'Name', value: 'name'},
+      {text: 'Pod ID', value: 'pod_id'},
+      {text: 'Template', value: 'template_ref'},
+      {text: 'Status', value: 'target_status'},
+      {text: 'Owner', value: 'username'},
+      {text: 'Accessed At', value: 'accessed_at'},
+      {text: 'Actions', value: 'actions', sortable: false},
+    ],
+    search: '',
+    editingIndex: -1,
+
   }),
 
   mounted: function () {
@@ -365,11 +487,17 @@ export default {
   },
   methods: {
     addDateStrSeconds,
+    userHasAdminPrivilege() {
+      return localStorage.getItem('user_role') === 'admin' || localStorage.getItem('user_role') === 'super_admin';
+    },
     initialize() {
       if (!checkLogin()) {
         this.$router.push('/')
       }
       this.listPod();
+      if (this.userHasAdminPrivilege()) {
+        this.listGlobalPod();
+      }
       this.keepAliveTimerID = setInterval(this.listPod, 60000);
       this.listTemplates();
     },
@@ -392,7 +520,7 @@ export default {
         if (error) {
           console.error(error);
         } else {
-          // console.log('API called successfully. Returned data: ' + response);
+          console.log('API called successfully. Returned data: ' + response);
           this.coder_hostname = response.body.config.coder_hostname;
           this.vnc_hostname = response.body.config.vnc_hostname;
         }
@@ -430,6 +558,24 @@ export default {
       );
       this.updateDialog = false;
     },
+    editItem: function (item) {
+      this.editingIndex = this.podItems.indexOf(item);
+      this.editingPod = Object.assign({}, item);
+      this.editDialog = true;
+    },
+    resetEditForm: function () {
+      this.editDialog = false;
+    },
+    saveEditForm: function () {
+      this.updateGlobalPod(
+          this.editingPod.pod_id,
+          this.editingPod.name,
+          this.editingPod.description,
+          this.editingPod.timeout_s,
+          this.editingPod.target_status,
+      );
+      this.editDialog = false;
+    },
     powerPod: function (pod_id, status) {
       if (status) {
         this.updatePod(pod_id, null, null, null, 'running');
@@ -457,7 +603,7 @@ export default {
             this.$message.bottom().error('Template List Failed: ' + JSON.parse(response.text).message);
           }
         } else {
-          // console.log('API called successfully. Returned data: ' + data);
+          console.log('API called successfully. Returned data: ' + data);
           this.templates = data.templates.map((item) => {
             item.friendlyName = item.name + ' (' + item.template_id + ')';
             return item
@@ -481,10 +627,43 @@ export default {
             this.$message.bottom().error('Pod List Failed: ' + JSON.parse(response.text).message);
           }
         } else {
-          // console.log('API called successfully. Returned data: ' + data);
+          console.log('API called successfully. Returned data: ' + data);
           this.pods = data.pods;
         }
       });
+    },
+    async listGlobalPod() {
+      let apiInstance = new Api.AdminPodApi();
+      let token = defaultClient.authentications['token'];
+      token.accessToken = localStorage.getItem("token");
+
+      // console.log( defaultClient.authentications['token'] );
+      apiInstance.getadminPodAdminPodList(null, (error, data, response) => {
+        if (error) {
+          console.error(error);
+          if (response.status === 401) {
+            this.$message.bottom().error('Please Login');
+            logOut();
+          } else {
+            this.$message.bottom().error('Pod List Failed: ' + JSON.parse(response.text).message);
+          }
+        } else {
+          console.log('API called successfully. Returned data: ' + data);
+          this.podItems = data.pods;
+        }
+      });
+    },
+    async actionDeleteSelectedPods() {
+      let pods = this.selectedItems;
+      console.log(pods);
+      if (pods.length === 0) {
+        return;
+      }
+      let ret = confirm('Are you sure you want to delete ' + pods.length + ' pod(s) ?');
+      if (ret === true) {
+        await this.deleteGlobalPods(pods);
+        await this.listGlobalPod();
+      }
     },
     setGlobalTitle: function () {
       var myElement = document.getElementById("global-title");
@@ -576,6 +755,44 @@ export default {
       });
 
     },
+    async updateGlobalPod(
+        podID = null,
+        name = null,
+        description = null,
+        timeoutS = null,
+        targetStatus = null) {
+      let apiInstance = new Api.AdminPodApi();
+      let token = defaultClient.authentications['token'];
+      token.accessToken = localStorage.getItem("token");
+
+      let payload = {
+        'podUpdateRequest': {
+          pod_id: podID,
+          name: name,
+          description: description,
+          timeout_s: parseInt(timeoutS),
+          target_status: targetStatus,
+        }
+      }
+
+      // console.log( defaultClient.authentications['token'] );
+      apiInstance.putadminPodAdminPodUpdate(podID, payload, (error, data, response) => {
+        if (error) {
+          console.error(error);
+          if (response.status === 401) {
+            this.$message.bottom().error('Please Login');
+            logOut();
+          } else {
+            this.$message.bottom().error('Pod Update Failed: ' + JSON.parse(response.text).message);
+          }
+        } else {
+          console.log('API called successfully. Returned data: ' + data);
+          this.$message.bottom().success('Pod Update Succeed');
+          this.listGlobalPod();
+        }
+      });
+
+    },
     async deletePod(
         podID = null,
     ) {
@@ -585,23 +802,81 @@ export default {
 
 
       // console.log( defaultClient.authentications['token'] );
-      apiInstance.deletenonadminPodNonadminPodDelete(podID, (error, data, response) => {
-        if (error) {
-          console.error(error);
-          if (response.status === 401) {
-            this.$message.bottom().error('Please Login');
-            logOut();
+      let succeed = await new Promise((resolve, reject) => {
+        apiInstance.deletenonadminPodNonadminPodDelete(podID, (error, data, response) => {
+          if (error) {
+            console.error(error);
+            if (response.status === 401) {
+              this.$message.bottom().error('Please Login');
+              logOut();
+            } else {
+              this.$message.bottom().error('Pod Delete Failed: ' + JSON.parse(response.text).message);
+            }
+            reject(error);
           } else {
-            this.$message.bottom().error('Pod Delete Failed: ' + JSON.parse(response.text).message);
+            console.log('API called successfully. Returned data: ' + data);
+            this.$message.bottom().success('Pod Delete Succeed');
+            this.listPod();
+            resolve(true);
           }
-        } else {
-          console.log('API called successfully. Returned data: ' + data);
-          this.$message.bottom().success('Pod Delete Succeed');
-          this.listPod();
-        }
+        });
+      }).catch(err => {
+        console.error(err);
+        this.$message.bottom().error('Pod Delete Failed: ' + err);
+        return false;
       });
+      return succeed;
+    },
+    async deleteGlobalPod(
+        podID = null,
+    ) {
+      let apiInstance = new Api.AdminPodApi();
+      let token = defaultClient.authentications['token'];
+      token.accessToken = localStorage.getItem("token");
 
-    }
+      // console.log( defaultClient.authentications['token'] );
+      let succeed = await new Promise((resolve, reject) => {
+        apiInstance.deleteadminPodAdminPodDelete(podID, (error, data, response) => {
+          if (error) {
+            console.error(error);
+            if (response.status === 401) {
+              this.$message.bottom().error('Please Login');
+              logOut();
+            } else {
+              this.$message.bottom().error('Pod Delete Failed: ' + JSON.parse(response.text).message);
+            }
+            reject(error);
+          } else {
+            console.log('API called successfully. Returned data: ' + data);
+            this.$message.bottom().success('Pod Delete Succeed');
+            this.listGlobalPod();
+            resolve(true);
+          }
+        });
+      }).catch(err => {
+        console.log(err);
+        return false;
+      });
+      return succeed;
+    },
+    async deleteGlobalPods(pods) {
+      // loop every pod
+      var successNum = 0;
+      var failNum = 0;
+      for (var index in pods) {
+        let succeed = await this.deleteGlobalPod(pods[index].pod_id);
+        if (succeed) {
+          successNum++;
+        } else {
+          failNum++;
+        }
+      }
+      if (failNum === 0) {
+        this.$message.bottom().success("Deleted " + successNum + " Pods");
+      } else {
+        this.$message.bottom().error("Deleted " + successNum + " Pods, Failed " + failNum + " Pods");
+      }
+    },
 
   },
   computed: {
