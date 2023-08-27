@@ -131,7 +131,7 @@
     </v-main>
 
     <v-footer color="primary" app>
-      <span class="white--text">&copy; 2023 {{ config.authorEmail }}</span>
+      <span class="white--text">&copy; 2023 <a v-on:click="sendEmail" href="#" class="white--text"> {{ config.authorEmail }} </a></span>
       <v-spacer></v-spacer>
       <span class="white--text">{{ config.version }}</span>
     </v-footer>
@@ -165,6 +165,13 @@ export default {
     };
   },
   methods: {
+    sendEmail() {
+      // const email = "myemail@example.com";
+      const subject = "[Ticket] Feedback";
+      // document.location = `mailto:${email}?subject=${subject}`;
+
+      window.open(`mailto:${this.config.authorEmail}?subject=${subject}`);
+    },
     async getUser() {
       let apiInstance = new Api.NonadminUserApi();
       let token = defaultClient.authentications['token'];

@@ -276,10 +276,12 @@
                   <v-icon> mdi-power</v-icon>
                   {{ pod.current_status === 'running' ? 'Stop' : 'Start' }}
                 </v-btn>
-                <v-menu offset-y>
+                <v-menu
+                    offset-y
+                    :disabled="pod.current_status !== 'running'">
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
-                        color="primary"
+                        :color="pod.current_status === 'running' ? 'primary' : 'grey'"
                         dark
                         v-bind="attrs"
                         v-on="on"
