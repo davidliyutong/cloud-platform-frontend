@@ -36,6 +36,7 @@
           <v-dialog
               v-model="dialog"
               persistent
+              :retain-focus="false"
               max-width="600px"
           >
             <template v-slot:activator="{ on, attrs }">
@@ -44,7 +45,7 @@
                   fab v-bind="attrs"
                   v-on="on"
               >
-                <v-icon dark>
+                <v-icon class="white--text">
                   mdi-pencil
                 </v-icon>
               </v-btn>

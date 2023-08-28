@@ -46,10 +46,9 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
                         :color="'blue'"
-                        dark
                         bottom
                         right
-                        class="mx-2"
+                        class="mx-2 white--text"
                         v-on="on"
                         v-bind="attrs"
                         @click="
@@ -110,15 +109,15 @@
                 <v-dialog
                     v-model="deleteDialog"
                     persistent
+                    :retain-focus="false"
                     max-width="290"
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
                         :color="'red'"
-                        dark
                         bottom
                         right
-                        class="mx-2"
+                        class="mx-2 white--text"
                         v-bind="attrs"
                         v-on="on"
                         @click="deletingTemplate = template"
@@ -170,6 +169,7 @@
       <v-dialog
           v-model="createDialog"
           persistent
+          :retain-focus="false"
           max-width="800px"
           @input="createDialogToggle"
       >
@@ -178,10 +178,9 @@
               :color="'blue'"
               fab
               large
-              dark
               bottom
               right
-              class="ma-8"
+              class="ma-8 white--text"
               v-on="on"
               v-bind="attrs"
           >

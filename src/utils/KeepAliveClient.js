@@ -1,4 +1,4 @@
-import { getRootWSPath } from "@/utils/tool";
+import {getRootWSPath, logOut} from "@/utils/tool";
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -7,6 +7,7 @@ function sleep(ms) {
 class KeepAliveClient {
     constructor() {
         this.uri = this.getConnectionUri();
+        this.failedConnectionAttempts = 0;
 
         this.handlers = {
             onOpen: event => console.log('KeepAlive connection established', event),
@@ -39,11 +40,16 @@ class KeepAliveClient {
     }
 
     async reconnect() {
-        await sleep(1000);
+        await sleep(4000);
+        this.failedConnectionAttempts++;
         if (!this.socket || this.socket.readyState !== WebSocket.OPEN) {
             console.log('KeepAlive Retry....');
             this.uri = this.getConnectionUri();
             this.openConnection();
+        }
+        if (this.failedConnectionAttempts > 10) {
+            this.close();
+            logOut();
         }
     }
 

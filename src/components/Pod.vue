@@ -54,7 +54,7 @@
           <v-btn color="error" @click="actionDeleteSelectedPods()" class="mx-2" :disabled="selectedItems.length === 0">
             <v-icon>mdi-delete</v-icon>
           </v-btn>
-          <v-dialog v-model="editDialog" max-width="800px">
+          <v-dialog v-model="editDialog" :retain-focus="false" max-width="800px">
             <v-card>
               <v-card-title>
                 <span class="headline">{{ editFormTitle }}</span>
@@ -121,7 +121,7 @@
     <v-divider v-show="isAdmin"></v-divider>
     <v-container>
       <template v-for="(pod, index) in pods">
-        <v-list-item :key="pod.name">
+        <v-list-item :key="pod.uuid">
           <template>
             <v-list-item-content>
               <v-list-item-title v-text="pod.name"></v-list-item-title>
@@ -148,15 +148,15 @@
                 <v-dialog
                     v-model="updateDialog"
                     persistent
+                    :retain-focus="false"
                     max-width="600px"
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
                         :color="'blue'"
-                        dark
                         bottom
                         right
-                        class="mx-2"
+                        class="mx-2 white--text"
                         v-on="on"
                         v-bind="attrs"
                         @click="
@@ -223,15 +223,15 @@
                 <v-dialog
                     v-model="deleteDialog"
                     persistent
+                    :retain-focus="false"
                     max-width="290"
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
                         :color="'red'"
-                        dark
                         bottom
                         right
-                        class="mx-2"
+                        class="mx-2 white--text"
                         v-bind="attrs"
                         v-on="on"
                         @click="deletingPod = pod"
@@ -267,11 +267,11 @@
 
                 <v-btn
                     :color="pod.current_status === 'running' ? 'orange' : 'green'"
-                    dark
                     bottom
                     right
-                    class="mx-2"
+                    class="mx-2 white--text"
                     @click="powerPod(pod.pod_id, pod.current_status !== 'running')"
+                    :disabled="pod.current_status === 'pending'"
                 >
                   <v-icon> mdi-power</v-icon>
                   {{ pod.current_status === 'running' ? 'Stop' : 'Start' }}
@@ -282,7 +282,7 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
                         :color="pod.current_status === 'running' ? 'primary' : 'grey'"
-                        dark
+                        class="white--text"
                         v-bind="attrs"
                         v-on="on"
                     >
@@ -323,6 +323,7 @@
       <v-dialog
           v-model="createDialog"
           persistent
+          :retain-focus="false"
           max-width="600px"
       >
         <template v-slot:activator="{ on, attrs }">
@@ -330,10 +331,9 @@
               :color="'blue'"
               fab
               large
-              dark
               bottom
               right
-              class="ma-8"
+              class="ma-8 white--text"
               v-on="on"
               v-bind="attrs"
           >

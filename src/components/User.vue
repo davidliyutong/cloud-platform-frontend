@@ -48,7 +48,7 @@
           <v-btn color="blue" @click="downloadExampleCSV()" class="mx-2">
             <v-icon>mdi-download</v-icon>
           </v-btn>
-          <v-dialog v-model="editDialog" max-width="800px">
+          <v-dialog v-model="editDialog" max-width="800px" :retain-focus="false">
             <v-card>
               <v-card-title>
                 <span class="headline">{{ editFormTitle }}</span>
@@ -205,6 +205,7 @@ export default {
     userHeaders: [
       {text: 'uid', value: 'uid'},
       {text: 'username', value: 'username'},
+      {text: 'uuid', value: 'uuid'},
       {text: 'email', value: 'email'},
       {text: 'status', value: 'status'},
       {text: 'role', value: 'role'},
