@@ -99,7 +99,8 @@ export default {
       snackbarOK: false,
       token: null,
       refreshToken: null,
-      oidcConfig: null
+      oidcConfig: null,
+      success: null
     }
   },
   methods: {
@@ -142,17 +143,27 @@ export default {
     const urlParams = new URLSearchParams(window.location.search);
     this.token = urlParams.get("token");
     this.refreshToken = urlParams.get("refreshToken");
-
-    if (this.token != null) {
-      localStorage.setItem("token", this.token);
-      localStorage.setItem("refreshToken", this.refreshToken);
-      let decoded = jwt_decode(this.token);
-      localStorage.setItem('username', decoded.username);
-      localStorage.setItem('user_uid', decoded.uid);
-      localStorage.setItem('user_role', decoded.role);
-      localStorage.setItem('email', decoded.email);
-      this.$router.push('/home');
+    // convert string to boolean
+    if (urlParams.get("success") !== null) {
+      this.success = urlParams.get("success") === 'true';
     }
+
+    if (this.success === false) {
+      this.snackbarFail = true;
+    } else {
+      if (this.token != null) {
+        localStorage.setItem("token", this.token);
+        localStorage.setItem("refreshToken", this.refreshToken);
+        let decoded = jwt_decode(this.token);
+        localStorage.setItem('username', decoded.username);
+        localStorage.setItem('user_uid', decoded.uid);
+        localStorage.setItem('user_role', decoded.role);
+        localStorage.setItem('email', decoded.email);
+        this.$router.push('/home');
+      }
+    }
+
+
 
     if (checkLogin()) {
       let decoded = jwt_decode(localStorage.getItem('token'));
