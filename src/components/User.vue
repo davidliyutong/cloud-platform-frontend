@@ -83,7 +83,6 @@
                     <v-col>
                       <v-text-field v-model="editedItem.password" label="New Password"
                                     placeholder="password"
-                                    :rules="passwordRules"
                                     type="password"></v-text-field>
                     </v-col>
                     <v-col>
@@ -663,10 +662,6 @@ export default {
       rules.push(v => (v || '').indexOf(' ') < 0 ||
           'No spaces are allowed')
 
-      if (this.passwordConfirm) {
-        rules.push(v => (!!v && v) === this.passwordConfirm ||
-            'Values do not match')
-      }
 
       if (this.password) {
         rules.push(v => (!!v && v) === this.password ||

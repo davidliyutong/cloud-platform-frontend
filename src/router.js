@@ -7,6 +7,7 @@ import Profile from "@/components/Profile.vue";
 import Pod from "@/components/Pod.vue";
 import Template from "@/components/Template.vue";
 import User from "@/components/User.vue";
+import Root from "@/components/Root.vue";
 
 Vue.use(VueRouter);
 
@@ -18,8 +19,17 @@ VueRouter.prototype.push = function push(location) {
 const routes = [
     {
         path: "/",
-        name: "login",
-        component: Login,
+        name: "root",
+        component: Root,
+        redirect: "/login",
+        children: [
+            {
+                path: "/login",
+                name: "login",
+                component: Login,
+            }
+        ]
+        // props: (route) => ({ token: route.query.token, refresh_token: route.query.refresh_token })
     },
     {
         path: "/home",
@@ -82,7 +92,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     let token = localStorage.getItem("token")
     if (token == null || token === '') {
-        if (to.path === '/' || to.path === '/passwordreset') {
+        if (to.path === '/' || to.path === '/passwordreset' || to.path === '/login') {
             next();
         } else {
             next({name: 'login'});

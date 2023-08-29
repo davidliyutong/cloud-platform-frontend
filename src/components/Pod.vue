@@ -544,6 +544,7 @@ export default {
           this.creatingPod.timeout_s,
       );
       this.createDialog = false;
+      this.listPod();
     },
     resetUpdateForm: function () {
       // this.$refs.updatingForm.reset();

@@ -14,7 +14,8 @@
             <!--          </v-img>-->
 
             <div class="overline mb-2 text-h6">
-              Role: <span class="font-weight-bold">{{ role }}</span>
+              Role: <span class="font-weight-bold">{{ role }}</span><br>
+              Email: <span class="font-weight-bold">{{ email }}</span>
             </div>
 
             <v-list-item-subtitle class="subtitle-1">
@@ -44,6 +45,7 @@
                   color="primary  ma-4"
                   fab v-bind="attrs"
                   v-on="on"
+                  @click="editingItem.email = email; editingItem.password = null; editingItem.passwordConfirm = null;"
               >
                 <v-icon class="white--text">
                   mdi-pencil
@@ -59,10 +61,12 @@
 
               <v-card-text>
                 <v-form v-model=formIsValid ref="form" @submit.prevent="save()">
-                  <v-text-field label="Email" hint="not necessary" v-model="email" :rules="emailRules"></v-text-field>
-                  <v-text-field label="New Password" placeholder="password" v-model="password" :rules="passwordRules"
+                  <v-text-field label="Email" hint="not necessary" v-model="editingItem.email" :rules="emailRules"></v-text-field>
+                  <v-text-field label="Old Password" placeholder="password" v-model="editingItem.oldPassword"
                                 type="password"></v-text-field>
-                  <v-text-field label="Confirm Password" placeholder="confirm" v-model="passwordConfirm"
+                  <v-text-field label="New Password" placeholder="password" v-model="editingItem.password"
+                                type="password"></v-text-field>
+                  <v-text-field label="Confirm Password" placeholder="confirm" v-model="editingItem.passwordConfirm"
                                 :rules="passwordRules"
                                 type="password"></v-text-field>
                 </v-form>
@@ -156,7 +160,13 @@ export default {
     },
     password: null,
     passwordConfirm: null,
-    email: null
+    email: null,
+    editingItem: {
+      oldPassword: null,
+      password: null,
+      passwordConfirm: null,
+      email: ""
+    }
   }),
   methods: {
     initialize() {
@@ -182,8 +192,9 @@ export default {
         let requestPayload = {
           'userUpdateRequest': {
             "username": local_username,
-            "password": this.password,
-            "email": this.email
+            "old_password": this.editingItem.oldPassword || null,
+            "password": this.editingItem.password || null,
+            "email": this.editingItem.email
           }
         }
         apiInstance.putnonadminUserNonadminUserUpdate(local_username, requestPayload, (error, data, response) => {
@@ -256,13 +267,8 @@ export default {
       rules.push(v => (v || '').indexOf(' ') < 0 ||
           'No spaces are allowed')
 
-      if (this.passwordConfirm) {
-        rules.push(v => (!!v && v) === this.passwordConfirm ||
-            'Values do not match')
-      }
-
-      if (this.password) {
-        rules.push(v => (!!v && v) === this.password ||
+      if (this.editingItem.password) {
+        rules.push(v => v === this.editingItem.password ||
             'Values do not match')
       }
 
@@ -272,7 +278,9 @@ export default {
       // check if email is valid
       const rules = []
       // rules.push(v => !!v || 'E-mail is required')
-      rules.push(v => /.+@.+\..+/.test(v) || 'E-mail must be valid')
+      if (this.editingItem.email) {
+        rules.push(v => /.+@.+\..+/.test(v) || 'E-mail must be valid')
+      }
       return rules
     }
   },
