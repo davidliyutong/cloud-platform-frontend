@@ -196,11 +196,11 @@ export default {
     gravatarUrl() {
       // If the email is empty, return a default Gravatar image
       if (this.email.trim() === '') {
-        return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+        return 'https://cn.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
       }
 
       // Otherwise, generate the Gravatar URL
-      return 'https://2.gravatar.com/avatar/' + md5(this.email.trim().toLowerCase());
+      return 'https://cn.gravatar.com/avatar/' + md5(this.email.trim().toLowerCase());
     },
   },
   created() {

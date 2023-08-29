@@ -13,3 +13,10 @@
 
 import ApiClient from '../ApiClient';
 // TODO: add anyof model support
+export default class ExtraInfo {
+    constructor() {
+    }
+    static constructFromObject(v) {
+        return v
+    }
+}

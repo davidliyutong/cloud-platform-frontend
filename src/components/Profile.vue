@@ -1,6 +1,17 @@
 <template>
   <v-container fluid>
     <v-container>
+      <v-card class="mx-auto  my-4">
+        <v-list-item three-line>
+          <v-list-item-content>
+            <v-list-item-title class="headline mb-1">Notice</v-list-item-title>
+            <v-list-item-subtitle>
+              - Default password of OIDC user the same as username, you should change it immediately.
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+
 
       <v-card class="mx-auto" elevatoin="2">
         <v-list-item three-line>

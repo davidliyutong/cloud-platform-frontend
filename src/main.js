@@ -57,8 +57,6 @@ Vue.use(message, {
     vuetifyPreset
 })
 
-
-
 Vue.use(JsonViewer);
 
 // import { basicSetup } from 'codemirror'

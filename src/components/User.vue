@@ -13,11 +13,13 @@
     <v-data-table
         v-model="selectedItems"
         class="elevation-1"
-        :headers="userHeaders"
+        :headers="extCheckBox ? userExtHeaders : userHeaders"
         :items="userItems"
         :items-per-page=30
         item-key="username"
         show-select
+        dense
+        multi-sort
         :search="search"
     >
       <template v-slot:top>
@@ -36,6 +38,12 @@
               hide-details
           ></v-text-field>
           <v-spacer></v-spacer>
+          <v-checkbox
+              class="shrink mr-2 mt-0"
+              hide-details
+              v-model="extCheckBox"
+              :label="`Show extended info`"
+          ></v-checkbox>
           <v-btn color="success" @click="listUsers()" class="mx-2">
             <v-icon>mdi-refresh</v-icon>
           </v-btn>
@@ -121,6 +129,10 @@
           </v-dialog>
         </v-toolbar>
       </template>
+<!--      <template v-slot:item.extra_info="{ item }">-->
+<!--        <json-viewer :value="item.extra_info" :expand-depth=1></json-viewer>-->
+<!--        {{ JSON.stringify(item.extra_info, null, 2)}}-->
+<!--      </template>-->
       <template v-slot:item.actions="{ item }">
         <v-icon
             small
@@ -192,6 +204,7 @@
 var Api = require('../client/src');
 var defaultClient = Api.ApiClient.instance;
 import {logOut} from "@/utils/tool";
+import JsonViewer from 'vue-json-viewer'
 import Papa from 'papaparse'
 import _ from 'lodash'
 
@@ -201,6 +214,7 @@ export default {
     formIsValid: false,
     selectedItems: [],
     search: "",
+    extCheckBox: false,
     userHeaders: [
       {text: 'uid', value: 'uid'},
       {text: 'username', value: 'username'},
@@ -209,6 +223,17 @@ export default {
       {text: 'status', value: 'status'},
       {text: 'role', value: 'role'},
       {text: 'quota', value: 'quota'},
+      {text: 'Actions', value: 'actions', sortable: false},
+    ],
+    userExtHeaders: [
+      {text: 'uid', value: 'uid'},
+      {text: 'username', value: 'username'},
+      {text: 'uuid', value: 'uuid'},
+      {text: 'email', value: 'email'},
+      {text: 'status', value: 'status'},
+      {text: 'role', value: 'role'},
+      {text: 'quota', value: 'quota'},
+      {text: 'extra_info', value: 'extra_info', sortable: false},
       {text: 'Actions', value: 'actions', sortable: false},
     ],
     batchUserHeaders: [
@@ -286,7 +311,11 @@ export default {
           }
         } else {
           console.log('API called successfully. Returned data: ' + data);
-          this.userItems = data.users;
+          this.userItems = data.users.map(user => {
+            user.extra_info = JSON.stringify(user.extra_info);
+            // user.quota = JSON.stringify(user.quota);
+            return user
+          });
         }
       });
     },
@@ -663,8 +692,8 @@ export default {
           'No spaces are allowed')
 
 
-      if (this.password) {
-        rules.push(v => (!!v && v) === this.password ||
+      if (this.editedItem.password) {
+        rules.push(v => (!!v && v) === this.editedItem.password ||
             'Values do not match')
       }
 
