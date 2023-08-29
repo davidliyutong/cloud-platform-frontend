@@ -19,6 +19,7 @@ import Description from './model/Description';
 import Email from './model/Email';
 import Email1 from './model/Email1';
 import Email2 from './model/Email2';
+import ExtraInfo from './model/ExtraInfo';
 import FieldTypeEnum from './model/FieldTypeEnum';
 import Fields from './model/Fields';
 import Fields1 from './model/Fields1';
@@ -165,6 +166,12 @@ export {
      * @property {module:model/Email2}
      */
     Email2,
+
+    /**
+     * The ExtraInfo model constructor.
+     * @property {module:model/ExtraInfo}
+     */
+    ExtraInfo,
 
     /**
      * The FieldTypeEnum model constructor.

@@ -16,5 +16,6 @@ Name | Type | Description | Notes
 **role** | [**UserRoleEnum**](UserRoleEnum.md) |  | 
 **ownedPodIds** | **[String]** |  | 
 **quota** | [**UserModelQuota**](UserModelQuota.md) |  | 
+**extraInfo** | [**ExtraInfo**](ExtraInfo.md) |  | [optional] 
 
 

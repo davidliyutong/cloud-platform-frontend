@@ -4,7 +4,7 @@ All URIs are relative to *http://0.0.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getauthOidcAuthorize**](AuthOidcApi.md#getauthOidcAuthorize) | **GET** /v1/auth/oidc/authorize | Authorize
+[**getauthOidcAuthorize**](AuthOidcApi.md#getauthOidcAuthorize) | **GET** /v1/auth/oidc/authorize | This endpoint is called by identity provider after user login, will redirect to frontend login page with token
 [**getauthOidcLogin**](AuthOidcApi.md#getauthOidcLogin) | **GET** /v1/auth/oidc/login | Login
 [**getauthOidcStatus**](AuthOidcApi.md#getauthOidcStatus) | **GET** /v1/auth/oidc/status | Status
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > getauthOidcAuthorize()
 
-Authorize
+This endpoint is called by identity provider after user login, will redirect to frontend login page with token
 
 ### Example
 

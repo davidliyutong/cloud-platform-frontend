@@ -147,7 +147,7 @@ Class | Method | HTTP request | Description
 *Api.AuthBpApi* | [**getauthBpVerifyEndpoint**](docs/AuthBpApi.md#getauthBpVerifyEndpoint) | **GET** /v1/auth/jwt/verify | Verifyendpoint
 *Api.AuthBpApi* | [**postauthBpAuthenticateEndpoint**](docs/AuthBpApi.md#postauthBpAuthenticateEndpoint) | **POST** /v1/auth/jwt/login | Authenticateendpoint
 *Api.AuthBpApi* | [**postauthBpRefreshEndpoint**](docs/AuthBpApi.md#postauthBpRefreshEndpoint) | **POST** /v1/auth/jwt/refresh | Refreshendpoint
-*Api.AuthOidcApi* | [**getauthOidcAuthorize**](docs/AuthOidcApi.md#getauthOidcAuthorize) | **GET** /v1/auth/oidc/authorize | Authorize
+*Api.AuthOidcApi* | [**getauthOidcAuthorize**](docs/AuthOidcApi.md#getauthOidcAuthorize) | **GET** /v1/auth/oidc/authorize | This endpoint is called by identity provider after user login, will redirect to frontend login page with token
 *Api.AuthOidcApi* | [**getauthOidcLogin**](docs/AuthOidcApi.md#getauthOidcLogin) | **GET** /v1/auth/oidc/login | Login
 *Api.AuthOidcApi* | [**getauthOidcStatus**](docs/AuthOidcApi.md#getauthOidcStatus) | **GET** /v1/auth/oidc/status | Status
 *Api.DefaultApi* | [**gethealth**](docs/DefaultApi.md#gethealth) | **GET** /health | Health check. Return a 200 OK response.
@@ -172,6 +172,7 @@ Class | Method | HTTP request | Description
  - [Api.Email](docs/Email.md)
  - [Api.Email1](docs/Email1.md)
  - [Api.Email2](docs/Email2.md)
+ - [Api.ExtraInfo](docs/ExtraInfo.md)
  - [Api.FieldTypeEnum](docs/FieldTypeEnum.md)
  - [Api.Fields](docs/Fields.md)
  - [Api.Fields1](docs/Fields1.md)

@@ -43,7 +43,7 @@ export default class AuthOidcApi {
      */
 
     /**
-     * Authorize
+     * This endpoint is called by identity provider after user login, will redirect to frontend login page with token
      * @param {module:api/AuthOidcApi~getauthOidcAuthorizeCallback} callback The callback function, accepting three arguments: error, data, response
      */
     getauthOidcAuthorize(callback) {

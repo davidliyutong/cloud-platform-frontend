@@ -15,6 +15,7 @@ docs/Description.md
 docs/Email.md
 docs/Email1.md
 docs/Email2.md
+docs/ExtraInfo.md
 docs/FieldTypeEnum.md
 docs/Fields.md
 docs/Fields1.md
@@ -101,6 +102,7 @@ src/model/Description.js
 src/model/Email.js
 src/model/Email1.js
 src/model/Email2.js
+src/model/ExtraInfo.js
 src/model/FieldTypeEnum.js
 src/model/Fields.js
 src/model/Fields1.js
@@ -161,13 +163,3 @@ src/model/UserUuid.js
 src/model/Username.js
 src/model/Uuid.js
 src/model/Values.js
-test/api/AuthOidcApi.spec.js
-test/model/ImageRef.spec.js
-test/model/LoginCredential1.spec.js
-test/model/OIDCStatusResponse.spec.js
-test/model/OIDCStatusResponse1.spec.js
-test/model/OldPassword.spec.js
-test/model/TemplateStr.spec.js
-test/model/TemplateStr1.spec.js
-test/model/TokenResponse1.spec.js
-test/model/UserUuid.spec.js

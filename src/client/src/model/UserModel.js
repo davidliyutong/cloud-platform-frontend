@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import Email2 from './Email2';
+import ExtraInfo from './ExtraInfo';
 import Htpasswd from './Htpasswd';
 import ResourceStatusEnum from './ResourceStatusEnum';
 import UserModelQuota from './UserModelQuota';
@@ -109,6 +110,9 @@ class UserModel {
             if (data.hasOwnProperty('quota')) {
                 obj['quota'] = UserModelQuota.constructFromObject(data['quota']);
             }
+            if (data.hasOwnProperty('extra_info')) {
+                obj['extra_info'] = ExtraInfo.constructFromObject(data['extra_info']);
+            }
         }
         return obj;
     }
@@ -156,6 +160,10 @@ class UserModel {
         // validate the optional field `quota`
         if (data['quota']) { // data not null
           UserModelQuota.validateJSON(data['quota']);
+        }
+        // validate the optional field `extra_info`
+        if (data['extra_info']) { // data not null
+          ExtraInfo.validateJSON(data['extra_info']);
         }
 
         return true;
@@ -225,6 +233,11 @@ UserModel.prototype['owned_pod_ids'] = undefined;
  * @member {module:model/UserModelQuota} quota
  */
 UserModel.prototype['quota'] = undefined;
+
+/**
+ * @member {module:model/ExtraInfo} extra_info
+ */
+UserModel.prototype['extra_info'] = undefined;
 
 
 
