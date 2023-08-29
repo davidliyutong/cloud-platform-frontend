@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | [**Name**](Name.md) |  | [optional] 
 **description** | [**Description**](Description.md) |  | [optional] 
 **username** | [**Username**](Username.md) |  | [optional] 
+**userUuid** | [**UserUuid**](UserUuid.md) |  | [optional] 
 **timeoutS** | [**TimeoutS**](TimeoutS.md) |  | [optional] 
 **targetStatus** | [**PodUpdateRequestTargetStatus**](PodUpdateRequestTargetStatus.md) |  | [optional] 
 

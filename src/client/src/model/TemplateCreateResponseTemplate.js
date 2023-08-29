@@ -27,6 +27,7 @@ class TemplateCreateResponseTemplate {
      * Constructs a new <code>TemplateCreateResponseTemplate</code>.
      * @alias module:model/TemplateCreateResponseTemplate
      * @implements module:model/TemplateModel
+     * @param version {String} 
      * @param templateId {String} 
      * @param name {String} 
      * @param description {String} 
@@ -35,9 +36,9 @@ class TemplateCreateResponseTemplate {
      * @param fields {module:model/Fields2} 
      * @param defaults {module:model/Defaults} 
      */
-    constructor(templateId, name, description, imageRef, templateStr, fields, defaults) { 
-        TemplateModel.initialize(this, templateId, name, description, imageRef, templateStr, fields, defaults);
-        TemplateCreateResponseTemplate.initialize(this, templateId, name, description, imageRef, templateStr, fields, defaults);
+    constructor(version, templateId, name, description, imageRef, templateStr, fields, defaults) { 
+        TemplateModel.initialize(this, version, templateId, name, description, imageRef, templateStr, fields, defaults);
+        TemplateCreateResponseTemplate.initialize(this, version, templateId, name, description, imageRef, templateStr, fields, defaults);
     }
 
     /**
@@ -45,7 +46,8 @@ class TemplateCreateResponseTemplate {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, templateId, name, description, imageRef, templateStr, fields, defaults) { 
+    static initialize(obj, version, templateId, name, description, imageRef, templateStr, fields, defaults) { 
+        obj['version'] = version;
         obj['template_id'] = templateId;
         obj['name'] = name;
         obj['description'] = description;
@@ -67,6 +69,9 @@ class TemplateCreateResponseTemplate {
             obj = obj || new TemplateCreateResponseTemplate();
             TemplateModel.constructFromObject(data, obj);
 
+            if (data.hasOwnProperty('version')) {
+                obj['version'] = ApiClient.convertToType(data['version'], 'String');
+            }
             if (data.hasOwnProperty('resource_status')) {
                 obj['resource_status'] = ApiClient.convertToType(data['resource_status'], ResourceStatusEnum);
             }
@@ -108,6 +113,10 @@ class TemplateCreateResponseTemplate {
             }
         }
         // ensure the json data is a string
+        if (data['version'] && !(typeof data['version'] === 'string' || data['version'] instanceof String)) {
+            throw new Error("Expected the field `version` to be a primitive type in the JSON string but got " + data['version']);
+        }
+        // ensure the json data is a string
         if (data['template_id'] && !(typeof data['template_id'] === 'string' || data['template_id'] instanceof String)) {
             throw new Error("Expected the field `template_id` to be a primitive type in the JSON string but got " + data['template_id']);
         }
@@ -142,7 +151,12 @@ class TemplateCreateResponseTemplate {
 
 }
 
-TemplateCreateResponseTemplate.RequiredProperties = ["template_id", "name", "description", "image_ref", "template_str", "fields", "defaults"];
+TemplateCreateResponseTemplate.RequiredProperties = ["version", "template_id", "name", "description", "image_ref", "template_str", "fields", "defaults"];
+
+/**
+ * @member {String} version
+ */
+TemplateCreateResponseTemplate.prototype['version'] = undefined;
 
 /**
  * @member {module:model/ResourceStatusEnum} resource_status
@@ -186,6 +200,10 @@ TemplateCreateResponseTemplate.prototype['defaults'] = undefined;
 
 
 // Implement TemplateModel interface:
+/**
+ * @member {String} version
+ */
+TemplateModel.prototype['version'] = undefined;
 /**
  * @member {module:model/ResourceStatusEnum} resource_status
  */

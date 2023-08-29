@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**version** | **String** |  | 
 **resourceStatus** | [**ResourceStatusEnum**](ResourceStatusEnum.md) |  | [optional] 
 **templateId** | **String** |  | 
 **name** | **String** |  | 

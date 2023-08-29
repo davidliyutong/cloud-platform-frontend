@@ -13,6 +13,7 @@
 
 import ApiClient from '../ApiClient';
 import Email1 from './Email1';
+import OldPassword from './OldPassword';
 import Password from './Password';
 import Quota from './Quota';
 import Role from './Role';
@@ -58,6 +59,9 @@ class UserUpdateRequest {
             if (data.hasOwnProperty('username')) {
                 obj['username'] = ApiClient.convertToType(data['username'], 'String');
             }
+            if (data.hasOwnProperty('old_password')) {
+                obj['old_password'] = OldPassword.constructFromObject(data['old_password']);
+            }
             if (data.hasOwnProperty('password')) {
                 obj['password'] = Password.constructFromObject(data['password']);
             }
@@ -93,6 +97,10 @@ class UserUpdateRequest {
         if (data['username'] && !(typeof data['username'] === 'string' || data['username'] instanceof String)) {
             throw new Error("Expected the field `username` to be a primitive type in the JSON string but got " + data['username']);
         }
+        // validate the optional field `old_password`
+        if (data['old_password']) { // data not null
+          OldPassword.validateJSON(data['old_password']);
+        }
         // validate the optional field `password`
         if (data['password']) { // data not null
           Password.validateJSON(data['password']);
@@ -126,6 +134,11 @@ UserUpdateRequest.RequiredProperties = ["username"];
  * @member {String} username
  */
 UserUpdateRequest.prototype['username'] = undefined;
+
+/**
+ * @member {module:model/OldPassword} old_password
+ */
+UserUpdateRequest.prototype['old_password'] = undefined;
 
 /**
  * @member {module:model/Password} password

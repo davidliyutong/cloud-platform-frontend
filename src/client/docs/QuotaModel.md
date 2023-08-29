@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**version** | **String** |  | 
 **committed** | **Boolean** |  | [optional] [default to false]
 **cpuM** | **Number** |  | 
 **memoryMb** | **Number** |  | 

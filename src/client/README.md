@@ -147,6 +147,9 @@ Class | Method | HTTP request | Description
 *Api.AuthBpApi* | [**getauthBpVerifyEndpoint**](docs/AuthBpApi.md#getauthBpVerifyEndpoint) | **GET** /v1/auth/jwt/verify | Verifyendpoint
 *Api.AuthBpApi* | [**postauthBpAuthenticateEndpoint**](docs/AuthBpApi.md#postauthBpAuthenticateEndpoint) | **POST** /v1/auth/jwt/login | Authenticateendpoint
 *Api.AuthBpApi* | [**postauthBpRefreshEndpoint**](docs/AuthBpApi.md#postauthBpRefreshEndpoint) | **POST** /v1/auth/jwt/refresh | Refreshendpoint
+*Api.AuthOidcApi* | [**getauthOidcAuthorize**](docs/AuthOidcApi.md#getauthOidcAuthorize) | **GET** /v1/auth/oidc/authorize | Authorize
+*Api.AuthOidcApi* | [**getauthOidcLogin**](docs/AuthOidcApi.md#getauthOidcLogin) | **GET** /v1/auth/oidc/login | Login
+*Api.AuthOidcApi* | [**getauthOidcStatus**](docs/AuthOidcApi.md#getauthOidcStatus) | **GET** /v1/auth/oidc/status | Status
 *Api.DefaultApi* | [**gethealth**](docs/DefaultApi.md#gethealth) | **GET** /health | Health check. Return a 200 OK response.
 *Api.DefaultApi* | [**getv1Health**](docs/DefaultApi.md#getv1Health) | **GET** /v1/health | Health check. Return a 200 OK response.
 *Api.HeartbeatApi* | [**getheartbeatHeartbeatUser**](docs/HeartbeatApi.md#getheartbeatHeartbeatUser) | **GET** /v1/heartbeat/user | partial(func, *args, **keywords) - new function with partial application
@@ -174,8 +177,13 @@ Class | Method | HTTP request | Description
  - [Api.Fields1](docs/Fields1.md)
  - [Api.Fields2](docs/Fields2.md)
  - [Api.Htpasswd](docs/Htpasswd.md)
+ - [Api.ImageRef](docs/ImageRef.md)
  - [Api.LoginCredential](docs/LoginCredential.md)
+ - [Api.LoginCredential1](docs/LoginCredential1.md)
  - [Api.Name](docs/Name.md)
+ - [Api.OIDCStatusResponse](docs/OIDCStatusResponse.md)
+ - [Api.OIDCStatusResponse1](docs/OIDCStatusResponse1.md)
+ - [Api.OldPassword](docs/OldPassword.md)
  - [Api.Password](docs/Password.md)
  - [Api.PodCreateRequest](docs/PodCreateRequest.md)
  - [Api.PodCreateResponse](docs/PodCreateResponse.md)
@@ -201,10 +209,13 @@ Class | Method | HTTP request | Description
  - [Api.TemplateGetResponse](docs/TemplateGetResponse.md)
  - [Api.TemplateListResponse](docs/TemplateListResponse.md)
  - [Api.TemplateModel](docs/TemplateModel.md)
+ - [Api.TemplateStr](docs/TemplateStr.md)
+ - [Api.TemplateStr1](docs/TemplateStr1.md)
  - [Api.TemplateUpdateRequest](docs/TemplateUpdateRequest.md)
  - [Api.TemplateUpdateResponse](docs/TemplateUpdateResponse.md)
  - [Api.TimeoutS](docs/TimeoutS.md)
  - [Api.TokenResponse](docs/TokenResponse.md)
+ - [Api.TokenResponse1](docs/TokenResponse1.md)
  - [Api.UserCreateRequest](docs/UserCreateRequest.md)
  - [Api.UserCreateResponse](docs/UserCreateResponse.md)
  - [Api.UserCreateResponseUser](docs/UserCreateResponseUser.md)
@@ -217,6 +228,7 @@ Class | Method | HTTP request | Description
  - [Api.UserStatusEnum](docs/UserStatusEnum.md)
  - [Api.UserUpdateRequest](docs/UserUpdateRequest.md)
  - [Api.UserUpdateResponse](docs/UserUpdateResponse.md)
+ - [Api.UserUuid](docs/UserUuid.md)
  - [Api.Username](docs/Username.md)
  - [Api.Uuid](docs/Uuid.md)
  - [Api.Values](docs/Values.md)

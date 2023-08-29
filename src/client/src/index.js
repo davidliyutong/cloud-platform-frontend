@@ -24,8 +24,13 @@ import Fields from './model/Fields';
 import Fields1 from './model/Fields1';
 import Fields2 from './model/Fields2';
 import Htpasswd from './model/Htpasswd';
+import ImageRef from './model/ImageRef';
 import LoginCredential from './model/LoginCredential';
+import LoginCredential1 from './model/LoginCredential1';
 import Name from './model/Name';
+import OIDCStatusResponse from './model/OIDCStatusResponse';
+import OIDCStatusResponse1 from './model/OIDCStatusResponse1';
+import OldPassword from './model/OldPassword';
 import Password from './model/Password';
 import PodCreateRequest from './model/PodCreateRequest';
 import PodCreateResponse from './model/PodCreateResponse';
@@ -51,10 +56,13 @@ import TemplateDeleteResponse from './model/TemplateDeleteResponse';
 import TemplateGetResponse from './model/TemplateGetResponse';
 import TemplateListResponse from './model/TemplateListResponse';
 import TemplateModel from './model/TemplateModel';
+import TemplateStr from './model/TemplateStr';
+import TemplateStr1 from './model/TemplateStr1';
 import TemplateUpdateRequest from './model/TemplateUpdateRequest';
 import TemplateUpdateResponse from './model/TemplateUpdateResponse';
 import TimeoutS from './model/TimeoutS';
 import TokenResponse from './model/TokenResponse';
+import TokenResponse1 from './model/TokenResponse1';
 import UserCreateRequest from './model/UserCreateRequest';
 import UserCreateResponse from './model/UserCreateResponse';
 import UserCreateResponseUser from './model/UserCreateResponseUser';
@@ -67,6 +75,7 @@ import UserRoleEnum from './model/UserRoleEnum';
 import UserStatusEnum from './model/UserStatusEnum';
 import UserUpdateRequest from './model/UserUpdateRequest';
 import UserUpdateResponse from './model/UserUpdateResponse';
+import UserUuid from './model/UserUuid';
 import Username from './model/Username';
 import Uuid from './model/Uuid';
 import Values from './model/Values';
@@ -75,6 +84,7 @@ import AdminTemplateApi from './api/AdminTemplateApi';
 import AdminUserApi from './api/AdminUserApi';
 import AuthApi from './api/AuthApi';
 import AuthBpApi from './api/AuthBpApi';
+import AuthOidcApi from './api/AuthOidcApi';
 import DefaultApi from './api/DefaultApi';
 import HeartbeatApi from './api/HeartbeatApi';
 import NonadminPodApi from './api/NonadminPodApi';
@@ -187,16 +197,46 @@ export {
     Htpasswd,
 
     /**
+     * The ImageRef model constructor.
+     * @property {module:model/ImageRef}
+     */
+    ImageRef,
+
+    /**
      * The LoginCredential model constructor.
      * @property {module:model/LoginCredential}
      */
     LoginCredential,
 
     /**
+     * The LoginCredential1 model constructor.
+     * @property {module:model/LoginCredential1}
+     */
+    LoginCredential1,
+
+    /**
      * The Name model constructor.
      * @property {module:model/Name}
      */
     Name,
+
+    /**
+     * The OIDCStatusResponse model constructor.
+     * @property {module:model/OIDCStatusResponse}
+     */
+    OIDCStatusResponse,
+
+    /**
+     * The OIDCStatusResponse1 model constructor.
+     * @property {module:model/OIDCStatusResponse1}
+     */
+    OIDCStatusResponse1,
+
+    /**
+     * The OldPassword model constructor.
+     * @property {module:model/OldPassword}
+     */
+    OldPassword,
 
     /**
      * The Password model constructor.
@@ -349,6 +389,18 @@ export {
     TemplateModel,
 
     /**
+     * The TemplateStr model constructor.
+     * @property {module:model/TemplateStr}
+     */
+    TemplateStr,
+
+    /**
+     * The TemplateStr1 model constructor.
+     * @property {module:model/TemplateStr1}
+     */
+    TemplateStr1,
+
+    /**
      * The TemplateUpdateRequest model constructor.
      * @property {module:model/TemplateUpdateRequest}
      */
@@ -371,6 +423,12 @@ export {
      * @property {module:model/TokenResponse}
      */
     TokenResponse,
+
+    /**
+     * The TokenResponse1 model constructor.
+     * @property {module:model/TokenResponse1}
+     */
+    TokenResponse1,
 
     /**
      * The UserCreateRequest model constructor.
@@ -445,6 +503,12 @@ export {
     UserUpdateResponse,
 
     /**
+     * The UserUuid model constructor.
+     * @property {module:model/UserUuid}
+     */
+    UserUuid,
+
+    /**
      * The Username model constructor.
      * @property {module:model/Username}
      */
@@ -491,6 +555,12 @@ export {
     * @property {module:api/AuthBpApi}
     */
     AuthBpApi,
+
+    /**
+    * The AuthOidcApi service constructor.
+    * @property {module:api/AuthOidcApi}
+    */
+    AuthOidcApi,
 
     /**
     * The DefaultApi service constructor.

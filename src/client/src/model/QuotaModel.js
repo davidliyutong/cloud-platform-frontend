@@ -23,6 +23,7 @@ class QuotaModel {
      * Constructs a new <code>QuotaModel</code>.
      *      Quota model, used to define user quota     
      * @alias module:model/QuotaModel
+     * @param version {String} 
      * @param cpuM {Number} 
      * @param memoryMb {Number} 
      * @param storageMb {Number} 
@@ -30,9 +31,9 @@ class QuotaModel {
      * @param networkMb {Number} 
      * @param podN {Number} 
      */
-    constructor(cpuM, memoryMb, storageMb, gpu, networkMb, podN) { 
+    constructor(version, cpuM, memoryMb, storageMb, gpu, networkMb, podN) { 
         
-        QuotaModel.initialize(this, cpuM, memoryMb, storageMb, gpu, networkMb, podN);
+        QuotaModel.initialize(this, version, cpuM, memoryMb, storageMb, gpu, networkMb, podN);
     }
 
     /**
@@ -40,7 +41,8 @@ class QuotaModel {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, cpuM, memoryMb, storageMb, gpu, networkMb, podN) { 
+    static initialize(obj, version, cpuM, memoryMb, storageMb, gpu, networkMb, podN) { 
+        obj['version'] = version;
         obj['cpu_m'] = cpuM;
         obj['memory_mb'] = memoryMb;
         obj['storage_mb'] = storageMb;
@@ -60,6 +62,9 @@ class QuotaModel {
         if (data) {
             obj = obj || new QuotaModel();
 
+            if (data.hasOwnProperty('version')) {
+                obj['version'] = ApiClient.convertToType(data['version'], 'String');
+            }
             if (data.hasOwnProperty('committed')) {
                 obj['committed'] = ApiClient.convertToType(data['committed'], 'Boolean');
             }
@@ -97,6 +102,10 @@ class QuotaModel {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
+        // ensure the json data is a string
+        if (data['version'] && !(typeof data['version'] === 'string' || data['version'] instanceof String)) {
+            throw new Error("Expected the field `version` to be a primitive type in the JSON string but got " + data['version']);
+        }
 
         return true;
     }
@@ -104,7 +113,12 @@ class QuotaModel {
 
 }
 
-QuotaModel.RequiredProperties = ["cpu_m", "memory_mb", "storage_mb", "gpu", "network_mb", "pod_n"];
+QuotaModel.RequiredProperties = ["version", "cpu_m", "memory_mb", "storage_mb", "gpu", "network_mb", "pod_n"];
+
+/**
+ * @member {String} version
+ */
+QuotaModel.prototype['version'] = undefined;
 
 /**
  * @member {Boolean} committed

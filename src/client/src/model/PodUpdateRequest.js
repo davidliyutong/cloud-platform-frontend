@@ -17,6 +17,7 @@ import Name from './Name';
 import PodId from './PodId';
 import PodUpdateRequestTargetStatus from './PodUpdateRequestTargetStatus';
 import TimeoutS from './TimeoutS';
+import UserUuid from './UserUuid';
 import Username from './Username';
 
 /**
@@ -68,6 +69,9 @@ class PodUpdateRequest {
             if (data.hasOwnProperty('username')) {
                 obj['username'] = Username.constructFromObject(data['username']);
             }
+            if (data.hasOwnProperty('user_uuid')) {
+                obj['user_uuid'] = UserUuid.constructFromObject(data['user_uuid']);
+            }
             if (data.hasOwnProperty('timeout_s')) {
                 obj['timeout_s'] = TimeoutS.constructFromObject(data['timeout_s']);
             }
@@ -106,6 +110,10 @@ class PodUpdateRequest {
         if (data['username']) { // data not null
           Username.validateJSON(data['username']);
         }
+        // validate the optional field `user_uuid`
+        if (data['user_uuid']) { // data not null
+          UserUuid.validateJSON(data['user_uuid']);
+        }
         // validate the optional field `timeout_s`
         if (data['timeout_s']) { // data not null
           TimeoutS.validateJSON(data['timeout_s']);
@@ -142,6 +150,11 @@ PodUpdateRequest.prototype['description'] = undefined;
  * @member {module:model/Username} username
  */
 PodUpdateRequest.prototype['username'] = undefined;
+
+/**
+ * @member {module:model/UserUuid} user_uuid
+ */
+PodUpdateRequest.prototype['user_uuid'] = undefined;
 
 /**
  * @member {module:model/TimeoutS} timeout_s

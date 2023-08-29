@@ -30,6 +30,7 @@ class UserModel {
      * Constructs a new <code>UserModel</code>.
      *      User model, used to define user     
      * @alias module:model/UserModel
+     * @param version {String} 
      * @param uid {Number} 
      * @param uuid {module:model/Uuid} 
      * @param username {String} 
@@ -39,9 +40,9 @@ class UserModel {
      * @param ownedPodIds {Array.<String>} 
      * @param quota {module:model/UserModelQuota} 
      */
-    constructor(uid, uuid, username, email, password, role, ownedPodIds, quota) { 
+    constructor(version, uid, uuid, username, email, password, role, ownedPodIds, quota) { 
         
-        UserModel.initialize(this, uid, uuid, username, email, password, role, ownedPodIds, quota);
+        UserModel.initialize(this, version, uid, uuid, username, email, password, role, ownedPodIds, quota);
     }
 
     /**
@@ -49,7 +50,8 @@ class UserModel {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, uid, uuid, username, email, password, role, ownedPodIds, quota) { 
+    static initialize(obj, version, uid, uuid, username, email, password, role, ownedPodIds, quota) { 
+        obj['version'] = version;
         obj['uid'] = uid;
         obj['uuid'] = uuid;
         obj['username'] = username;
@@ -71,6 +73,9 @@ class UserModel {
         if (data) {
             obj = obj || new UserModel();
 
+            if (data.hasOwnProperty('version')) {
+                obj['version'] = ApiClient.convertToType(data['version'], 'String');
+            }
             if (data.hasOwnProperty('resource_status')) {
                 obj['resource_status'] = ApiClient.convertToType(data['resource_status'], ResourceStatusEnum);
             }
@@ -120,6 +125,10 @@ class UserModel {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
+        // ensure the json data is a string
+        if (data['version'] && !(typeof data['version'] === 'string' || data['version'] instanceof String)) {
+            throw new Error("Expected the field `version` to be a primitive type in the JSON string but got " + data['version']);
+        }
         // validate the optional field `uuid`
         if (data['uuid']) { // data not null
           Uuid.validateJSON(data['uuid']);
@@ -155,7 +164,12 @@ class UserModel {
 
 }
 
-UserModel.RequiredProperties = ["uid", "uuid", "username", "email", "password", "role", "owned_pod_ids", "quota"];
+UserModel.RequiredProperties = ["version", "uid", "uuid", "username", "email", "password", "role", "owned_pod_ids", "quota"];
+
+/**
+ * @member {String} version
+ */
+UserModel.prototype['version'] = undefined;
 
 /**
  * @member {module:model/ResourceStatusEnum} resource_status

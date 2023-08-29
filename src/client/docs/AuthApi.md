@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 ## postauthAuthTokenLogin
 
-> TokenResponse postauthAuthTokenLogin(opts)
+> TokenResponse1 postauthAuthTokenLogin(opts)
 
 this is a hack to assign 10yr valid token to user
 
@@ -114,7 +114,7 @@ import Api from 'api';
 
 let apiInstance = new Api.AuthApi();
 let opts = {
-  'loginCredential': new Api.LoginCredential() // LoginCredential | 
+  'loginCredential1': new Api.LoginCredential1() // LoginCredential1 | 
 };
 apiInstance.postauthAuthTokenLogin(opts, (error, data, response) => {
   if (error) {
@@ -130,11 +130,11 @@ apiInstance.postauthAuthTokenLogin(opts, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **loginCredential** | [**LoginCredential**](LoginCredential.md)|  | [optional] 
+ **loginCredential1** | [**LoginCredential1**](LoginCredential1.md)|  | [optional] 
 
 ### Return type
 
-[**TokenResponse**](TokenResponse.md)
+[**TokenResponse1**](TokenResponse1.md)
 
 ### Authorization
 
@@ -148,7 +148,7 @@ No authorization required
 
 ## postauthAuthTokenRefresh
 
-> TokenResponse postauthAuthTokenRefresh()
+> TokenResponse1 postauthAuthTokenRefresh()
 
 this is a hack to verify the long-term token and sign short term token
 
@@ -177,7 +177,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**TokenResponse**](TokenResponse.md)
+[**TokenResponse1**](TokenResponse1.md)
 
 ### Authorization
 

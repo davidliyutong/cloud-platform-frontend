@@ -13,7 +13,7 @@
 
 import ApiClient from '../ApiClient';
 // TODO: add anyof model support
-export default class Password {
+export default class UserUuid {
     constructor() {
     }
     static constructFromObject(v) {

@@ -13,8 +13,8 @@
 
 
 import ApiClient from "../ApiClient";
-import LoginCredential from '../model/LoginCredential';
-import TokenResponse from '../model/TokenResponse';
+import LoginCredential1 from '../model/LoginCredential1';
+import TokenResponse1 from '../model/TokenResponse1';
 
 /**
 * Auth service.
@@ -117,20 +117,20 @@ export default class AuthApi {
      * Callback function to receive the result of the postauthAuthTokenLogin operation.
      * @callback module:api/AuthApi~postauthAuthTokenLoginCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/TokenResponse} data The data returned by the service call.
+     * @param {module:model/TokenResponse1} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
      * this is a hack to assign 10yr valid token to user
      * @param {Object} opts Optional parameters
-     * @param {module:model/LoginCredential} [loginCredential] 
+     * @param {module:model/LoginCredential1} [loginCredential1] 
      * @param {module:api/AuthApi~postauthAuthTokenLoginCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/TokenResponse}
+     * data is of type: {@link module:model/TokenResponse1}
      */
     postauthAuthTokenLogin(opts, callback) {
       opts = opts || {};
-      let postBody = opts['loginCredential'];
+      let postBody = opts['loginCredential1'];
 
       let pathParams = {
       };
@@ -144,7 +144,7 @@ export default class AuthApi {
       let authNames = [];
       let contentTypes = ['application/json'];
       let accepts = ['application/json'];
-      let returnType = TokenResponse;
+      let returnType = TokenResponse1;
       return this.apiClient.callApi(
         '/v1/auth/token/login', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -156,14 +156,14 @@ export default class AuthApi {
      * Callback function to receive the result of the postauthAuthTokenRefresh operation.
      * @callback module:api/AuthApi~postauthAuthTokenRefreshCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/TokenResponse} data The data returned by the service call.
+     * @param {module:model/TokenResponse1} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
      * this is a hack to verify the long-term token and sign short term token
      * @param {module:api/AuthApi~postauthAuthTokenRefreshCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/TokenResponse}
+     * data is of type: {@link module:model/TokenResponse1}
      */
     postauthAuthTokenRefresh(callback) {
       let postBody = null;
@@ -180,7 +180,7 @@ export default class AuthApi {
       let authNames = ['token'];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = TokenResponse;
+      let returnType = TokenResponse1;
       return this.apiClient.callApi(
         '/v1/auth/token/refresh', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
