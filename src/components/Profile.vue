@@ -6,7 +6,8 @@
           <v-list-item-content>
             <v-list-item-title class="headline mb-1">Notice</v-list-item-title>
             <v-list-item-subtitle>
-              - Default password of OIDC users are empty, which prevents them from connecting pods. Change it immediately.
+              - Default password of OIDC users are empty, which prevents them from connecting pods. Change it
+              immediately.
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -72,7 +73,8 @@
 
               <v-card-text>
                 <v-form v-model=formIsValid ref="form" @submit.prevent="save()">
-                  <v-text-field label="Email" hint="not necessary" v-model="editingItem.email" :rules="emailRules"></v-text-field>
+                  <v-text-field label="Email" hint="not necessary" v-model="editingItem.email"
+                                :rules="emailRules"></v-text-field>
                   <v-text-field label="Old Password" placeholder="password" v-model="editingItem.oldPassword"
                                 type="password"></v-text-field>
                   <v-text-field label="New Password" placeholder="password" v-model="editingItem.password"

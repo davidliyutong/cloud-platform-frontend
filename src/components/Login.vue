@@ -84,6 +84,7 @@ import axios from 'axios';
 var api = require('../client/src');
 import {checkLogin, getRootPath, logIn} from "@/utils/tool";
 import jwt_decode from "jwt-decode";
+
 var Api = require('../client/src');
 var defaultClient = Api.ApiClient.instance;
 
@@ -155,8 +156,8 @@ export default {
       this.snackbarFail = true;
     } else {
       if (this.token != null) {
-        localStorage.setItem("token", this.token);
-        localStorage.setItem("refreshToken", this.refreshToken);
+        localStorage.setItem('token', this.token);
+        localStorage.setItem('refreshToken', this.refreshToken);
         let decoded = jwt_decode(this.token);
         localStorage.setItem('username', decoded.username);
         localStorage.setItem('user_uid', decoded.uid);
@@ -165,7 +166,6 @@ export default {
         this.$router.push('/home');
       }
     }
-
 
 
     if (checkLogin()) {

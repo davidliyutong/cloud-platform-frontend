@@ -132,10 +132,10 @@
           </v-dialog>
         </v-toolbar>
       </template>
-<!--      <template v-slot:item.extra_info="{ item }">-->
-<!--        <json-viewer :value="item.extra_info" :expand-depth=1></json-viewer>-->
-<!--        {{ JSON.stringify(item.extra_info, null, 2)}}-->
-<!--      </template>-->
+      <!--      <template v-slot:item.extra_info="{ item }">-->
+      <!--        <json-viewer :value="item.extra_info" :expand-depth=1></json-viewer>-->
+      <!--        {{ JSON.stringify(item.extra_info, null, 2)}}-->
+      <!--      </template>-->
       <template v-slot:item.actions="{ item }">
         <v-icon
             small

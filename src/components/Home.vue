@@ -130,8 +130,10 @@
 
     </v-main>
 
-    <v-footer color="primary" app>
-      <span class="white--text">&copy; 2023 <a v-on:click="sendEmail" href="#" class="white--text"> {{ config.authorEmail }} </a></span>
+    <v-footer app color="primary">
+      <span class="white--text">&copy; 2023
+        <a v-on:click="sendEmail" href="#" class="white--text"> {{ config.authorEmail }} </a>
+      </span>
       <v-spacer></v-spacer>
       <span class="white--text">{{ config.version }}</span>
     </v-footer>

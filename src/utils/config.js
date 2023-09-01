@@ -3,5 +3,5 @@ export default {
   title: 'Cloud Platform',
   description: 'davidliyutong',
   name: 'CloudPlatform',
-  version: 'v0.0.9',
+  version: 'v0.0.10',
 };

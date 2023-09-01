@@ -479,7 +479,7 @@ export default {
       {text: 'Name', value: 'name'},
       {text: 'Pod ID', value: 'pod_id'},
       {text: 'Template', value: 'template_ref'},
-      {text: 'Status', value: 'target_status'},
+      {text: 'Status', value: 'current_status'},
       {text: 'Owner', value: 'username'},
       {text: 'Accessed At', value: 'accessed_at'},
       {text: 'Actions', value: 'actions', sortable: false},
@@ -519,6 +519,7 @@ export default {
       } else {
         console.error('unknown type');
       }
+      uri = uri + '?clpl_auth_token=' + localStorage.getItem('token');
       window.open(uri, '_blank');
     },
     getHostname() {
