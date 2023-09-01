@@ -78,7 +78,7 @@ export default class AuthOidcApi {
      */
 
     /**
-     * Login
+     * This handler redirect user to IdP login page
      * @param {module:api/AuthOidcApi~getauthOidcLoginCallback} callback The callback function, accepting three arguments: error, data, response
      */
     getauthOidcLogin(callback) {

@@ -12,10 +12,13 @@
  */
 
 import ApiClient from '../ApiClient';
+import CpuLimMCpu from './CpuLimMCpu';
 import Description from './Description';
+import MemLimMb from './MemLimMb';
 import Name from './Name';
 import PodId from './PodId';
 import PodUpdateRequestTargetStatus from './PodUpdateRequestTargetStatus';
+import StorageLimMb from './StorageLimMb';
 import TimeoutS from './TimeoutS';
 import UserUuid from './UserUuid';
 import Username from './Username';
@@ -66,6 +69,15 @@ class PodUpdateRequest {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = Description.constructFromObject(data['description']);
             }
+            if (data.hasOwnProperty('cpu_lim_m_cpu')) {
+                obj['cpu_lim_m_cpu'] = CpuLimMCpu.constructFromObject(data['cpu_lim_m_cpu']);
+            }
+            if (data.hasOwnProperty('mem_lim_mb')) {
+                obj['mem_lim_mb'] = MemLimMb.constructFromObject(data['mem_lim_mb']);
+            }
+            if (data.hasOwnProperty('storage_lim_mb')) {
+                obj['storage_lim_mb'] = StorageLimMb.constructFromObject(data['storage_lim_mb']);
+            }
             if (data.hasOwnProperty('username')) {
                 obj['username'] = Username.constructFromObject(data['username']);
             }
@@ -77,6 +89,9 @@ class PodUpdateRequest {
             }
             if (data.hasOwnProperty('target_status')) {
                 obj['target_status'] = PodUpdateRequestTargetStatus.constructFromObject(data['target_status']);
+            }
+            if (data.hasOwnProperty('force')) {
+                obj['force'] = ApiClient.convertToType(data['force'], 'Boolean');
             }
         }
         return obj;
@@ -105,6 +120,18 @@ class PodUpdateRequest {
         // validate the optional field `description`
         if (data['description']) { // data not null
           Description.validateJSON(data['description']);
+        }
+        // validate the optional field `cpu_lim_m_cpu`
+        if (data['cpu_lim_m_cpu']) { // data not null
+          CpuLimMCpu.validateJSON(data['cpu_lim_m_cpu']);
+        }
+        // validate the optional field `mem_lim_mb`
+        if (data['mem_lim_mb']) { // data not null
+          MemLimMb.validateJSON(data['mem_lim_mb']);
+        }
+        // validate the optional field `storage_lim_mb`
+        if (data['storage_lim_mb']) { // data not null
+          StorageLimMb.validateJSON(data['storage_lim_mb']);
         }
         // validate the optional field `username`
         if (data['username']) { // data not null
@@ -147,6 +174,21 @@ PodUpdateRequest.prototype['name'] = undefined;
 PodUpdateRequest.prototype['description'] = undefined;
 
 /**
+ * @member {module:model/CpuLimMCpu} cpu_lim_m_cpu
+ */
+PodUpdateRequest.prototype['cpu_lim_m_cpu'] = undefined;
+
+/**
+ * @member {module:model/MemLimMb} mem_lim_mb
+ */
+PodUpdateRequest.prototype['mem_lim_mb'] = undefined;
+
+/**
+ * @member {module:model/StorageLimMb} storage_lim_mb
+ */
+PodUpdateRequest.prototype['storage_lim_mb'] = undefined;
+
+/**
  * @member {module:model/Username} username
  */
 PodUpdateRequest.prototype['username'] = undefined;
@@ -165,6 +207,12 @@ PodUpdateRequest.prototype['timeout_s'] = undefined;
  * @member {module:model/PodUpdateRequestTargetStatus} target_status
  */
 PodUpdateRequest.prototype['target_status'] = undefined;
+
+/**
+ * @member {Boolean} force
+ * @default false
+ */
+PodUpdateRequest.prototype['force'] = false;
 
 
 

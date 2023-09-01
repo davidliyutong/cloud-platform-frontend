@@ -9,4 +9,6 @@
 
 * `user` (value: `"user"`)
 
+* `device` (value: `"device"`)
+
 

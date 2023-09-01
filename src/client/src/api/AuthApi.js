@@ -36,8 +36,8 @@ export default class AuthApi {
 
 
     /**
-     * Callback function to receive the result of the getauthAuthBasic operation.
-     * @callback module:api/AuthApi~getauthAuthBasicCallback
+     * Callback function to receive the result of the getauthBasic operation.
+     * @callback module:api/AuthApi~getauthBasicCallback
      * @param {String} error Error message, if any.
      * @param {Object} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -45,10 +45,10 @@ export default class AuthApi {
 
     /**
      * Basic auth for any user
-     * @param {module:api/AuthApi~getauthAuthBasicCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AuthApi~getauthBasicCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Object}
      */
-    getauthAuthBasic(callback) {
+    getauthBasic(callback) {
       let postBody = null;
 
       let pathParams = {
@@ -72,8 +72,8 @@ export default class AuthApi {
     }
 
     /**
-     * Callback function to receive the result of the getauthAuthBasicUser operation.
-     * @callback module:api/AuthApi~getauthAuthBasicUserCallback
+     * Callback function to receive the result of the getauthBasicUser operation.
+     * @callback module:api/AuthApi~getauthBasicUserCallback
      * @param {String} error Error message, if any.
      * @param {Object} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -82,14 +82,14 @@ export default class AuthApi {
     /**
      * Basic auth for specific user
      * @param {String} username 
-     * @param {module:api/AuthApi~getauthAuthBasicUserCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AuthApi~getauthBasicUserCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Object}
      */
-    getauthAuthBasicUser(username, callback) {
+    getauthBasicUser(username, callback) {
       let postBody = null;
       // verify the required parameter 'username' is set
       if (username === undefined || username === null) {
-        throw new Error("Missing the required parameter 'username' when calling getauthAuthBasicUser");
+        throw new Error("Missing the required parameter 'username' when calling getauthBasicUser");
       }
 
       let pathParams = {
@@ -114,8 +114,51 @@ export default class AuthApi {
     }
 
     /**
-     * Callback function to receive the result of the postauthAuthTokenLogin operation.
-     * @callback module:api/AuthApi~postauthAuthTokenLoginCallback
+     * Callback function to receive the result of the getauthTokenValidateUser operation.
+     * @callback module:api/AuthApi~getauthTokenValidateUserCallback
+     * @param {String} error Error message, if any.
+     * @param {Object} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * This function validates the token in:
+     * - header.Authorization<br>- urlParam.clpl_auth_token<br><br>If the validation succeed, return 200 OK and set cookie clpl_auth_token=${JWT}
+     * @param {String} username 
+     * @param {module:api/AuthApi~getauthTokenValidateUserCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Object}
+     */
+    getauthTokenValidateUser(username, callback) {
+      let postBody = null;
+      // verify the required parameter 'username' is set
+      if (username === undefined || username === null) {
+        throw new Error("Missing the required parameter 'username' when calling getauthTokenValidateUser");
+      }
+
+      let pathParams = {
+        'username': username
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = ['token'];
+      let contentTypes = [];
+      let accepts = ['*/*', 'application/json'];
+      let returnType = Object;
+      return this.apiClient.callApi(
+        '/v1/auth/token/validate/{username}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the postauthTokenLogin operation.
+     * @callback module:api/AuthApi~postauthTokenLoginCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TokenResponse1} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -125,10 +168,10 @@ export default class AuthApi {
      * this is a hack to assign 10yr valid token to user
      * @param {Object} opts Optional parameters
      * @param {module:model/LoginCredential1} [loginCredential1] 
-     * @param {module:api/AuthApi~postauthAuthTokenLoginCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AuthApi~postauthTokenLoginCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/TokenResponse1}
      */
-    postauthAuthTokenLogin(opts, callback) {
+    postauthTokenLogin(opts, callback) {
       opts = opts || {};
       let postBody = opts['loginCredential1'];
 
@@ -153,8 +196,8 @@ export default class AuthApi {
     }
 
     /**
-     * Callback function to receive the result of the postauthAuthTokenRefresh operation.
-     * @callback module:api/AuthApi~postauthAuthTokenRefreshCallback
+     * Callback function to receive the result of the postauthTokenRefresh operation.
+     * @callback module:api/AuthApi~postauthTokenRefreshCallback
      * @param {String} error Error message, if any.
      * @param {module:model/TokenResponse1} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -162,10 +205,10 @@ export default class AuthApi {
 
     /**
      * this is a hack to verify the long-term token and sign short term token
-     * @param {module:api/AuthApi~postauthAuthTokenRefreshCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/AuthApi~postauthTokenRefreshCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/TokenResponse1}
      */
-    postauthAuthTokenRefresh(callback) {
+    postauthTokenRefresh(callback) {
       let postBody = null;
 
       let pathParams = {

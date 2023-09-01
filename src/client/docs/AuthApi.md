@@ -4,16 +4,17 @@ All URIs are relative to *http://0.0.0.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getauthAuthBasic**](AuthApi.md#getauthAuthBasic) | **GET** /v1/auth/basic | Basic auth for any user
-[**getauthAuthBasicUser**](AuthApi.md#getauthAuthBasicUser) | **GET** /v1/auth/basic/{username} | Basic auth for specific user
-[**postauthAuthTokenLogin**](AuthApi.md#postauthAuthTokenLogin) | **POST** /v1/auth/token/login | this is a hack to assign 10yr valid token to user
-[**postauthAuthTokenRefresh**](AuthApi.md#postauthAuthTokenRefresh) | **POST** /v1/auth/token/refresh | this is a hack to verify the long-term token and sign short term token
+[**getauthBasic**](AuthApi.md#getauthBasic) | **GET** /v1/auth/basic | Basic auth for any user
+[**getauthBasicUser**](AuthApi.md#getauthBasicUser) | **GET** /v1/auth/basic/{username} | Basic auth for specific user
+[**getauthTokenValidateUser**](AuthApi.md#getauthTokenValidateUser) | **GET** /v1/auth/token/validate/{username} | This function validates the token in:
+[**postauthTokenLogin**](AuthApi.md#postauthTokenLogin) | **POST** /v1/auth/token/login | this is a hack to assign 10yr valid token to user
+[**postauthTokenRefresh**](AuthApi.md#postauthTokenRefresh) | **POST** /v1/auth/token/refresh | this is a hack to verify the long-term token and sign short term token
 
 
 
-## getauthAuthBasic
+## getauthBasic
 
-> Object getauthAuthBasic()
+> Object getauthBasic()
 
 Basic auth for any user
 
@@ -27,7 +28,7 @@ let token = defaultClient.authentications['token'];
 token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new Api.AuthApi();
-apiInstance.getauthAuthBasic((error, data, response) => {
+apiInstance.getauthBasic((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -54,9 +55,9 @@ This endpoint does not need any parameter.
 - **Accept**: application/json
 
 
-## getauthAuthBasicUser
+## getauthBasicUser
 
-> Object getauthAuthBasicUser(username)
+> Object getauthBasicUser(username)
 
 Basic auth for specific user
 
@@ -71,7 +72,7 @@ token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new Api.AuthApi();
 let username = "username_example"; // String | 
-apiInstance.getauthAuthBasicUser(username, (error, data, response) => {
+apiInstance.getauthBasicUser(username, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -101,9 +102,58 @@ Name | Type | Description  | Notes
 - **Accept**: application/json
 
 
-## postauthAuthTokenLogin
+## getauthTokenValidateUser
 
-> TokenResponse1 postauthAuthTokenLogin(opts)
+> Object getauthTokenValidateUser(username)
+
+This function validates the token in:
+
+- header.Authorization&lt;br&gt;- urlParam.clpl_auth_token&lt;br&gt;&lt;br&gt;If the validation succeed, return 200 OK and set cookie clpl_auth_token&#x3D;${JWT}
+
+### Example
+
+```javascript
+import Api from 'api';
+let defaultClient = Api.ApiClient.instance;
+// Configure Bearer (JWT) access token for authorization: token
+let token = defaultClient.authentications['token'];
+token.accessToken = "YOUR ACCESS TOKEN"
+
+let apiInstance = new Api.AuthApi();
+let username = "username_example"; // String | 
+apiInstance.getauthTokenValidateUser(username, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **username** | **String**|  | 
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*, application/json
+
+
+## postauthTokenLogin
+
+> TokenResponse1 postauthTokenLogin(opts)
 
 this is a hack to assign 10yr valid token to user
 
@@ -116,7 +166,7 @@ let apiInstance = new Api.AuthApi();
 let opts = {
   'loginCredential1': new Api.LoginCredential1() // LoginCredential1 | 
 };
-apiInstance.postauthAuthTokenLogin(opts, (error, data, response) => {
+apiInstance.postauthTokenLogin(opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -146,9 +196,9 @@ No authorization required
 - **Accept**: application/json
 
 
-## postauthAuthTokenRefresh
+## postauthTokenRefresh
 
-> TokenResponse1 postauthAuthTokenRefresh()
+> TokenResponse1 postauthTokenRefresh()
 
 this is a hack to verify the long-term token and sign short term token
 
@@ -162,7 +212,7 @@ let token = defaultClient.authentications['token'];
 token.accessToken = "YOUR ACCESS TOKEN"
 
 let apiInstance = new Api.AuthApi();
-apiInstance.postauthAuthTokenRefresh((error, data, response) => {
+apiInstance.postauthTokenRefresh((error, data, response) => {
   if (error) {
     console.error(error);
   } else {

@@ -139,16 +139,17 @@ Class | Method | HTTP request | Description
 *Api.AdminUserApi* | [**getadminUserAdminUserList**](docs/AdminUserApi.md#getadminUserAdminUserList) | **GET** /v1/admin/users | List all users.
 *Api.AdminUserApi* | [**postadminUserAdminUserCreate**](docs/AdminUserApi.md#postadminUserAdminUserCreate) | **POST** /v1/admin/users | Create a user.
 *Api.AdminUserApi* | [**putadminUserAdminUserUpdate**](docs/AdminUserApi.md#putadminUserAdminUserUpdate) | **PUT** /v1/admin/users/{username} | Update a user.
-*Api.AuthApi* | [**getauthAuthBasic**](docs/AuthApi.md#getauthAuthBasic) | **GET** /v1/auth/basic | Basic auth for any user
-*Api.AuthApi* | [**getauthAuthBasicUser**](docs/AuthApi.md#getauthAuthBasicUser) | **GET** /v1/auth/basic/{username} | Basic auth for specific user
-*Api.AuthApi* | [**postauthAuthTokenLogin**](docs/AuthApi.md#postauthAuthTokenLogin) | **POST** /v1/auth/token/login | this is a hack to assign 10yr valid token to user
-*Api.AuthApi* | [**postauthAuthTokenRefresh**](docs/AuthApi.md#postauthAuthTokenRefresh) | **POST** /v1/auth/token/refresh | this is a hack to verify the long-term token and sign short term token
+*Api.AuthApi* | [**getauthBasic**](docs/AuthApi.md#getauthBasic) | **GET** /v1/auth/basic | Basic auth for any user
+*Api.AuthApi* | [**getauthBasicUser**](docs/AuthApi.md#getauthBasicUser) | **GET** /v1/auth/basic/{username} | Basic auth for specific user
+*Api.AuthApi* | [**getauthTokenValidateUser**](docs/AuthApi.md#getauthTokenValidateUser) | **GET** /v1/auth/token/validate/{username} | This function validates the token in:
+*Api.AuthApi* | [**postauthTokenLogin**](docs/AuthApi.md#postauthTokenLogin) | **POST** /v1/auth/token/login | this is a hack to assign 10yr valid token to user
+*Api.AuthApi* | [**postauthTokenRefresh**](docs/AuthApi.md#postauthTokenRefresh) | **POST** /v1/auth/token/refresh | this is a hack to verify the long-term token and sign short term token
 *Api.AuthBpApi* | [**getauthBpRetrieveUserEndpoint**](docs/AuthBpApi.md#getauthBpRetrieveUserEndpoint) | **GET** /v1/auth/jwt/me | Retrieveuserendpoint
 *Api.AuthBpApi* | [**getauthBpVerifyEndpoint**](docs/AuthBpApi.md#getauthBpVerifyEndpoint) | **GET** /v1/auth/jwt/verify | Verifyendpoint
 *Api.AuthBpApi* | [**postauthBpAuthenticateEndpoint**](docs/AuthBpApi.md#postauthBpAuthenticateEndpoint) | **POST** /v1/auth/jwt/login | Authenticateendpoint
 *Api.AuthBpApi* | [**postauthBpRefreshEndpoint**](docs/AuthBpApi.md#postauthBpRefreshEndpoint) | **POST** /v1/auth/jwt/refresh | Refreshendpoint
 *Api.AuthOidcApi* | [**getauthOidcAuthorize**](docs/AuthOidcApi.md#getauthOidcAuthorize) | **GET** /v1/auth/oidc/authorize | This endpoint is called by identity provider after user login, will redirect to frontend login page with token
-*Api.AuthOidcApi* | [**getauthOidcLogin**](docs/AuthOidcApi.md#getauthOidcLogin) | **GET** /v1/auth/oidc/login | Login
+*Api.AuthOidcApi* | [**getauthOidcLogin**](docs/AuthOidcApi.md#getauthOidcLogin) | **GET** /v1/auth/oidc/login | This handler redirect user to IdP login page
 *Api.AuthOidcApi* | [**getauthOidcStatus**](docs/AuthOidcApi.md#getauthOidcStatus) | **GET** /v1/auth/oidc/status | Status
 *Api.DefaultApi* | [**gethealth**](docs/DefaultApi.md#gethealth) | **GET** /health | Health check. Return a 200 OK response.
 *Api.DefaultApi* | [**getv1Health**](docs/DefaultApi.md#getv1Health) | **GET** /v1/health | Health check. Return a 200 OK response.
@@ -166,6 +167,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [Api.CpuLimMCpu](docs/CpuLimMCpu.md)
  - [Api.Defaults](docs/Defaults.md)
  - [Api.Defaults1](docs/Defaults1.md)
  - [Api.Description](docs/Description.md)
@@ -181,6 +183,7 @@ Class | Method | HTTP request | Description
  - [Api.ImageRef](docs/ImageRef.md)
  - [Api.LoginCredential](docs/LoginCredential.md)
  - [Api.LoginCredential1](docs/LoginCredential1.md)
+ - [Api.MemLimMb](docs/MemLimMb.md)
  - [Api.Name](docs/Name.md)
  - [Api.OIDCStatusResponse](docs/OIDCStatusResponse.md)
  - [Api.OIDCStatusResponse1](docs/OIDCStatusResponse1.md)
@@ -203,6 +206,7 @@ Class | Method | HTTP request | Description
  - [Api.ResourceStatusEnum](docs/ResourceStatusEnum.md)
  - [Api.Role](docs/Role.md)
  - [Api.Status](docs/Status.md)
+ - [Api.StorageLimMb](docs/StorageLimMb.md)
  - [Api.TemplateCreateRequest](docs/TemplateCreateRequest.md)
  - [Api.TemplateCreateResponse](docs/TemplateCreateResponse.md)
  - [Api.TemplateCreateResponseTemplate](docs/TemplateCreateResponseTemplate.md)

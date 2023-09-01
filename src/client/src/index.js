@@ -13,6 +13,7 @@
 
 
 import ApiClient from './ApiClient';
+import CpuLimMCpu from './model/CpuLimMCpu';
 import Defaults from './model/Defaults';
 import Defaults1 from './model/Defaults1';
 import Description from './model/Description';
@@ -28,6 +29,7 @@ import Htpasswd from './model/Htpasswd';
 import ImageRef from './model/ImageRef';
 import LoginCredential from './model/LoginCredential';
 import LoginCredential1 from './model/LoginCredential1';
+import MemLimMb from './model/MemLimMb';
 import Name from './model/Name';
 import OIDCStatusResponse from './model/OIDCStatusResponse';
 import OIDCStatusResponse1 from './model/OIDCStatusResponse1';
@@ -50,6 +52,7 @@ import QuotaModel from './model/QuotaModel';
 import ResourceStatusEnum from './model/ResourceStatusEnum';
 import Role from './model/Role';
 import Status from './model/Status';
+import StorageLimMb from './model/StorageLimMb';
 import TemplateCreateRequest from './model/TemplateCreateRequest';
 import TemplateCreateResponse from './model/TemplateCreateResponse';
 import TemplateCreateResponseTemplate from './model/TemplateCreateResponseTemplate';
@@ -130,6 +133,12 @@ export {
      * @property {module:ApiClient}
      */
     ApiClient,
+
+    /**
+     * The CpuLimMCpu model constructor.
+     * @property {module:model/CpuLimMCpu}
+     */
+    CpuLimMCpu,
 
     /**
      * The Defaults model constructor.
@@ -220,6 +229,12 @@ export {
      * @property {module:model/LoginCredential1}
      */
     LoginCredential1,
+
+    /**
+     * The MemLimMb model constructor.
+     * @property {module:model/MemLimMb}
+     */
+    MemLimMb,
 
     /**
      * The Name model constructor.
@@ -352,6 +367,12 @@ export {
      * @property {module:model/Status}
      */
     Status,
+
+    /**
+     * The StorageLimMb model constructor.
+     * @property {module:model/StorageLimMb}
+     */
+    StorageLimMb,
 
     /**
      * The TemplateCreateRequest model constructor.

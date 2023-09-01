@@ -8,6 +8,7 @@ docs/AdminUserApi.md
 docs/AuthApi.md
 docs/AuthBpApi.md
 docs/AuthOidcApi.md
+docs/CpuLimMCpu.md
 docs/DefaultApi.md
 docs/Defaults.md
 docs/Defaults1.md
@@ -25,6 +26,7 @@ docs/Htpasswd.md
 docs/ImageRef.md
 docs/LoginCredential.md
 docs/LoginCredential1.md
+docs/MemLimMb.md
 docs/Name.md
 docs/NonadminPodApi.md
 docs/NonadminTemplateApi.md
@@ -50,6 +52,7 @@ docs/QuotaModel.md
 docs/ResourceStatusEnum.md
 docs/Role.md
 docs/Status.md
+docs/StorageLimMb.md
 docs/TemplateCreateRequest.md
 docs/TemplateCreateResponse.md
 docs/TemplateCreateResponseTemplate.md
@@ -96,6 +99,7 @@ src/api/NonadminPodApi.js
 src/api/NonadminTemplateApi.js
 src/api/NonadminUserApi.js
 src/index.js
+src/model/CpuLimMCpu.js
 src/model/Defaults.js
 src/model/Defaults1.js
 src/model/Description.js
@@ -111,6 +115,7 @@ src/model/Htpasswd.js
 src/model/ImageRef.js
 src/model/LoginCredential.js
 src/model/LoginCredential1.js
+src/model/MemLimMb.js
 src/model/Name.js
 src/model/OIDCStatusResponse.js
 src/model/OIDCStatusResponse1.js
@@ -133,6 +138,7 @@ src/model/QuotaModel.js
 src/model/ResourceStatusEnum.js
 src/model/Role.js
 src/model/Status.js
+src/model/StorageLimMb.js
 src/model/TemplateCreateRequest.js
 src/model/TemplateCreateResponse.js
 src/model/TemplateCreateResponseTemplate.js
@@ -163,3 +169,6 @@ src/model/UserUuid.js
 src/model/Username.js
 src/model/Uuid.js
 src/model/Values.js
+test/model/CpuLimMCpu.spec.js
+test/model/MemLimMb.spec.js
+test/model/StorageLimMb.spec.js

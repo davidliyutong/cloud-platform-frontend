@@ -39,7 +39,14 @@ export default class UserRoleEnum {
          */
         "user" = "user";
 
-    
+
+        /**
+         * value: "device"
+         * @const
+         */
+        "device" = "device";
+
+
 
     /**
     * Returns a <code>UserRoleEnum</code> enum value from a Javascript object name.
