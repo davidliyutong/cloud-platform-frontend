@@ -325,6 +325,11 @@
         ></v-divider>
       </template>
     </v-container>
+    <v-progress-linear
+        indeterminate
+        color="cyan"
+        v-show="toggleProgress"
+    ></v-progress-linear>
     <div class="float-right">
       <v-dialog
           v-model="createDialog"
@@ -486,6 +491,7 @@ export default {
     ],
     search: '',
     editingIndex: -1,
+    toggleProgress: false,
 
   }),
 
@@ -710,6 +716,7 @@ export default {
       }
 
       // console.log( defaultClient.authentications['token'] );
+      this.toggleProgress = true;
       apiInstance.postnonadminPodNonadminPodCreate(payload, (error, data, response) => {
         if (error) {
           console.error(error);
@@ -724,6 +731,7 @@ export default {
           this.$message.bottom().success('Pod Create Succeed');
           this.listPod();
         }
+        this.toggleProgress = false;
       });
     },
 
@@ -748,6 +756,7 @@ export default {
       }
 
       // console.log( defaultClient.authentications['token'] );
+      this.toggleProgress = true;
       apiInstance.putnonadminPodNonadminPodUpdate(podID, payload, (error, data, response) => {
         if (error) {
           console.error(error);
@@ -762,6 +771,7 @@ export default {
           this.$message.bottom().success('Pod Update Succeed');
           this.listPod();
         }
+        this.toggleProgress = false;
       });
 
     },
