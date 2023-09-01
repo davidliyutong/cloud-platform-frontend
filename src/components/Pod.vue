@@ -5,17 +5,23 @@
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">Notice</v-list-item-title>
           <v-list-item-subtitle>
-            - Do not store your files in directories other than /root. They will be deleted when
-            your pod restarts
+            - New users MUST change their password before using the system.
           </v-list-item-subtitle>
           <v-list-item-subtitle>
-            - Pod may not be ready after creation or startup, wait for at least 60 seconds.
+            - Do not store your files in directories other than /root. They will be deleted when
+            your pods restarts
+          </v-list-item-subtitle>
+          <v-list-item-subtitle>
+            - Pods may not be ready after creation or startup, wait for at least 60 seconds.
           </v-list-item-subtitle>
           <v-list-item-subtitle>
             - Click connect and connect to WebIDE or VNC (GUI) of Pod, you will be asked to provide your credentials.
           </v-list-item-subtitle>
           <v-list-item-subtitle>
-            - If you close this page, the pod will automatically shutdown after timeout.
+            - If you close this page, pods will automatically shutdown after timeout.
+          </v-list-item-subtitle>
+          <v-list-item-subtitle>
+            - If a pod failed to start, click its "Edit" button and force change its status.
           </v-list-item-subtitle>
 
         </v-list-item-content>

@@ -5,7 +5,10 @@
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">Notice</v-list-item-title>
           <v-list-item-subtitle>
-            - Click the download button to download a csv template for operating a batch users.
+            - Click the download button to download a csv template for operating a batch of users.
+          </v-list-item-subtitle>
+          <v-list-item-subtitle>
+            - Click the download button to download a csv template for operating a batch of users.
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>

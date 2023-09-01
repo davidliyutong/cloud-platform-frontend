@@ -41,7 +41,7 @@
                       v-bind="attrs"
                       @click="snackbarFail = false"
                   >
-                    Close
+                    {{ failMessage }}
                   </v-btn>
                 </template>
               </v-snackbar>
@@ -49,7 +49,7 @@
                   v-model="snackbarOK"
                   color="green"
               >
-                Login Succeed
+                {{ successMessage }}
                 <template v-slot:action="{ attrs }">
                   <v-btn
                       text
@@ -100,7 +100,9 @@ export default {
       token: null,
       refreshToken: null,
       oidcConfig: null,
-      success: null
+      success: null,
+      successMessage: "Login Succeed",
+      failMessage: "Login Failed",
     }
   },
   methods: {
@@ -146,6 +148,7 @@ export default {
     // convert string to boolean
     if (urlParams.get("success") !== null) {
       this.success = urlParams.get("success") === 'true';
+      this.failMessage = urlParams.get("message");
     }
 
     if (this.success === false) {

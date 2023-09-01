@@ -6,7 +6,7 @@
           <v-list-item-content>
             <v-list-item-title class="headline mb-1">Notice</v-list-item-title>
             <v-list-item-subtitle>
-              - Default password of OIDC user the same as username, you should change it immediately.
+              - Default password of OIDC users are empty, which prevents them from connecting pods. Change it immediately.
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -205,7 +205,7 @@ export default {
             "username": local_username,
             "old_password": this.editingItem.oldPassword || null,
             "password": this.editingItem.password || null,
-            "email": this.editingItem.email
+            "email": this.editingItem.email || null,
           }
         }
         apiInstance.putnonadminUserNonadminUserUpdate(local_username, requestPayload, (error, data, response) => {
