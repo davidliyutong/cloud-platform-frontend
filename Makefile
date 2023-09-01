@@ -4,11 +4,15 @@ GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 build.docker:
 	docker build -t davidliyutong/clpl-frontend:latest .
 
-build.docker.buildx:
+build.yarn:
+	yarn install
+	yarn build
+
+build.docker.buildx: build.yarn
 	docker buildx build --platform=linux/amd64,linux/arm64 -t davidliyutong/clpl-frontend:${GIT_VERSION} -t davidliyutong/clpl-frontend:${GIT_BRANCH}-${GIT_VERSION} -t davidliyutong/clpl-frontend:latest -f manifests/docker/Dockerfile .
 	docker buildx build --load -t davidliyutong/clpl-frontend:latest -f manifests/docker/Dockerfile .
 
-push.docker.buildx:
+push.docker.buildx: build.yarn
 	docker buildx build --push --platform=linux/amd64,linux/arm64 -t davidliyutong/clpl-frontend:${GIT_VERSION} -t davidliyutong/clpl-frontend:${GIT_BRANCH}-${GIT_VERSION} -t davidliyutong/clpl-frontend:latest -f manifests/docker/Dockerfile .
 
 test.docker:
