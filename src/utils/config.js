@@ -1,7 +1,7 @@
 export default {
-  authorEmail: 'davidliyutong@sjtu.edu.cn',
+  authorEmail: 'admin@speit.site',
   title: 'Cloud Platform',
-  description: 'davidliyutong',
+  description: 'SPEIT',
   name: 'CloudPlatform',
   version: process.env.VUE_APP_GIT_VERSION || 'unknown',
 };
