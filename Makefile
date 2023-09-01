@@ -1,4 +1,4 @@
-GIT_VERSION := $(shell git describe --abbrev=0 --tags)
+GIT_VERSION := $(shell git describe --abbrev=0 --tags --always)
 GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 AUTHOR=davidliyutong
 

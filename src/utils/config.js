@@ -1,7 +1,7 @@
 export default {
-  authorEmail: 'davidliyutong@sjtu.edu.cn',
+  authorEmail: 'admin@robotflow.ai',
   title: 'Cloud Platform',
-  description: 'davidliyutong',
+  description: 'RobotFlow',
   name: 'CloudPlatform',
   version: 'v0.0.10',
 };
