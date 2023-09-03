@@ -4,6 +4,8 @@ This is the frontend for the [Cloud Platform API Server](https://github.com/davi
 
 ## Project setup
 
+Recommended node version: `v16.18.1`
+
 ```
 yarn install
 ```

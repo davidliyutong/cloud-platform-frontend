@@ -69,7 +69,7 @@
                v-show="oidcConfig !== null"
                @click="oidcLogin"
                x-large>
-          OIDC ({{ oidcConfig.name }})
+          OIDC ({{ oidcName }})
         </v-btn>
       </v-flex>
     </v-layout>
@@ -101,6 +101,7 @@ export default {
       token: null,
       refreshToken: null,
       oidcConfig: null,
+      oidcName: "",
       success: null,
       successMessage: "Login Succeed",
       failMessage: "Login Failed",
@@ -130,6 +131,7 @@ export default {
         } else {
           console.log('API called successfully. Returned data: ' + response);
           this.oidcConfig = response.body.oidc;
+          this.oidcName = response.body.oidc.name;
         }
       });
     },
