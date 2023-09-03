@@ -20,3 +20,7 @@ test.docker:
 
 task.generate_client.javascript:
 	openapi-generator-cli generate -g javascript -i http://127.0.0.1:8080/docs/openapi.json --skip-validate-spec -o src/client
+
+task.update_branches:
+	git checkout speit && git rebase main || git checkout main
+	git checkout robotflow && git rebase main || git checkout main

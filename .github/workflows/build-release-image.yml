@@ -34,5 +34,7 @@ jobs:
         uses: docker/setup-buildx-action@v2
 
       - uses: actions/checkout@v3
+        with:
+          fetch-tags: true
       - name: Build and push the Docker image
         run: make push.docker.buildx
