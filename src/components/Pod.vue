@@ -129,28 +129,26 @@
       <template v-for="(pod, index) in pods">
         <v-list-item :key="pod.uuid">
           <template>
+
             <v-list-item-content>
               <v-list-item-title v-text="pod.name"></v-list-item-title>
-
               <v-list-item-subtitle
                   class="text--primary"
                   v-text="pod.description"
               ></v-list-item-subtitle>
 
               <v-list-item-subtitle
-                  v-text="'Timeout at:' +addDateStrSeconds(pod.accessed_at,pod.timeout_s)"></v-list-item-subtitle>
+                  v-text="'Timeout at:' +addDateStrSeconds(pod.accessed_at,pod.timeout_s)">
+              </v-list-item-subtitle>
               <v-list-item-subtitle
                   v-text="'CPU:'+ pod.cpu_lim_m_cpu + 'm MEM:' + pod.mem_lim_mb + 'MiB DISK:' + pod.storage_lim_mb + 'MiB'"></v-list-item-subtitle>
               <v-list-item-subtitle v-text="'WebIDE: ' + pod.pod_id + '.' + coder_hostname"></v-list-item-subtitle>
               <v-list-item-subtitle v-text="'noVNC: ' + pod.pod_id + '.' + vnc_hostname"></v-list-item-subtitle>
-
-
+              <v-list-item-subtitle v-text="'SSH: ' + pod.pod_id + '.' + ssh_hostname"></v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
               <v-col>
-
-
                 <v-dialog
                     v-model="updateDialog"
                     persistent
@@ -296,22 +294,26 @@
                       Connect
                     </v-btn>
                   </template>
-                  <v-container class="mx-2">
+
                     <v-list>
                       <v-list-item>
                         <v-list-item-title>
-                          <v-btn @click="redirect(pod.pod_id, 'webide')">
+                          <v-btn depressed @click="redirect(pod.pod_id, 'webide')">
                             WebIDE
                           </v-btn>
                         </v-list-item-title>
                       </v-list-item>
                       <v-list-item>
                         <v-list-item-title>
-                          <v-btn @click="redirect(pod.pod_id, 'vnc')">VNC</v-btn>
+                          <v-btn depressed @click="redirect(pod.pod_id, 'vnc')">VNC</v-btn>
+                        </v-list-item-title>
+                      </v-list-item>
+                      <v-list-item>
+                        <v-list-item-title>
+                          <v-btn depressed @click="copySSHInfo(pod.pod_id)">SSH</v-btn>
                         </v-list-item-title>
                       </v-list-item>
                     </v-list>
-                  </v-container>
                 </v-menu>
 
               </v-col>
@@ -437,6 +439,7 @@ export default {
     username: localStorage.getItem("username"),
     coder_hostname: "",
     vnc_hostname: "",
+    ssh_hostname: "",
     pods: [],
     templates: [],
     deleteDialog: false,
@@ -538,6 +541,7 @@ export default {
           console.log('API called successfully. Returned data: ' + response);
           this.coder_hostname = response.body.config.coder_hostname;
           this.vnc_hostname = response.body.config.vnc_hostname;
+          this.ssh_hostname = response.body.config.ssh_hostname;
         }
       });
     },
@@ -897,7 +901,17 @@ export default {
         this.$message.bottom().error("Deleted " + successNum + " Pods, Failed " + failNum + " Pods");
       }
     },
-
+    copySSHInfo(pod_id) {
+      let text = "Host " + pod_id + "\n" +
+          "  HostName " + pod_id + "." + this.ssh_hostname + "\n" +
+          "  User root\n" +
+          "  ProxyCommand websocat --binary wss://" + pod_id + "." + this.ssh_hostname + "\n"
+      navigator.clipboard.writeText(text).then(() => {
+        this.$message.bottom().success('SSH Info Copied, paste it to your .ssh/config');
+      }, () => {
+        this.$message.bottom().error('SSH Info Copy Failed');
+      });
+    },
   },
   computed: {
     notNullRule() {
