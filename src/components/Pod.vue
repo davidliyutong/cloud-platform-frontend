@@ -461,8 +461,8 @@ export default {
       description: "",
       timeout_s: 3600,
       template_ref: "",
-      cpu_lim_m_cpu: 1000,
-      mem_lim_mb: 1024,
+      cpu_lim_m_cpu: 2000,
+      mem_lim_mb: 4096,
       storage_lim_mb: 10240,
     },
     deletingPod: {
@@ -546,7 +546,7 @@ export default {
       });
     },
     resetCreateForm: function () {
-      this.$refs.creatingForm.reset();
+      // this.$refs.creatingForm.reset();
       this.createDialog = false;
     },
     saveCreateForm: function () {

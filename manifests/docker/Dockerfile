@@ -8,7 +8,8 @@
 #COPY . /opt/build
 #RUN yarn install && yarn build
 
-FROM nginx:1.23.3
+FROM nginx:1.25.2
+RUN #apt-get update && apt-get upgrade -y && apt-get clean
 #COPY --from=builder /opt/build/dist /var/www/html/public
 COPY dist /var/www/html/public
 
