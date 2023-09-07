@@ -8,7 +8,7 @@
             - New users MUST change their password before using the system.
           </v-list-item-subtitle>
           <v-list-item-subtitle>
-            - Do not store your files in directories other than /root. They will be deleted when
+            - Do not store your files in directories other than $HOME(which is usually /home/ubuntu). They will be deleted when
             your pods restarts
           </v-list-item-subtitle>
           <v-list-item-subtitle>
@@ -904,7 +904,7 @@ export default {
     copySSHInfo(pod_id) {
       let text = "Host " + pod_id + "\n" +
           "  HostName " + pod_id + "." + this.ssh_hostname + "\n" +
-          "  User root\n" +
+          "  User ubuntu\n" +
           "  ProxyCommand websocat --binary wss://" + pod_id + "." + this.ssh_hostname + "\n"
       navigator.clipboard.writeText(text).then(() => {
         this.$message.bottom().success('SSH Info Copied, paste it to your .ssh/config');
