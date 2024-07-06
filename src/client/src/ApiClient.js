@@ -55,7 +55,7 @@ class ApiClient {
          * @default {}
          */
         this.defaultHeaders = {
-            // 'User-Agent' omitted: browsers refuse to set this header
+            // 'User-Agent': 'OpenAPI-Generator/1.0.0/Javascript'
         };
 
         /**
