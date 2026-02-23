@@ -142,9 +142,7 @@
               </v-list-item-subtitle>
               <v-list-item-subtitle
                   v-text="'CPU:'+ pod.cpu_lim_m_cpu + 'm MEM:' + pod.mem_lim_mb + 'MiB DISK:' + pod.storage_lim_mb + 'MiB'"></v-list-item-subtitle>
-              <v-list-item-subtitle v-text="'WebIDE: ' + pod.pod_id + '.' + coder_hostname"></v-list-item-subtitle>
-              <v-list-item-subtitle v-text="'noVNC: ' + pod.pod_id + '.' + vnc_hostname"></v-list-item-subtitle>
-              <v-list-item-subtitle v-text="'SSH: ' + pod.pod_id + '.' + ssh_hostname"></v-list-item-subtitle>
+              <v-list-item-subtitle v-text="'Workspace Hostname: ' + pod.pod_id + '.' + workspace_hostname"></v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
@@ -437,9 +435,7 @@ export default {
   name: "Pod",
   data: () => ({
     username: localStorage.getItem("username"),
-    coder_hostname: "",
-    vnc_hostname: "",
-    ssh_hostname: "",
+    workspace_hostname: "",
     pods: [],
     templates: [],
     deleteDialog: false,
@@ -521,10 +517,10 @@ export default {
     redirect(pod_id, type) {
       let uri = "";
       if (type === 'webide') {
-        uri = window.location.protocol + '//' + pod_id + '.' + this.coder_hostname;
+        uri = window.location.protocol + '//' + pod_id + '.' + this.workspace_hostname + '/coder/';
 
       } else if (type === 'vnc') {
-        uri = window.location.protocol + '//' + pod_id + '.' + this.vnc_hostname;
+        uri = window.location.protocol + '//' + pod_id + '.' + this.workspace_hostname + '/vnc/';
       } else {
         console.error('unknown type');
       }
@@ -539,9 +535,7 @@ export default {
           console.error(error);
         } else {
           console.log('API called successfully. Returned data: ' + response);
-          this.coder_hostname = response.body.config.coder_hostname;
-          this.vnc_hostname = response.body.config.vnc_hostname;
-          this.ssh_hostname = response.body.config.ssh_hostname;
+          this.workspace_hostname = response.body.config.workspace_hostname;
         }
       });
     },
@@ -903,9 +897,9 @@ export default {
     },
     copySSHInfo(pod_id) {
       let text = "Host " + pod_id + "\n" +
-          "  HostName " + pod_id + "." + this.ssh_hostname + "\n" +
+          "  HostName " + pod_id + "." + this.workspace_hostname + "\n" +
           "  User ubuntu\n" +
-          "  ProxyCommand websocat --binary wss://" + pod_id + "." + this.ssh_hostname + "\n"
+          "  ProxyCommand websocat --binary wss://" + pod_id + "." + this.workspace_hostname + "/ssh/" + "\n"
       navigator.clipboard.writeText(text).then(() => {
         this.$message.bottom().success('SSH Info Copied, paste it to your .ssh/config');
       }, () => {
