@@ -141,7 +141,7 @@
                   v-text="'Timeout at:' +addDateStrSeconds(pod.accessed_at,pod.timeout_s)">
               </v-list-item-subtitle>
               <v-list-item-subtitle
-                  v-text="'CPU:'+ pod.cpu_lim_m_cpu + 'm MEM:' + pod.mem_lim_mb + 'MiB DISK:' + pod.storage_lim_mb + 'MiB'"></v-list-item-subtitle>
+                  v-text="'CPU:'+ pod.cpu_lim_m_cpu + 'm MEM:' + pod.mem_lim_mb + 'MiB DISK:' + pod.storage_lim_mb + 'MiB GPU:' + (pod.gpu || 0)"></v-list-item-subtitle>
               <v-list-item-subtitle v-text="'Workspace Hostname: ' + pod.pod_id + '.' + workspace_hostname"></v-list-item-subtitle>
             </v-list-item-content>
 
@@ -395,6 +395,12 @@
                   placeholder="10240"
                   v-model="creatingPod.storage_lim_mb"
               ></v-text-field>
+                <v-text-field
+                  label="GPU *"
+                  hint="gpu >= 0"
+                  placeholder="0"
+                  v-model="creatingPod.gpu"
+                ></v-text-field>
               <v-select
                   v-model="creatingPod.template_ref"
                   :items="templates"
@@ -460,6 +466,7 @@ export default {
       cpu_lim_m_cpu: 2000,
       mem_lim_mb: 4096,
       storage_lim_mb: 10240,
+      gpu: 0,
     },
     deletingPod: {
       "pod_id": "",
@@ -552,6 +559,7 @@ export default {
           this.creatingPod.cpu_lim_m_cpu,
           this.creatingPod.mem_lim_mb,
           this.creatingPod.storage_lim_mb,
+          this.creatingPod.gpu,
           this.creatingPod.timeout_s,
       );
       this.createDialog = false;
@@ -690,6 +698,7 @@ export default {
         cpuLimMCpu,
         memLimMB,
         storageLimMB,
+        gpu,
         timeout_s
     ) {
       let apiInstance = new Api.NonadminPodApi();
@@ -709,6 +718,7 @@ export default {
           cpu_lim_m_cpu: parseInt(cpuLimMCpu),
           mem_lim_mb: parseInt(memLimMB),
           storage_lim_mb: parseInt(storageLimMB),
+          gpu: parseInt(gpu),
           timeout_s: parseInt(timeout_s),
         }
       }

@@ -24,7 +24,7 @@ import ResourceStatusEnum from './ResourceStatusEnum';
 class TemplateModel {
     /**
      * Constructs a new <code>TemplateModel</code>.
-     *      Template model, used to define template     
+     * Template model, used to define template
      * @alias module:model/TemplateModel
      * @param version {String} 
      * @param templateId {String} 
@@ -71,7 +71,7 @@ class TemplateModel {
                 obj['version'] = ApiClient.convertToType(data['version'], 'String');
             }
             if (data.hasOwnProperty('resource_status')) {
-                obj['resource_status'] = ApiClient.convertToType(data['resource_status'], ResourceStatusEnum);
+                obj['resource_status'] = ResourceStatusEnum.constructFromObject(data['resource_status']);
             }
             if (data.hasOwnProperty('template_id')) {
                 obj['template_id'] = ApiClient.convertToType(data['template_id'], 'String');

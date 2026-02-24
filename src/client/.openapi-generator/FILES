@@ -21,6 +21,7 @@ docs/FieldTypeEnum.md
 docs/Fields.md
 docs/Fields1.md
 docs/Fields2.md
+docs/Gpu.md
 docs/HeartbeatApi.md
 docs/Htpasswd.md
 docs/ImageRef.md
@@ -37,7 +38,6 @@ docs/OldPassword.md
 docs/Password.md
 docs/PodCreateRequest.md
 docs/PodCreateResponse.md
-docs/PodCreateResponsePod.md
 docs/PodDeleteResponse.md
 docs/PodGetResponse.md
 docs/PodId.md
@@ -55,7 +55,6 @@ docs/Status.md
 docs/StorageLimMb.md
 docs/TemplateCreateRequest.md
 docs/TemplateCreateResponse.md
-docs/TemplateCreateResponseTemplate.md
 docs/TemplateDeleteResponse.md
 docs/TemplateGetResponse.md
 docs/TemplateListResponse.md
@@ -69,7 +68,6 @@ docs/TokenResponse.md
 docs/TokenResponse1.md
 docs/UserCreateRequest.md
 docs/UserCreateResponse.md
-docs/UserCreateResponseUser.md
 docs/UserDeleteResponse.md
 docs/UserGetResponse.md
 docs/UserListResponse.md
@@ -111,6 +109,7 @@ src/model/FieldTypeEnum.js
 src/model/Fields.js
 src/model/Fields1.js
 src/model/Fields2.js
+src/model/Gpu.js
 src/model/Htpasswd.js
 src/model/ImageRef.js
 src/model/LoginCredential.js
@@ -123,7 +122,6 @@ src/model/OldPassword.js
 src/model/Password.js
 src/model/PodCreateRequest.js
 src/model/PodCreateResponse.js
-src/model/PodCreateResponsePod.js
 src/model/PodDeleteResponse.js
 src/model/PodGetResponse.js
 src/model/PodId.js
@@ -141,7 +139,6 @@ src/model/Status.js
 src/model/StorageLimMb.js
 src/model/TemplateCreateRequest.js
 src/model/TemplateCreateResponse.js
-src/model/TemplateCreateResponseTemplate.js
 src/model/TemplateDeleteResponse.js
 src/model/TemplateGetResponse.js
 src/model/TemplateListResponse.js
@@ -155,7 +152,6 @@ src/model/TokenResponse.js
 src/model/TokenResponse1.js
 src/model/UserCreateRequest.js
 src/model/UserCreateResponse.js
-src/model/UserCreateResponseUser.js
 src/model/UserDeleteResponse.js
 src/model/UserGetResponse.js
 src/model/UserListResponse.js
@@ -169,6 +165,4 @@ src/model/UserUuid.js
 src/model/Username.js
 src/model/Uuid.js
 src/model/Values.js
-test/model/CpuLimMCpu.spec.js
-test/model/MemLimMb.spec.js
-test/model/StorageLimMb.spec.js
+test/model/Gpu.spec.js

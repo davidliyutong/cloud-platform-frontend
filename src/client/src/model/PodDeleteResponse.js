@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import PodCreateResponsePod from './PodCreateResponsePod';
+import PodModel from './PodModel';
 
 /**
  * The PodDeleteResponse model module.
@@ -22,7 +22,7 @@ import PodCreateResponsePod from './PodCreateResponsePod';
 class PodDeleteResponse {
     /**
      * Constructs a new <code>PodDeleteResponse</code>.
-     *      Delete response for pods, the same as get response     
+     * Delete response for pods, the same as get response
      * @alias module:model/PodDeleteResponse
      * @param status {Number} 
      * @param message {String} 
@@ -63,7 +63,7 @@ class PodDeleteResponse {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
             if (data.hasOwnProperty('pod')) {
-                obj['pod'] = PodCreateResponsePod.constructFromObject(data['pod']);
+                obj['pod'] = PodModel.constructFromObject(data['pod']);
             }
         }
         return obj;
@@ -91,7 +91,7 @@ class PodDeleteResponse {
         }
         // validate the optional field `pod`
         if (data['pod']) { // data not null
-          PodCreateResponsePod.validateJSON(data['pod']);
+          PodModel.validateJSON(data['pod']);
         }
 
         return true;
@@ -119,7 +119,7 @@ PodDeleteResponse.prototype['status'] = undefined;
 PodDeleteResponse.prototype['message'] = undefined;
 
 /**
- * @member {module:model/PodCreateResponsePod} pod
+ * @member {module:model/PodModel} pod
  */
 PodDeleteResponse.prototype['pod'] = undefined;
 

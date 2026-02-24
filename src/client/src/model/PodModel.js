@@ -24,7 +24,7 @@ import TemplateStr1 from './TemplateStr1';
 class PodModel {
     /**
      * Constructs a new <code>PodModel</code>.
-     *      Pod model, used to define pod     
+     * Pod model, used to define pod
      * @alias module:model/PodModel
      * @param version {String} 
      * @param podId {String} 
@@ -89,7 +89,7 @@ class PodModel {
                 obj['version'] = ApiClient.convertToType(data['version'], 'String');
             }
             if (data.hasOwnProperty('resource_status')) {
-                obj['resource_status'] = ApiClient.convertToType(data['resource_status'], ResourceStatusEnum);
+                obj['resource_status'] = ResourceStatusEnum.constructFromObject(data['resource_status']);
             }
             if (data.hasOwnProperty('pod_id')) {
                 obj['pod_id'] = ApiClient.convertToType(data['pod_id'], 'String');
@@ -114,6 +114,9 @@ class PodModel {
             }
             if (data.hasOwnProperty('storage_lim_mb')) {
                 obj['storage_lim_mb'] = ApiClient.convertToType(data['storage_lim_mb'], 'Number');
+            }
+            if (data.hasOwnProperty('gpu')) {
+                obj['gpu'] = ApiClient.convertToType(data['gpu'], 'Number');
             }
             if (data.hasOwnProperty('username')) {
                 obj['username'] = ApiClient.convertToType(data['username'], 'String');
@@ -245,6 +248,12 @@ PodModel.prototype['mem_lim_mb'] = undefined;
  * @member {Number} storage_lim_mb
  */
 PodModel.prototype['storage_lim_mb'] = undefined;
+
+/**
+ * @member {Number} gpu
+ * @default 0
+ */
+PodModel.prototype['gpu'] = 0;
 
 /**
  * @member {String} username

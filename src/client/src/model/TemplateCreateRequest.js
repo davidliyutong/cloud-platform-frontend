@@ -23,7 +23,7 @@ import Fields from './Fields';
 class TemplateCreateRequest {
     /**
      * Constructs a new <code>TemplateCreateRequest</code>.
-     *      Create request for templates.     fields and defaults are optional and not yet used.     
+     * Create request for templates. fields and defaults are optional and not yet used.
      * @alias module:model/TemplateCreateRequest
      * @param name {String} 
      * @param description {String} 

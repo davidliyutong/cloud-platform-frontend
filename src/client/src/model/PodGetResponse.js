@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import PodCreateResponsePod from './PodCreateResponsePod';
+import PodModel from './PodModel';
 
 /**
  * The PodGetResponse model module.
@@ -22,7 +22,7 @@ import PodCreateResponsePod from './PodCreateResponsePod';
 class PodGetResponse {
     /**
      * Constructs a new <code>PodGetResponse</code>.
-     *      Get response for pods, the same as create response     
+     * Get response for pods, the same as create response
      * @alias module:model/PodGetResponse
      * @param status {Number} 
      * @param message {String} 
@@ -63,7 +63,7 @@ class PodGetResponse {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
             if (data.hasOwnProperty('pod')) {
-                obj['pod'] = PodCreateResponsePod.constructFromObject(data['pod']);
+                obj['pod'] = PodModel.constructFromObject(data['pod']);
             }
         }
         return obj;
@@ -91,7 +91,7 @@ class PodGetResponse {
         }
         // validate the optional field `pod`
         if (data['pod']) { // data not null
-          PodCreateResponsePod.validateJSON(data['pod']);
+          PodModel.validateJSON(data['pod']);
         }
 
         return true;
@@ -119,7 +119,7 @@ PodGetResponse.prototype['status'] = undefined;
 PodGetResponse.prototype['message'] = undefined;
 
 /**
- * @member {module:model/PodCreateResponsePod} pod
+ * @member {module:model/PodModel} pod
  */
 PodGetResponse.prototype['pod'] = undefined;
 

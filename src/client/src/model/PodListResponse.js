@@ -22,7 +22,7 @@ import PodModel from './PodModel';
 class PodListResponse {
     /**
      * Constructs a new <code>PodListResponse</code>.
-     *      List response for pods     
+     * List response for pods
      * @alias module:model/PodListResponse
      * @param status {Number} 
      * @param message {String} 

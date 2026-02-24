@@ -29,7 +29,7 @@ import Uuid from './Uuid';
 class UserModel {
     /**
      * Constructs a new <code>UserModel</code>.
-     *      User model, used to define user     
+     * User model, used to define user
      * @alias module:model/UserModel
      * @param version {String} 
      * @param uid {Number} 
@@ -78,7 +78,7 @@ class UserModel {
                 obj['version'] = ApiClient.convertToType(data['version'], 'String');
             }
             if (data.hasOwnProperty('resource_status')) {
-                obj['resource_status'] = ApiClient.convertToType(data['resource_status'], ResourceStatusEnum);
+                obj['resource_status'] = ResourceStatusEnum.constructFromObject(data['resource_status']);
             }
             if (data.hasOwnProperty('uid')) {
                 obj['uid'] = ApiClient.convertToType(data['uid'], 'Number');
@@ -90,7 +90,7 @@ class UserModel {
                 obj['username'] = ApiClient.convertToType(data['username'], 'String');
             }
             if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], UserStatusEnum);
+                obj['status'] = UserStatusEnum.constructFromObject(data['status']);
             }
             if (data.hasOwnProperty('email')) {
                 obj['email'] = Email2.constructFromObject(data['email']);

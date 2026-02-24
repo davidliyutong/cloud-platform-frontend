@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **cpuLimMCpu** | [**CpuLimMCpu**](CpuLimMCpu.md) |  | [optional] 
 **memLimMb** | [**MemLimMb**](MemLimMb.md) |  | [optional] 
 **storageLimMb** | [**StorageLimMb**](StorageLimMb.md) |  | [optional] 
+**gpu** | [**Gpu**](Gpu.md) |  | [optional] 
 **username** | [**Username**](Username.md) |  | [optional] 
 **userUuid** | [**UserUuid**](UserUuid.md) |  | [optional] 
 **timeoutS** | [**TimeoutS**](TimeoutS.md) |  | [optional] 

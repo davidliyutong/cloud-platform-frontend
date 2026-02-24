@@ -117,6 +117,9 @@
                     <v-col>
                       <v-text-field v-model="editedItem.quota.pod_n" label="Number Limit"></v-text-field>
                     </v-col>
+                    <v-col>
+                      <v-text-field v-model="editedItem.quota.gpu" label="GPU Limit"></v-text-field>
+                    </v-col>
                   </v-row>
                 </v-form>
 
@@ -414,10 +417,15 @@ export default {
         username: user.username,
       };
 
-      if (user.quota.cpu_m === null || user.quota.cpu_m === '' &&
-          user.quota.memory_mb === null || user.quota.memory_mb === '' &&
-          user.quota.storage_mb === null || user.quota.storage_mb === '' &&
-          user.quota.pod_n === null || user.quota.pod_n === '') {
+      const hasAnyQuotaValue = [
+        user.quota.cpu_m,
+        user.quota.memory_mb,
+        user.quota.storage_mb,
+        user.quota.pod_n,
+        user.quota.gpu,
+      ].some(v => v !== null && v !== '');
+
+      if (!hasAnyQuotaValue) {
         request.quota = null;
       } else {
         request.quota = {
@@ -425,7 +433,7 @@ export default {
           memory_mb: Number(user.quota.memory_mb),
           storage_mb: Number(user.quota.storage_mb),
           pod_n: Number(user.quota.pod_n),
-          gpu: 0,
+          gpu: Number(user.quota.gpu),
           network_mb: 0
         }
       }
@@ -500,10 +508,15 @@ export default {
         username: user.username,
       };
 
-      if (user.quota.cpu_m === null || user.quota.cpu_m === '' &&
-          user.quota.memory_mb === null || user.quota.memory_mb === '' &&
-          user.quota.storage_mb === null || user.quota.storage_mb === '' &&
-          user.quota.pod_n === null || user.quota.pod_n === '') {
+      const hasAnyQuotaValue = [
+        user.quota.cpu_m,
+        user.quota.memory_mb,
+        user.quota.storage_mb,
+        user.quota.pod_n,
+        user.quota.gpu,
+      ].some(v => v !== null && v !== '');
+
+      if (!hasAnyQuotaValue) {
         request.quota = null;
       } else {
         request.quota = {
@@ -511,7 +524,7 @@ export default {
           memory_mb: Number(user.quota.memory_mb),
           storage_mb: Number(user.quota.storage_mb),
           pod_n: Number(user.quota.pod_n),
-          gpu: 0,
+          gpu: Number(user.quota.gpu),
           network_mb: 0
         }
       }
@@ -602,7 +615,7 @@ export default {
     },
     downloadExampleCSV() {
       let _header = [
-        ['username', 'email', 'password', 'status', 'role', 'quota.cpu_m', 'quota.memory_mb', 'quota.storage_mb', 'quota.pod_n']
+        ['username', 'email', 'password', 'status', 'role', 'quota.cpu_m', 'quota.memory_mb', 'quota.storage_mb', 'quota.pod_n', 'quota.gpu']
         // add data rows here
       ];
       let data = _header.concat(this.selectedItems.map(user => {
@@ -612,11 +625,11 @@ export default {
             memory_mb: null,
             storage_mb: null,
             pod_n: null,
-            gpu: 0,
+            gpu: null,
             network_mb: 0
           }
         }
-        return [user.username, user.email, null, user.status, user.role, user.quota.cpu_m, user.quota.memory_mb, user.quota.storage_mb, user.quota.pod_n]
+        return [user.username, user.email, null, user.status, user.role, user.quota.cpu_m, user.quota.memory_mb, user.quota.storage_mb, user.quota.pod_n, user.quota.gpu]
       }));
 
       const csv = Papa.unparse(data);

@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import TemplateCreateResponseTemplate from './TemplateCreateResponseTemplate';
+import TemplateModel from './TemplateModel';
 
 /**
  * The TemplateGetResponse model module.
@@ -22,7 +22,7 @@ import TemplateCreateResponseTemplate from './TemplateCreateResponseTemplate';
 class TemplateGetResponse {
     /**
      * Constructs a new <code>TemplateGetResponse</code>.
-     *      Get response for templates, the same as create response     
+     * Get response for templates, the same as create response
      * @alias module:model/TemplateGetResponse
      * @param status {Number} 
      * @param message {String} 
@@ -63,7 +63,7 @@ class TemplateGetResponse {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
             if (data.hasOwnProperty('template')) {
-                obj['template'] = TemplateCreateResponseTemplate.constructFromObject(data['template']);
+                obj['template'] = TemplateModel.constructFromObject(data['template']);
             }
         }
         return obj;
@@ -91,7 +91,7 @@ class TemplateGetResponse {
         }
         // validate the optional field `template`
         if (data['template']) { // data not null
-          TemplateCreateResponseTemplate.validateJSON(data['template']);
+          TemplateModel.validateJSON(data['template']);
         }
 
         return true;
@@ -119,7 +119,7 @@ TemplateGetResponse.prototype['status'] = undefined;
 TemplateGetResponse.prototype['message'] = undefined;
 
 /**
- * @member {module:model/TemplateCreateResponseTemplate} template
+ * @member {module:model/TemplateModel} template
  */
 TemplateGetResponse.prototype['template'] = undefined;
 

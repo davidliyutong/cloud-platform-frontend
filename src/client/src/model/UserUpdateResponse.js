@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import UserCreateResponseUser from './UserCreateResponseUser';
+import UserModel from './UserModel';
 
 /**
  * The UserUpdateResponse model module.
@@ -22,7 +22,7 @@ import UserCreateResponseUser from './UserCreateResponseUser';
 class UserUpdateResponse {
     /**
      * Constructs a new <code>UserUpdateResponse</code>.
-     *      Update response for users, the same as get response     
+     * Update response for users, the same as get response
      * @alias module:model/UserUpdateResponse
      * @param status {Number} 
      * @param message {String} 
@@ -63,7 +63,7 @@ class UserUpdateResponse {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
             if (data.hasOwnProperty('user')) {
-                obj['user'] = UserCreateResponseUser.constructFromObject(data['user']);
+                obj['user'] = UserModel.constructFromObject(data['user']);
             }
         }
         return obj;
@@ -91,7 +91,7 @@ class UserUpdateResponse {
         }
         // validate the optional field `user`
         if (data['user']) { // data not null
-          UserCreateResponseUser.validateJSON(data['user']);
+          UserModel.validateJSON(data['user']);
         }
 
         return true;
@@ -119,7 +119,7 @@ UserUpdateResponse.prototype['status'] = undefined;
 UserUpdateResponse.prototype['message'] = undefined;
 
 /**
- * @member {module:model/UserCreateResponseUser} user
+ * @member {module:model/UserModel} user
  */
 UserUpdateResponse.prototype['user'] = undefined;
 

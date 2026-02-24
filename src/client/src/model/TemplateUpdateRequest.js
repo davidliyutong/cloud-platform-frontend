@@ -27,7 +27,7 @@ import TemplateStr from './TemplateStr';
 class TemplateUpdateRequest {
     /**
      * Constructs a new <code>TemplateUpdateRequest</code>.
-     *      Update request for templates, all fields except template_id are optional.     
+     * Update request for templates, all fields except template_id are optional.
      * @alias module:model/TemplateUpdateRequest
      * @param templateId {String} 
      */

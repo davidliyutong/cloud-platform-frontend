@@ -21,7 +21,7 @@ import ApiClient from '../ApiClient';
 class QuotaModel {
     /**
      * Constructs a new <code>QuotaModel</code>.
-     *      Quota model, used to define user quota     
+     * Quota model, used to define user quota
      * @alias module:model/QuotaModel
      * @param version {String} 
      * @param cpuM {Number} 

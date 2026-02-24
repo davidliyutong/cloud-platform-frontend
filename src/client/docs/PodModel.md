@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **cpuLimMCpu** | **Number** |  | 
 **memLimMb** | **Number** |  | 
 **storageLimMb** | **Number** |  | 
+**gpu** | **Number** |  | [optional] [default to 0]
 **username** | **String** |  | 
 **userUuid** | **String** |  | 
 **createdAt** | **Date** |  | 

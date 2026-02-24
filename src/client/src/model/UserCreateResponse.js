@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import UserCreateResponseUser from './UserCreateResponseUser';
+import UserModel from './UserModel';
 
 /**
  * The UserCreateResponse model module.
@@ -22,7 +22,7 @@ import UserCreateResponseUser from './UserCreateResponseUser';
 class UserCreateResponse {
     /**
      * Constructs a new <code>UserCreateResponse</code>.
-     *      Create response for users     
+     * Create response for users
      * @alias module:model/UserCreateResponse
      * @param status {Number} 
      * @param message {String} 
@@ -63,7 +63,7 @@ class UserCreateResponse {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
             if (data.hasOwnProperty('user')) {
-                obj['user'] = UserCreateResponseUser.constructFromObject(data['user']);
+                obj['user'] = UserModel.constructFromObject(data['user']);
             }
         }
         return obj;
@@ -91,7 +91,7 @@ class UserCreateResponse {
         }
         // validate the optional field `user`
         if (data['user']) { // data not null
-          UserCreateResponseUser.validateJSON(data['user']);
+          UserModel.validateJSON(data['user']);
         }
 
         return true;
@@ -119,7 +119,7 @@ UserCreateResponse.prototype['status'] = undefined;
 UserCreateResponse.prototype['message'] = undefined;
 
 /**
- * @member {module:model/UserCreateResponseUser} user
+ * @member {module:model/UserModel} user
  */
 UserCreateResponse.prototype['user'] = undefined;
 

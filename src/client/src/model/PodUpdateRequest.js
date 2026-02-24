@@ -14,6 +14,7 @@
 import ApiClient from '../ApiClient';
 import CpuLimMCpu from './CpuLimMCpu';
 import Description from './Description';
+import Gpu from './Gpu';
 import MemLimMb from './MemLimMb';
 import Name from './Name';
 import PodId from './PodId';
@@ -31,7 +32,7 @@ import Username from './Username';
 class PodUpdateRequest {
     /**
      * Constructs a new <code>PodUpdateRequest</code>.
-     *      Update request for pods, all fields except pod_id are optional.     target_status is the target status for the pod to reach. Can be either running or stopped.     
+     * Update request for pods, all fields except pod_id are optional. target_status is the target status for the pod to reach. Can be either running or stopped.
      * @alias module:model/PodUpdateRequest
      * @param podId {module:model/PodId} 
      */
@@ -77,6 +78,9 @@ class PodUpdateRequest {
             }
             if (data.hasOwnProperty('storage_lim_mb')) {
                 obj['storage_lim_mb'] = StorageLimMb.constructFromObject(data['storage_lim_mb']);
+            }
+            if (data.hasOwnProperty('gpu')) {
+                obj['gpu'] = Gpu.constructFromObject(data['gpu']);
             }
             if (data.hasOwnProperty('username')) {
                 obj['username'] = Username.constructFromObject(data['username']);
@@ -133,6 +137,10 @@ class PodUpdateRequest {
         if (data['storage_lim_mb']) { // data not null
           StorageLimMb.validateJSON(data['storage_lim_mb']);
         }
+        // validate the optional field `gpu`
+        if (data['gpu']) { // data not null
+          Gpu.validateJSON(data['gpu']);
+        }
         // validate the optional field `username`
         if (data['username']) { // data not null
           Username.validateJSON(data['username']);
@@ -187,6 +195,11 @@ PodUpdateRequest.prototype['mem_lim_mb'] = undefined;
  * @member {module:model/StorageLimMb} storage_lim_mb
  */
 PodUpdateRequest.prototype['storage_lim_mb'] = undefined;
+
+/**
+ * @member {module:model/Gpu} gpu
+ */
+PodUpdateRequest.prototype['gpu'] = undefined;
 
 /**
  * @member {module:model/Username} username

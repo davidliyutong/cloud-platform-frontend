@@ -23,7 +23,7 @@ import Quota from './Quota';
 class UserCreateRequest {
     /**
      * Constructs a new <code>UserCreateRequest</code>.
-     *      Create request for users     
+     * Create request for users
      * @alias module:model/UserCreateRequest
      * @param username {String} 
      * @param password {String} 

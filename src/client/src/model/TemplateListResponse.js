@@ -22,7 +22,7 @@ import TemplateModel from './TemplateModel';
 class TemplateListResponse {
     /**
      * Constructs a new <code>TemplateListResponse</code>.
-     *      List response for templates     
+     * List response for templates
      * @alias module:model/TemplateListResponse
      * @param status {Number} 
      * @param message {String} 

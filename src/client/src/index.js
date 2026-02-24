@@ -25,6 +25,7 @@ import FieldTypeEnum from './model/FieldTypeEnum';
 import Fields from './model/Fields';
 import Fields1 from './model/Fields1';
 import Fields2 from './model/Fields2';
+import Gpu from './model/Gpu';
 import Htpasswd from './model/Htpasswd';
 import ImageRef from './model/ImageRef';
 import LoginCredential from './model/LoginCredential';
@@ -37,7 +38,6 @@ import OldPassword from './model/OldPassword';
 import Password from './model/Password';
 import PodCreateRequest from './model/PodCreateRequest';
 import PodCreateResponse from './model/PodCreateResponse';
-import PodCreateResponsePod from './model/PodCreateResponsePod';
 import PodDeleteResponse from './model/PodDeleteResponse';
 import PodGetResponse from './model/PodGetResponse';
 import PodId from './model/PodId';
@@ -55,7 +55,6 @@ import Status from './model/Status';
 import StorageLimMb from './model/StorageLimMb';
 import TemplateCreateRequest from './model/TemplateCreateRequest';
 import TemplateCreateResponse from './model/TemplateCreateResponse';
-import TemplateCreateResponseTemplate from './model/TemplateCreateResponseTemplate';
 import TemplateDeleteResponse from './model/TemplateDeleteResponse';
 import TemplateGetResponse from './model/TemplateGetResponse';
 import TemplateListResponse from './model/TemplateListResponse';
@@ -69,7 +68,6 @@ import TokenResponse from './model/TokenResponse';
 import TokenResponse1 from './model/TokenResponse1';
 import UserCreateRequest from './model/UserCreateRequest';
 import UserCreateResponse from './model/UserCreateResponse';
-import UserCreateResponseUser from './model/UserCreateResponseUser';
 import UserDeleteResponse from './model/UserDeleteResponse';
 import UserGetResponse from './model/UserGetResponse';
 import UserListResponse from './model/UserListResponse';
@@ -207,6 +205,12 @@ export {
     Fields2,
 
     /**
+     * The Gpu model constructor.
+     * @property {module:model/Gpu}
+     */
+    Gpu,
+
+    /**
      * The Htpasswd model constructor.
      * @property {module:model/Htpasswd}
      */
@@ -277,12 +281,6 @@ export {
      * @property {module:model/PodCreateResponse}
      */
     PodCreateResponse,
-
-    /**
-     * The PodCreateResponsePod model constructor.
-     * @property {module:model/PodCreateResponsePod}
-     */
-    PodCreateResponsePod,
 
     /**
      * The PodDeleteResponse model constructor.
@@ -387,12 +385,6 @@ export {
     TemplateCreateResponse,
 
     /**
-     * The TemplateCreateResponseTemplate model constructor.
-     * @property {module:model/TemplateCreateResponseTemplate}
-     */
-    TemplateCreateResponseTemplate,
-
-    /**
      * The TemplateDeleteResponse model constructor.
      * @property {module:model/TemplateDeleteResponse}
      */
@@ -469,12 +461,6 @@ export {
      * @property {module:model/UserCreateResponse}
      */
     UserCreateResponse,
-
-    /**
-     * The UserCreateResponseUser model constructor.
-     * @property {module:model/UserCreateResponseUser}
-     */
-    UserCreateResponseUser,
 
     /**
      * The UserDeleteResponse model constructor.

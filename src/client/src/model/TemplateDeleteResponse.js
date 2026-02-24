@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import TemplateCreateResponseTemplate from './TemplateCreateResponseTemplate';
+import TemplateModel from './TemplateModel';
 
 /**
  * The TemplateDeleteResponse model module.
@@ -22,7 +22,7 @@ import TemplateCreateResponseTemplate from './TemplateCreateResponseTemplate';
 class TemplateDeleteResponse {
     /**
      * Constructs a new <code>TemplateDeleteResponse</code>.
-     *      Delete response for templates, the same as get response     
+     * Delete response for templates, the same as get response
      * @alias module:model/TemplateDeleteResponse
      * @param status {Number} 
      * @param message {String} 
@@ -63,7 +63,7 @@ class TemplateDeleteResponse {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
             if (data.hasOwnProperty('template')) {
-                obj['template'] = TemplateCreateResponseTemplate.constructFromObject(data['template']);
+                obj['template'] = TemplateModel.constructFromObject(data['template']);
             }
         }
         return obj;
@@ -91,7 +91,7 @@ class TemplateDeleteResponse {
         }
         // validate the optional field `template`
         if (data['template']) { // data not null
-          TemplateCreateResponseTemplate.validateJSON(data['template']);
+          TemplateModel.validateJSON(data['template']);
         }
 
         return true;
@@ -119,7 +119,7 @@ TemplateDeleteResponse.prototype['status'] = undefined;
 TemplateDeleteResponse.prototype['message'] = undefined;
 
 /**
- * @member {module:model/TemplateCreateResponseTemplate} template
+ * @member {module:model/TemplateModel} template
  */
 TemplateDeleteResponse.prototype['template'] = undefined;
 

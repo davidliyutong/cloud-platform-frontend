@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import UserCreateResponseUser from './UserCreateResponseUser';
+import UserModel from './UserModel';
 
 /**
  * The UserDeleteResponse model module.
@@ -22,7 +22,7 @@ import UserCreateResponseUser from './UserCreateResponseUser';
 class UserDeleteResponse {
     /**
      * Constructs a new <code>UserDeleteResponse</code>.
-     *      Delete response for users, the same as get response     
+     * Delete response for users, the same as get response
      * @alias module:model/UserDeleteResponse
      * @param status {Number} 
      * @param message {String} 
@@ -63,7 +63,7 @@ class UserDeleteResponse {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
             if (data.hasOwnProperty('user')) {
-                obj['user'] = UserCreateResponseUser.constructFromObject(data['user']);
+                obj['user'] = UserModel.constructFromObject(data['user']);
             }
         }
         return obj;
@@ -91,7 +91,7 @@ class UserDeleteResponse {
         }
         // validate the optional field `user`
         if (data['user']) { // data not null
-          UserCreateResponseUser.validateJSON(data['user']);
+          UserModel.validateJSON(data['user']);
         }
 
         return true;
@@ -119,7 +119,7 @@ UserDeleteResponse.prototype['status'] = undefined;
 UserDeleteResponse.prototype['message'] = undefined;
 
 /**
- * @member {module:model/UserCreateResponseUser} user
+ * @member {module:model/UserModel} user
  */
 UserDeleteResponse.prototype['user'] = undefined;
 

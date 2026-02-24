@@ -24,7 +24,7 @@ import Values from './Values';
 class PodCreateRequest {
     /**
      * Constructs a new <code>PodCreateRequest</code>.
-     *      Create request for pods. values is the values for the template (not used).     timeout_s is the timeout for the pod to run. max is 86400 seconds (24 hours).     
+     * Create request for pods. values is the values for the template (not used). timeout_s is the timeout for the pod to run. max is 86400 seconds (24 hours).
      * @alias module:model/PodCreateRequest
      * @param name {String} 
      * @param description {String} 
@@ -80,6 +80,9 @@ class PodCreateRequest {
             }
             if (data.hasOwnProperty('storage_lim_mb')) {
                 obj['storage_lim_mb'] = ApiClient.convertToType(data['storage_lim_mb'], 'Number');
+            }
+            if (data.hasOwnProperty('gpu')) {
+                obj['gpu'] = ApiClient.convertToType(data['gpu'], 'Number');
             }
             if (data.hasOwnProperty('username')) {
                 obj['username'] = Username.constructFromObject(data['username']);
@@ -168,6 +171,12 @@ PodCreateRequest.prototype['mem_lim_mb'] = undefined;
  * @member {Number} storage_lim_mb
  */
 PodCreateRequest.prototype['storage_lim_mb'] = undefined;
+
+/**
+ * @member {Number} gpu
+ * @default 0
+ */
+PodCreateRequest.prototype['gpu'] = 0;
 
 /**
  * @member {module:model/Username} username

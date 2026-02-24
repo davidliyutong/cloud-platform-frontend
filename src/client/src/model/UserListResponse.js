@@ -22,7 +22,7 @@ import UserModel from './UserModel';
 class UserListResponse {
     /**
      * Constructs a new <code>UserListResponse</code>.
-     *      List response for users     
+     * List response for users
      * @alias module:model/UserListResponse
      * @param status {Number} 
      * @param message {String} 

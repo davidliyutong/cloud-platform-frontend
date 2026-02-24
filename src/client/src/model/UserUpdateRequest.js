@@ -27,7 +27,7 @@ import Status from './Status';
 class UserUpdateRequest {
     /**
      * Constructs a new <code>UserUpdateRequest</code>.
-     *      Update request for users, all fields except username are optional.     None means no change.     
+     * Update request for users, all fields except username are optional. None means no change.
      * @alias module:model/UserUpdateRequest
      * @param username {String} 
      */
