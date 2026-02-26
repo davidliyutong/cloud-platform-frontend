@@ -908,7 +908,7 @@ export default {
     copySSHInfo(pod_id) {
       let text = "Host " + pod_id + "\n" +
           "  HostName " + pod_id + "." + this.workspace_hostname + "\n" +
-          "  User ubuntu\n" +
+          "  User idekube\n" +
           "  ProxyCommand websocat --binary wss://" + pod_id + "." + this.workspace_hostname + "/ssh/" + "\n"
       navigator.clipboard.writeText(text).then(() => {
         this.$message.bottom().success('SSH Info Copied, paste it to your .ssh/config');
