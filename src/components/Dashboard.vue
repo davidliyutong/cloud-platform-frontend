@@ -19,6 +19,25 @@
         </v-list-item>
       </v-card>
 
+      <v-card class="mx-auto my-4">
+        <v-list-item three-line>
+          <v-list-item-content>
+            <v-list-item-title class="headline mb-1">User Manuals</v-list-item-title>
+            <v-list-item-subtitle>Download the platform user manual</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-card-actions>
+          <v-btn text :href="manualZhUrl" target="_blank">
+            <v-icon left>mdi-file-pdf-box</v-icon>
+            中文手册
+          </v-btn>
+          <v-btn text :href="manualEnUrl" target="_blank">
+            <v-icon left>mdi-file-pdf-box</v-icon>
+            English Manual
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+
       <!--      <v-card class="mx-auto my-4" >-->
       <!--        <v-row align="center">-->
       <!--          <v-col>-->
@@ -66,6 +85,8 @@ export default {
   data: () => ({
     username: localStorage.getItem("username"),
     backendVersion: "",
+    manualZhUrl: "https://clpl-docs-cdn.speit.site/1774869293589.pdf",
+    manualEnUrl: "https://clpl-docs-cdn.speit.site/1774869275275.pdf",
   }),
 
   mounted: function () {
