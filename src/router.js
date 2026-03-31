@@ -35,7 +35,7 @@ const routes = [
         path: "/home",
         name: "home",
         component: Home,
-        redirect: "/pods",
+        redirect: "/dashboard",
         children: [
             {
                 path: "/dashboard",
