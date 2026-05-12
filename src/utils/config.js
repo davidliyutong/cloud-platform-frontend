@@ -3,5 +3,5 @@ export default {
   title: 'Cloud Platform',
   description: 'davidliyutong',
   name: 'CloudPlatform',
-  version: 'v0.0.11',
+  version: process.env.VUE_APP_GIT_VERSION || 'unknown',
 };

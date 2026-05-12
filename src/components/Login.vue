@@ -123,15 +123,13 @@ export default {
       }
     },
     getOIDCConfig() {
-      // console.log("getVersion")
-      var apiInstance = new Api.DefaultApi();
-      apiInstance.getv1Health((error, data, response) => {
+      var apiInstance = new Api.AuthOidcApi();
+      apiInstance.getauthOidcStatus((error, data) => {
         if (error) {
-          console.error(error);
+          console.log('OIDC not available:', error);
         } else {
-          console.log('API called successfully. Returned data: ' + response);
-          this.oidcConfig = response.body.oidc;
-          this.oidcName = response.body.oidc.name;
+          this.oidcConfig = data;
+          this.oidcName = data.name;
         }
       });
     },

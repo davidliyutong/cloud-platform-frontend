@@ -89,6 +89,27 @@
                       placeholder="3600"
                       v-model="editingPod.timeout_s"
                   ></v-text-field>
+                  <v-text-field
+                      label="CPU Limit (m)"
+                      hint="1000 = 1 CPU, cpu limit must > 500"
+                      v-model="editingPod.cpu_lim_m_cpu"
+                  ></v-text-field>
+                  <v-text-field
+                      label="Memory Limit (MiB)"
+                      hint="memory limit must > 512"
+                      v-model="editingPod.mem_lim_mb"
+                  ></v-text-field>
+                  <v-text-field
+                      label="Storage Limit (MiB)"
+                      hint="storage limit must > 10240 MiB"
+                      v-model="editingPod.storage_lim_mb"
+                      disabled
+                  ></v-text-field>
+                  <v-text-field
+                      label="GPU"
+                      hint="gpu >= 0"
+                      v-model="editingPod.gpu"
+                  ></v-text-field>
                   <v-select
                       v-model="editingPod.target_status"
                       :items="target_status_list"
@@ -167,7 +188,11 @@
                         updatingPod.timeout_s=pod.timeout_s;
                         updatingPod.target_status=pod.target_status;
                         updatingPod.template_ref=pod.template_ref;
-                        updatingPod.pod_id=pod.pod_id;"
+                        updatingPod.pod_id=pod.pod_id;
+                        updatingPod.cpu_lim_m_cpu=pod.cpu_lim_m_cpu;
+                        updatingPod.mem_lim_mb=pod.mem_lim_mb;
+                        updatingPod.storage_lim_mb=pod.storage_lim_mb;
+                        updatingPod.gpu=pod.gpu || 0;"
                     >
                       <v-icon> mdi-pencil</v-icon>
                       Edit
@@ -197,6 +222,27 @@
                             hint="timeout < 86400"
                             placeholder="3600"
                             v-model="updatingPod.timeout_s"
+                        ></v-text-field>
+                        <v-text-field
+                            label="CPU Limit (m)"
+                            hint="1000 = 1 CPU, cpu limit must > 500"
+                            v-model="updatingPod.cpu_lim_m_cpu"
+                        ></v-text-field>
+                        <v-text-field
+                            label="Memory Limit (MiB)"
+                            hint="memory limit must > 512"
+                            v-model="updatingPod.mem_lim_mb"
+                        ></v-text-field>
+                        <v-text-field
+                            label="Storage Limit (MiB)"
+                            hint="storage limit must > 10240 MiB"
+                            v-model="updatingPod.storage_lim_mb"
+                            disabled
+                        ></v-text-field>
+                        <v-text-field
+                            label="GPU"
+                            hint="gpu >= 0"
+                            v-model="updatingPod.gpu"
                         ></v-text-field>
                         <v-select
                             v-model="updatingPod.target_status"
@@ -457,6 +503,10 @@ export default {
       template_ref: "",
       target_status: "",
       pod_id: "",
+      cpu_lim_m_cpu: 0,
+      mem_lim_mb: 0,
+      storage_lim_mb: 0,
+      gpu: 0,
     },
     creatingPod: {
       name: "",
@@ -478,6 +528,10 @@ export default {
       template_ref: "",
       target_status: "",
       pod_id: "",
+      cpu_lim_m_cpu: 0,
+      mem_lim_mb: 0,
+      storage_lim_mb: 0,
+      gpu: 0,
     },
     createFormTitle: "Create Pod",
     updateFormTitle: "Edit Pod",
@@ -577,6 +631,10 @@ export default {
           this.updatingPod.description,
           this.updatingPod.timeout_s,
           this.updatingPod.target_status,
+          this.updatingPod.cpu_lim_m_cpu,
+          this.updatingPod.mem_lim_mb,
+          null,
+          this.updatingPod.gpu,
       );
       this.updateDialog = false;
     },
@@ -595,14 +653,18 @@ export default {
           this.editingPod.description,
           this.editingPod.timeout_s,
           this.editingPod.target_status,
+          this.editingPod.cpu_lim_m_cpu,
+          this.editingPod.mem_lim_mb,
+          null,
+          this.editingPod.gpu,
       );
       this.editDialog = false;
     },
     powerPod: function (pod_id, status) {
       if (status) {
-        this.updatePod(pod_id, null, null, null, 'running');
+        this.updatePod(pod_id, null, null, null, 'running', null, null, null, null);
       } else {
-        this.updatePod(pod_id, null, null, null, 'stopped');
+        this.updatePod(pod_id, null, null, null, 'stopped', null, null, null, null);
       }
     },
     actionDeletePod: function (pod_id) {
@@ -748,19 +810,29 @@ export default {
         name = null,
         description = null,
         timeoutS = null,
-        targetStatus = null) {
+        targetStatus = null,
+        cpuLimMCpu = null,
+        memLimMb = null,
+        storageLimMb = null,
+        gpu = null) {
       let apiInstance = new Api.NonadminPodApi();
       let token = defaultClient.authentications['token'];
       token.accessToken = localStorage.getItem("token");
 
+      let updateRequest = {
+        pod_id: podID,
+        name: name,
+        description: description,
+        timeout_s: timeoutS != null ? parseInt(timeoutS) : null,
+        target_status: targetStatus,
+      };
+      if (cpuLimMCpu != null) updateRequest.cpu_lim_m_cpu = parseInt(cpuLimMCpu);
+      if (memLimMb != null) updateRequest.mem_lim_mb = parseInt(memLimMb);
+      if (storageLimMb != null) updateRequest.storage_lim_mb = parseInt(storageLimMb);
+      if (gpu != null) updateRequest.gpu = parseInt(gpu);
+
       let payload = {
-        'podUpdateRequest': {
-          pod_id: podID,
-          name: name,
-          description: description,
-          timeout_s: parseInt(timeoutS),
-          target_status: targetStatus,
-        }
+        'podUpdateRequest': updateRequest
       }
 
       // console.log( defaultClient.authentications['token'] );
@@ -788,19 +860,29 @@ export default {
         name = null,
         description = null,
         timeoutS = null,
-        targetStatus = null) {
+        targetStatus = null,
+        cpuLimMCpu = null,
+        memLimMb = null,
+        storageLimMb = null,
+        gpu = null) {
       let apiInstance = new Api.AdminPodApi();
       let token = defaultClient.authentications['token'];
       token.accessToken = localStorage.getItem("token");
 
+      let updateRequest = {
+        pod_id: podID,
+        name: name,
+        description: description,
+        timeout_s: timeoutS != null ? parseInt(timeoutS) : null,
+        target_status: targetStatus,
+      };
+      if (cpuLimMCpu != null) updateRequest.cpu_lim_m_cpu = parseInt(cpuLimMCpu);
+      if (memLimMb != null) updateRequest.mem_lim_mb = parseInt(memLimMb);
+      if (storageLimMb != null) updateRequest.storage_lim_mb = parseInt(storageLimMb);
+      if (gpu != null) updateRequest.gpu = parseInt(gpu);
+
       let payload = {
-        'podUpdateRequest': {
-          pod_id: podID,
-          name: name,
-          description: description,
-          timeout_s: parseInt(timeoutS),
-          target_status: targetStatus,
-        }
+        'podUpdateRequest': updateRequest
       }
 
       // console.log( defaultClient.authentications['token'] );
