@@ -185,6 +185,7 @@
                         v-on="on"
                         v-bind="attrs"
                         @click="
+                        originalUpdatingPod = { cpu_lim_m_cpu: pod.cpu_lim_m_cpu, mem_lim_mb: pod.mem_lim_mb, gpu: pod.gpu || 0, template_ref: pod.template_ref };
                         updatingPod.name = pod.name;
                         updatingPod.description=pod.description;
                         updatingPod.timeout_s=pod.timeout_s;
@@ -522,9 +523,11 @@ export default {
       storage_lim_mb: 10240,
       gpu: 0,
     },
+    originalUpdatingPod: {},
     deletingPod: {
       "pod_id": "",
     },
+    originalEditingPod: {},
     editingPod: {
       name: "",
       description: "",
@@ -628,40 +631,43 @@ export default {
       this.updateDialog = false;
     },
     saveUpdateForm: function () {
+      var orig = this.originalUpdatingPod;
       this.updatePod(
           this.updatingPod.pod_id,
           this.updatingPod.name,
           this.updatingPod.description,
           this.updatingPod.timeout_s,
           this.updatingPod.target_status,
-          this.updatingPod.cpu_lim_m_cpu,
-          this.updatingPod.mem_lim_mb,
+          parseInt(this.updatingPod.cpu_lim_m_cpu) !== parseInt(orig.cpu_lim_m_cpu) ? this.updatingPod.cpu_lim_m_cpu : null,
+          parseInt(this.updatingPod.mem_lim_mb) !== parseInt(orig.mem_lim_mb) ? this.updatingPod.mem_lim_mb : null,
           null,
-          this.updatingPod.gpu,
-          this.updatingPod.template_ref,
+          parseInt(this.updatingPod.gpu) !== parseInt(orig.gpu) ? this.updatingPod.gpu : null,
+          this.updatingPod.template_ref !== orig.template_ref ? this.updatingPod.template_ref : null,
       );
       this.updateDialog = false;
     },
     editItem: function (item) {
       this.editingIndex = this.podItems.indexOf(item);
       this.editingPod = Object.assign({}, item);
+      this.originalEditingPod = { cpu_lim_m_cpu: item.cpu_lim_m_cpu, mem_lim_mb: item.mem_lim_mb, gpu: item.gpu || 0, template_ref: item.template_ref };
       this.editDialog = true;
     },
     resetEditForm: function () {
       this.editDialog = false;
     },
     saveEditForm: function () {
+      var orig = this.originalEditingPod;
       this.updateGlobalPod(
           this.editingPod.pod_id,
           this.editingPod.name,
           this.editingPod.description,
           this.editingPod.timeout_s,
           this.editingPod.target_status,
-          this.editingPod.cpu_lim_m_cpu,
-          this.editingPod.mem_lim_mb,
+          parseInt(this.editingPod.cpu_lim_m_cpu) !== parseInt(orig.cpu_lim_m_cpu) ? this.editingPod.cpu_lim_m_cpu : null,
+          parseInt(this.editingPod.mem_lim_mb) !== parseInt(orig.mem_lim_mb) ? this.editingPod.mem_lim_mb : null,
           null,
-          this.editingPod.gpu,
-          this.editingPod.template_ref,
+          parseInt(this.editingPod.gpu) !== parseInt(orig.gpu) ? this.editingPod.gpu : null,
+          this.editingPod.template_ref !== orig.template_ref ? this.editingPod.template_ref : null,
       );
       this.editDialog = false;
     },
