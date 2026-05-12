@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**defaults** | **{String: Object}** |  | [optional] 
+**description** | **String** |  | [optional] 
+**fields** | **{String: Object}** |  | [optional] 
+**imageRef** | **String** |  | [optional] 
+**name** | **String** |  | [optional] 
 **templateId** | **String** |  | 
-**name** | [**Name**](Name.md) |  | [optional] 
-**description** | [**Description**](Description.md) |  | [optional] 
-**imageRef** | [**ImageRef**](ImageRef.md) |  | [optional] 
-**templateStr** | [**TemplateStr**](TemplateStr.md) |  | [optional] 
-**fields** | [**Fields1**](Fields1.md) |  | [optional] 
-**defaults** | [**Defaults1**](Defaults1.md) |  | [optional] 
+**templateStr** | **String** |  | [optional] 
 
 

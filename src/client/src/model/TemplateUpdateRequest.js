@@ -12,12 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import Defaults1 from './Defaults1';
-import Description from './Description';
-import Fields1 from './Fields1';
-import ImageRef from './ImageRef';
-import Name from './Name';
-import TemplateStr from './TemplateStr';
 
 /**
  * The TemplateUpdateRequest model module.
@@ -56,26 +50,26 @@ class TemplateUpdateRequest {
         if (data) {
             obj = obj || new TemplateUpdateRequest();
 
+            if (data.hasOwnProperty('defaults')) {
+                obj['defaults'] = ApiClient.convertToType(data['defaults'], {'String': Object});
+            }
+            if (data.hasOwnProperty('description')) {
+                obj['description'] = ApiClient.convertToType(data['description'], 'String');
+            }
+            if (data.hasOwnProperty('fields')) {
+                obj['fields'] = ApiClient.convertToType(data['fields'], {'String': Object});
+            }
+            if (data.hasOwnProperty('image_ref')) {
+                obj['image_ref'] = ApiClient.convertToType(data['image_ref'], 'String');
+            }
+            if (data.hasOwnProperty('name')) {
+                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            }
             if (data.hasOwnProperty('template_id')) {
                 obj['template_id'] = ApiClient.convertToType(data['template_id'], 'String');
             }
-            if (data.hasOwnProperty('name')) {
-                obj['name'] = Name.constructFromObject(data['name']);
-            }
-            if (data.hasOwnProperty('description')) {
-                obj['description'] = Description.constructFromObject(data['description']);
-            }
-            if (data.hasOwnProperty('image_ref')) {
-                obj['image_ref'] = ImageRef.constructFromObject(data['image_ref']);
-            }
             if (data.hasOwnProperty('template_str')) {
-                obj['template_str'] = TemplateStr.constructFromObject(data['template_str']);
-            }
-            if (data.hasOwnProperty('fields')) {
-                obj['fields'] = Fields1.constructFromObject(data['fields']);
-            }
-            if (data.hasOwnProperty('defaults')) {
-                obj['defaults'] = Defaults1.constructFromObject(data['defaults']);
+                obj['template_str'] = ApiClient.convertToType(data['template_str'], 'String');
             }
         }
         return obj;
@@ -94,32 +88,24 @@ class TemplateUpdateRequest {
             }
         }
         // ensure the json data is a string
+        if (data['description'] && !(typeof data['description'] === 'string' || data['description'] instanceof String)) {
+            throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
+        }
+        // ensure the json data is a string
+        if (data['image_ref'] && !(typeof data['image_ref'] === 'string' || data['image_ref'] instanceof String)) {
+            throw new Error("Expected the field `image_ref` to be a primitive type in the JSON string but got " + data['image_ref']);
+        }
+        // ensure the json data is a string
+        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        }
+        // ensure the json data is a string
         if (data['template_id'] && !(typeof data['template_id'] === 'string' || data['template_id'] instanceof String)) {
             throw new Error("Expected the field `template_id` to be a primitive type in the JSON string but got " + data['template_id']);
         }
-        // validate the optional field `name`
-        if (data['name']) { // data not null
-          Name.validateJSON(data['name']);
-        }
-        // validate the optional field `description`
-        if (data['description']) { // data not null
-          Description.validateJSON(data['description']);
-        }
-        // validate the optional field `image_ref`
-        if (data['image_ref']) { // data not null
-          ImageRef.validateJSON(data['image_ref']);
-        }
-        // validate the optional field `template_str`
-        if (data['template_str']) { // data not null
-          TemplateStr.validateJSON(data['template_str']);
-        }
-        // validate the optional field `fields`
-        if (data['fields']) { // data not null
-          Fields1.validateJSON(data['fields']);
-        }
-        // validate the optional field `defaults`
-        if (data['defaults']) { // data not null
-          Defaults1.validateJSON(data['defaults']);
+        // ensure the json data is a string
+        if (data['template_str'] && !(typeof data['template_str'] === 'string' || data['template_str'] instanceof String)) {
+            throw new Error("Expected the field `template_str` to be a primitive type in the JSON string but got " + data['template_str']);
         }
 
         return true;
@@ -131,39 +117,39 @@ class TemplateUpdateRequest {
 TemplateUpdateRequest.RequiredProperties = ["template_id"];
 
 /**
+ * @member {Object.<String, Object>} defaults
+ */
+TemplateUpdateRequest.prototype['defaults'] = undefined;
+
+/**
+ * @member {String} description
+ */
+TemplateUpdateRequest.prototype['description'] = undefined;
+
+/**
+ * @member {Object.<String, Object>} fields
+ */
+TemplateUpdateRequest.prototype['fields'] = undefined;
+
+/**
+ * @member {String} image_ref
+ */
+TemplateUpdateRequest.prototype['image_ref'] = undefined;
+
+/**
+ * @member {String} name
+ */
+TemplateUpdateRequest.prototype['name'] = undefined;
+
+/**
  * @member {String} template_id
  */
 TemplateUpdateRequest.prototype['template_id'] = undefined;
 
 /**
- * @member {module:model/Name} name
- */
-TemplateUpdateRequest.prototype['name'] = undefined;
-
-/**
- * @member {module:model/Description} description
- */
-TemplateUpdateRequest.prototype['description'] = undefined;
-
-/**
- * @member {module:model/ImageRef} image_ref
- */
-TemplateUpdateRequest.prototype['image_ref'] = undefined;
-
-/**
- * @member {module:model/TemplateStr} template_str
+ * @member {String} template_str
  */
 TemplateUpdateRequest.prototype['template_str'] = undefined;
-
-/**
- * @member {module:model/Fields1} fields
- */
-TemplateUpdateRequest.prototype['fields'] = undefined;
-
-/**
- * @member {module:model/Defaults1} defaults
- */
-TemplateUpdateRequest.prototype['defaults'] = undefined;
 
 
 

@@ -120,7 +120,7 @@ api.deleteadminPodAdminPodDelete(podId, callback);
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://0.0.0.0*
+All URIs are relative to *http://127.0.0.1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -167,57 +167,30 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [Api.CpuLimMCpu](docs/CpuLimMCpu.md)
- - [Api.Defaults](docs/Defaults.md)
- - [Api.Defaults1](docs/Defaults1.md)
- - [Api.Description](docs/Description.md)
- - [Api.Email](docs/Email.md)
- - [Api.Email1](docs/Email1.md)
- - [Api.Email2](docs/Email2.md)
- - [Api.ExtraInfo](docs/ExtraInfo.md)
  - [Api.FieldTypeEnum](docs/FieldTypeEnum.md)
- - [Api.Fields](docs/Fields.md)
- - [Api.Fields1](docs/Fields1.md)
- - [Api.Fields2](docs/Fields2.md)
- - [Api.Gpu](docs/Gpu.md)
- - [Api.Htpasswd](docs/Htpasswd.md)
- - [Api.ImageRef](docs/ImageRef.md)
  - [Api.LoginCredential](docs/LoginCredential.md)
  - [Api.LoginCredential1](docs/LoginCredential1.md)
- - [Api.MemLimMb](docs/MemLimMb.md)
- - [Api.Name](docs/Name.md)
  - [Api.OIDCStatusResponse](docs/OIDCStatusResponse.md)
  - [Api.OIDCStatusResponse1](docs/OIDCStatusResponse1.md)
- - [Api.OldPassword](docs/OldPassword.md)
- - [Api.Password](docs/Password.md)
  - [Api.PodCreateRequest](docs/PodCreateRequest.md)
  - [Api.PodCreateResponse](docs/PodCreateResponse.md)
  - [Api.PodDeleteResponse](docs/PodDeleteResponse.md)
  - [Api.PodGetResponse](docs/PodGetResponse.md)
- - [Api.PodId](docs/PodId.md)
  - [Api.PodListResponse](docs/PodListResponse.md)
  - [Api.PodModel](docs/PodModel.md)
  - [Api.PodStatusEnum](docs/PodStatusEnum.md)
  - [Api.PodUpdateRequest](docs/PodUpdateRequest.md)
- - [Api.PodUpdateRequestTargetStatus](docs/PodUpdateRequestTargetStatus.md)
  - [Api.PodUpdateResponse](docs/PodUpdateResponse.md)
- - [Api.Quota](docs/Quota.md)
  - [Api.QuotaModel](docs/QuotaModel.md)
  - [Api.ResourceStatusEnum](docs/ResourceStatusEnum.md)
- - [Api.Role](docs/Role.md)
- - [Api.Status](docs/Status.md)
- - [Api.StorageLimMb](docs/StorageLimMb.md)
  - [Api.TemplateCreateRequest](docs/TemplateCreateRequest.md)
  - [Api.TemplateCreateResponse](docs/TemplateCreateResponse.md)
  - [Api.TemplateDeleteResponse](docs/TemplateDeleteResponse.md)
  - [Api.TemplateGetResponse](docs/TemplateGetResponse.md)
  - [Api.TemplateListResponse](docs/TemplateListResponse.md)
  - [Api.TemplateModel](docs/TemplateModel.md)
- - [Api.TemplateStr](docs/TemplateStr.md)
- - [Api.TemplateStr1](docs/TemplateStr1.md)
  - [Api.TemplateUpdateRequest](docs/TemplateUpdateRequest.md)
  - [Api.TemplateUpdateResponse](docs/TemplateUpdateResponse.md)
- - [Api.TimeoutS](docs/TimeoutS.md)
  - [Api.TokenResponse](docs/TokenResponse.md)
  - [Api.TokenResponse1](docs/TokenResponse1.md)
  - [Api.UserCreateRequest](docs/UserCreateRequest.md)
@@ -226,15 +199,10 @@ Class | Method | HTTP request | Description
  - [Api.UserGetResponse](docs/UserGetResponse.md)
  - [Api.UserListResponse](docs/UserListResponse.md)
  - [Api.UserModel](docs/UserModel.md)
- - [Api.UserModelQuota](docs/UserModelQuota.md)
  - [Api.UserRoleEnum](docs/UserRoleEnum.md)
  - [Api.UserStatusEnum](docs/UserStatusEnum.md)
  - [Api.UserUpdateRequest](docs/UserUpdateRequest.md)
  - [Api.UserUpdateResponse](docs/UserUpdateResponse.md)
- - [Api.UserUuid](docs/UserUuid.md)
- - [Api.Username](docs/Username.md)
- - [Api.Uuid](docs/Uuid.md)
- - [Api.Values](docs/Values.md)
 
 
 ## Documentation for Authorization

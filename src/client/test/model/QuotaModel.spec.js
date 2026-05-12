@@ -66,20 +66,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property memoryMb (base name: "memory_mb")', function() {
-      // uncomment below and update the code to test the property memoryMb
-      //var instance = new Api.QuotaModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property storageMb (base name: "storage_mb")', function() {
-      // uncomment below and update the code to test the property storageMb
-      //var instance = new Api.QuotaModel();
-      //expect(instance).to.be();
-    });
-
     it('should have the property gpu (base name: "gpu")', function() {
       // uncomment below and update the code to test the property gpu
+      //var instance = new Api.QuotaModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property memoryMb (base name: "memory_mb")', function() {
+      // uncomment below and update the code to test the property memoryMb
       //var instance = new Api.QuotaModel();
       //expect(instance).to.be();
     });
@@ -92,6 +86,18 @@
 
     it('should have the property podN (base name: "pod_n")', function() {
       // uncomment below and update the code to test the property podN
+      //var instance = new Api.QuotaModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property storageMb (base name: "storage_mb")', function() {
+      // uncomment below and update the code to test the property storageMb
+      //var instance = new Api.QuotaModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property version (base name: "version")', function() {
+      // uncomment below and update the code to test the property version
       //var instance = new Api.QuotaModel();
       //expect(instance).to.be();
     });

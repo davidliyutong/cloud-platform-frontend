@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **String** |  | [optional] [default to &#39;&#39;]
-**status** | **Number** |  | 
 **message** | **String** |  | 
-**totalTemplates** | **Number** |  | [optional] [default to 0]
+**status** | **Number** |  | 
 **templates** | [**[TemplateModel]**](TemplateModel.md) |  | [optional] 
+**totalTemplates** | **Number** |  | [optional] [default to 0]
 
 

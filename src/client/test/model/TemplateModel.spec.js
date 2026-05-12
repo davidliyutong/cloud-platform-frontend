@@ -54,6 +54,36 @@
       //expect(instance).to.be.a(Api.TemplateModel);
     });
 
+    it('should have the property defaults (base name: "defaults")', function() {
+      // uncomment below and update the code to test the property defaults
+      //var instance = new Api.TemplateModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property description (base name: "description")', function() {
+      // uncomment below and update the code to test the property description
+      //var instance = new Api.TemplateModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property fields (base name: "fields")', function() {
+      // uncomment below and update the code to test the property fields
+      //var instance = new Api.TemplateModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property imageRef (base name: "image_ref")', function() {
+      // uncomment below and update the code to test the property imageRef
+      //var instance = new Api.TemplateModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property name (base name: "name")', function() {
+      // uncomment below and update the code to test the property name
+      //var instance = new Api.TemplateModel();
+      //expect(instance).to.be();
+    });
+
     it('should have the property resourceStatus (base name: "resource_status")', function() {
       // uncomment below and update the code to test the property resourceStatus
       //var instance = new Api.TemplateModel();
@@ -66,38 +96,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property name (base name: "name")', function() {
-      // uncomment below and update the code to test the property name
-      //var instance = new Api.TemplateModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property description (base name: "description")', function() {
-      // uncomment below and update the code to test the property description
-      //var instance = new Api.TemplateModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property imageRef (base name: "image_ref")', function() {
-      // uncomment below and update the code to test the property imageRef
-      //var instance = new Api.TemplateModel();
-      //expect(instance).to.be();
-    });
-
     it('should have the property templateStr (base name: "template_str")', function() {
       // uncomment below and update the code to test the property templateStr
       //var instance = new Api.TemplateModel();
       //expect(instance).to.be();
     });
 
-    it('should have the property fields (base name: "fields")', function() {
-      // uncomment below and update the code to test the property fields
-      //var instance = new Api.TemplateModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property defaults (base name: "defaults")', function() {
-      // uncomment below and update the code to test the property defaults
+    it('should have the property version (base name: "version")', function() {
+      // uncomment below and update the code to test the property version
       //var instance = new Api.TemplateModel();
       //expect(instance).to.be();
     });

@@ -24,12 +24,12 @@ class TemplateListResponse {
      * Constructs a new <code>TemplateListResponse</code>.
      * List response for templates
      * @alias module:model/TemplateListResponse
-     * @param status {Number} 
      * @param message {String} 
+     * @param status {Number} 
      */
-    constructor(status, message) { 
+    constructor(message, status) { 
         
-        TemplateListResponse.initialize(this, status, message);
+        TemplateListResponse.initialize(this, message, status);
     }
 
     /**
@@ -37,9 +37,9 @@ class TemplateListResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, status, message) { 
-        obj['status'] = status;
+    static initialize(obj, message, status) { 
         obj['message'] = message;
+        obj['status'] = status;
     }
 
     /**
@@ -56,17 +56,17 @@ class TemplateListResponse {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
-            }
             if (data.hasOwnProperty('message')) {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
-            if (data.hasOwnProperty('total_templates')) {
-                obj['total_templates'] = ApiClient.convertToType(data['total_templates'], 'Number');
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
             }
             if (data.hasOwnProperty('templates')) {
                 obj['templates'] = ApiClient.convertToType(data['templates'], [TemplateModel]);
+            }
+            if (data.hasOwnProperty('total_templates')) {
+                obj['total_templates'] = ApiClient.convertToType(data['total_templates'], 'Number');
             }
         }
         return obj;
@@ -109,7 +109,7 @@ class TemplateListResponse {
 
 }
 
-TemplateListResponse.RequiredProperties = ["status", "message"];
+TemplateListResponse.RequiredProperties = ["message", "status"];
 
 /**
  * @member {String} description
@@ -118,25 +118,25 @@ TemplateListResponse.RequiredProperties = ["status", "message"];
 TemplateListResponse.prototype['description'] = '';
 
 /**
+ * @member {String} message
+ */
+TemplateListResponse.prototype['message'] = undefined;
+
+/**
  * @member {Number} status
  */
 TemplateListResponse.prototype['status'] = undefined;
 
 /**
- * @member {String} message
+ * @member {Array.<module:model/TemplateModel>} templates
  */
-TemplateListResponse.prototype['message'] = undefined;
+TemplateListResponse.prototype['templates'] = undefined;
 
 /**
  * @member {Number} total_templates
  * @default 0
  */
 TemplateListResponse.prototype['total_templates'] = 0;
-
-/**
- * @member {Array.<module:model/TemplateModel>} templates
- */
-TemplateListResponse.prototype['templates'] = undefined;
 
 
 

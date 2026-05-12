@@ -12,8 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import Email from './Email';
-import Quota from './Quota';
 
 /**
  * The UserCreateRequest model module.
@@ -25,14 +23,14 @@ class UserCreateRequest {
      * Constructs a new <code>UserCreateRequest</code>.
      * Create request for users
      * @alias module:model/UserCreateRequest
-     * @param username {String} 
+     * @param email {String} 
      * @param password {String} 
-     * @param email {module:model/Email} 
      * @param role {String} 
+     * @param username {String} 
      */
-    constructor(username, password, email, role) { 
+    constructor(email, password, role, username) { 
         
-        UserCreateRequest.initialize(this, username, password, email, role);
+        UserCreateRequest.initialize(this, email, password, role, username);
     }
 
     /**
@@ -40,11 +38,11 @@ class UserCreateRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, username, password, email, role) { 
-        obj['username'] = username;
-        obj['password'] = password;
+    static initialize(obj, email, password, role, username) { 
         obj['email'] = email;
+        obj['password'] = password;
         obj['role'] = role;
+        obj['username'] = username;
     }
 
     /**
@@ -58,20 +56,20 @@ class UserCreateRequest {
         if (data) {
             obj = obj || new UserCreateRequest();
 
-            if (data.hasOwnProperty('username')) {
-                obj['username'] = ApiClient.convertToType(data['username'], 'String');
+            if (data.hasOwnProperty('email')) {
+                obj['email'] = ApiClient.convertToType(data['email'], 'String');
             }
             if (data.hasOwnProperty('password')) {
                 obj['password'] = ApiClient.convertToType(data['password'], 'String');
             }
-            if (data.hasOwnProperty('email')) {
-                obj['email'] = Email.constructFromObject(data['email']);
+            if (data.hasOwnProperty('quota')) {
+                obj['quota'] = ApiClient.convertToType(data['quota'], {'String': Object});
             }
             if (data.hasOwnProperty('role')) {
                 obj['role'] = ApiClient.convertToType(data['role'], 'String');
             }
-            if (data.hasOwnProperty('quota')) {
-                obj['quota'] = Quota.constructFromObject(data['quota']);
+            if (data.hasOwnProperty('username')) {
+                obj['username'] = ApiClient.convertToType(data['username'], 'String');
             }
         }
         return obj;
@@ -90,24 +88,20 @@ class UserCreateRequest {
             }
         }
         // ensure the json data is a string
-        if (data['username'] && !(typeof data['username'] === 'string' || data['username'] instanceof String)) {
-            throw new Error("Expected the field `username` to be a primitive type in the JSON string but got " + data['username']);
+        if (data['email'] && !(typeof data['email'] === 'string' || data['email'] instanceof String)) {
+            throw new Error("Expected the field `email` to be a primitive type in the JSON string but got " + data['email']);
         }
         // ensure the json data is a string
         if (data['password'] && !(typeof data['password'] === 'string' || data['password'] instanceof String)) {
             throw new Error("Expected the field `password` to be a primitive type in the JSON string but got " + data['password']);
         }
-        // validate the optional field `email`
-        if (data['email']) { // data not null
-          Email.validateJSON(data['email']);
-        }
         // ensure the json data is a string
         if (data['role'] && !(typeof data['role'] === 'string' || data['role'] instanceof String)) {
             throw new Error("Expected the field `role` to be a primitive type in the JSON string but got " + data['role']);
         }
-        // validate the optional field `quota`
-        if (data['quota']) { // data not null
-          Quota.validateJSON(data['quota']);
+        // ensure the json data is a string
+        if (data['username'] && !(typeof data['username'] === 'string' || data['username'] instanceof String)) {
+            throw new Error("Expected the field `username` to be a primitive type in the JSON string but got " + data['username']);
         }
 
         return true;
@@ -116,12 +110,12 @@ class UserCreateRequest {
 
 }
 
-UserCreateRequest.RequiredProperties = ["username", "password", "email", "role"];
+UserCreateRequest.RequiredProperties = ["email", "password", "role", "username"];
 
 /**
- * @member {String} username
+ * @member {String} email
  */
-UserCreateRequest.prototype['username'] = undefined;
+UserCreateRequest.prototype['email'] = undefined;
 
 /**
  * @member {String} password
@@ -129,9 +123,9 @@ UserCreateRequest.prototype['username'] = undefined;
 UserCreateRequest.prototype['password'] = undefined;
 
 /**
- * @member {module:model/Email} email
+ * @member {Object.<String, Object>} quota
  */
-UserCreateRequest.prototype['email'] = undefined;
+UserCreateRequest.prototype['quota'] = undefined;
 
 /**
  * @member {String} role
@@ -139,9 +133,9 @@ UserCreateRequest.prototype['email'] = undefined;
 UserCreateRequest.prototype['role'] = undefined;
 
 /**
- * @member {module:model/Quota} quota
+ * @member {String} username
  */
-UserCreateRequest.prototype['quota'] = undefined;
+UserCreateRequest.prototype['username'] = undefined;
 
 
 

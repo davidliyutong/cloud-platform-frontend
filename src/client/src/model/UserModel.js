@@ -12,14 +12,10 @@
  */
 
 import ApiClient from '../ApiClient';
-import Email2 from './Email2';
-import ExtraInfo from './ExtraInfo';
-import Htpasswd from './Htpasswd';
+import QuotaModel from './QuotaModel';
 import ResourceStatusEnum from './ResourceStatusEnum';
-import UserModelQuota from './UserModelQuota';
 import UserRoleEnum from './UserRoleEnum';
 import UserStatusEnum from './UserStatusEnum';
-import Uuid from './Uuid';
 
 /**
  * The UserModel model module.
@@ -31,19 +27,19 @@ class UserModel {
      * Constructs a new <code>UserModel</code>.
      * User model, used to define user
      * @alias module:model/UserModel
-     * @param version {String} 
-     * @param uid {Number} 
-     * @param uuid {module:model/Uuid} 
-     * @param username {String} 
-     * @param email {module:model/Email2} 
-     * @param password {String} 
-     * @param role {module:model/UserRoleEnum} 
+     * @param email {String} 
      * @param ownedPodIds {Array.<String>} 
-     * @param quota {module:model/UserModelQuota} 
+     * @param password {String} 
+     * @param quota {module:model/QuotaModel} 
+     * @param role {module:model/UserRoleEnum} 
+     * @param uid {Number} 
+     * @param username {String} 
+     * @param uuid {String} 
+     * @param version {String} 
      */
-    constructor(version, uid, uuid, username, email, password, role, ownedPodIds, quota) { 
+    constructor(email, ownedPodIds, password, quota, role, uid, username, uuid, version) { 
         
-        UserModel.initialize(this, version, uid, uuid, username, email, password, role, ownedPodIds, quota);
+        UserModel.initialize(this, email, ownedPodIds, password, quota, role, uid, username, uuid, version);
     }
 
     /**
@@ -51,16 +47,16 @@ class UserModel {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, version, uid, uuid, username, email, password, role, ownedPodIds, quota) { 
-        obj['version'] = version;
-        obj['uid'] = uid;
-        obj['uuid'] = uuid;
-        obj['username'] = username;
+    static initialize(obj, email, ownedPodIds, password, quota, role, uid, username, uuid, version) { 
         obj['email'] = email;
-        obj['password'] = password;
-        obj['role'] = role;
         obj['owned_pod_ids'] = ownedPodIds;
+        obj['password'] = password;
         obj['quota'] = quota;
+        obj['role'] = role;
+        obj['uid'] = uid;
+        obj['username'] = username;
+        obj['uuid'] = uuid;
+        obj['version'] = version;
     }
 
     /**
@@ -74,44 +70,44 @@ class UserModel {
         if (data) {
             obj = obj || new UserModel();
 
-            if (data.hasOwnProperty('version')) {
-                obj['version'] = ApiClient.convertToType(data['version'], 'String');
-            }
-            if (data.hasOwnProperty('resource_status')) {
-                obj['resource_status'] = ResourceStatusEnum.constructFromObject(data['resource_status']);
-            }
-            if (data.hasOwnProperty('uid')) {
-                obj['uid'] = ApiClient.convertToType(data['uid'], 'Number');
-            }
-            if (data.hasOwnProperty('uuid')) {
-                obj['uuid'] = Uuid.constructFromObject(data['uuid']);
-            }
-            if (data.hasOwnProperty('username')) {
-                obj['username'] = ApiClient.convertToType(data['username'], 'String');
-            }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = UserStatusEnum.constructFromObject(data['status']);
-            }
             if (data.hasOwnProperty('email')) {
-                obj['email'] = Email2.constructFromObject(data['email']);
+                obj['email'] = ApiClient.convertToType(data['email'], 'String');
             }
-            if (data.hasOwnProperty('password')) {
-                obj['password'] = ApiClient.convertToType(data['password'], 'String');
+            if (data.hasOwnProperty('extra_info')) {
+                obj['extra_info'] = ApiClient.convertToType(data['extra_info'], {'String': Object});
             }
             if (data.hasOwnProperty('htpasswd')) {
-                obj['htpasswd'] = Htpasswd.constructFromObject(data['htpasswd']);
-            }
-            if (data.hasOwnProperty('role')) {
-                obj['role'] = UserRoleEnum.constructFromObject(data['role']);
+                obj['htpasswd'] = ApiClient.convertToType(data['htpasswd'], 'String');
             }
             if (data.hasOwnProperty('owned_pod_ids')) {
                 obj['owned_pod_ids'] = ApiClient.convertToType(data['owned_pod_ids'], ['String']);
             }
-            if (data.hasOwnProperty('quota')) {
-                obj['quota'] = UserModelQuota.constructFromObject(data['quota']);
+            if (data.hasOwnProperty('password')) {
+                obj['password'] = ApiClient.convertToType(data['password'], 'String');
             }
-            if (data.hasOwnProperty('extra_info')) {
-                obj['extra_info'] = ExtraInfo.constructFromObject(data['extra_info']);
+            if (data.hasOwnProperty('quota')) {
+                obj['quota'] = ApiClient.convertToType(data['quota'], QuotaModel);
+            }
+            if (data.hasOwnProperty('resource_status')) {
+                obj['resource_status'] = ResourceStatusEnum.constructFromObject(data['resource_status']);
+            }
+            if (data.hasOwnProperty('role')) {
+                obj['role'] = UserRoleEnum.constructFromObject(data['role']);
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = UserStatusEnum.constructFromObject(data['status']);
+            }
+            if (data.hasOwnProperty('uid')) {
+                obj['uid'] = ApiClient.convertToType(data['uid'], 'Number');
+            }
+            if (data.hasOwnProperty('username')) {
+                obj['username'] = ApiClient.convertToType(data['username'], 'String');
+            }
+            if (data.hasOwnProperty('uuid')) {
+                obj['uuid'] = ApiClient.convertToType(data['uuid'], 'String');
+            }
+            if (data.hasOwnProperty('version')) {
+                obj['version'] = ApiClient.convertToType(data['version'], 'String');
             }
         }
         return obj;
@@ -130,40 +126,36 @@ class UserModel {
             }
         }
         // ensure the json data is a string
-        if (data['version'] && !(typeof data['version'] === 'string' || data['version'] instanceof String)) {
-            throw new Error("Expected the field `version` to be a primitive type in the JSON string but got " + data['version']);
-        }
-        // validate the optional field `uuid`
-        if (data['uuid']) { // data not null
-          Uuid.validateJSON(data['uuid']);
+        if (data['email'] && !(typeof data['email'] === 'string' || data['email'] instanceof String)) {
+            throw new Error("Expected the field `email` to be a primitive type in the JSON string but got " + data['email']);
         }
         // ensure the json data is a string
-        if (data['username'] && !(typeof data['username'] === 'string' || data['username'] instanceof String)) {
-            throw new Error("Expected the field `username` to be a primitive type in the JSON string but got " + data['username']);
-        }
-        // validate the optional field `email`
-        if (data['email']) { // data not null
-          Email2.validateJSON(data['email']);
-        }
-        // ensure the json data is a string
-        if (data['password'] && !(typeof data['password'] === 'string' || data['password'] instanceof String)) {
-            throw new Error("Expected the field `password` to be a primitive type in the JSON string but got " + data['password']);
-        }
-        // validate the optional field `htpasswd`
-        if (data['htpasswd']) { // data not null
-          Htpasswd.validateJSON(data['htpasswd']);
+        if (data['htpasswd'] && !(typeof data['htpasswd'] === 'string' || data['htpasswd'] instanceof String)) {
+            throw new Error("Expected the field `htpasswd` to be a primitive type in the JSON string but got " + data['htpasswd']);
         }
         // ensure the json data is an array
         if (!Array.isArray(data['owned_pod_ids'])) {
             throw new Error("Expected the field `owned_pod_ids` to be an array in the JSON data but got " + data['owned_pod_ids']);
         }
+        // ensure the json data is a string
+        if (data['password'] && !(typeof data['password'] === 'string' || data['password'] instanceof String)) {
+            throw new Error("Expected the field `password` to be a primitive type in the JSON string but got " + data['password']);
+        }
         // validate the optional field `quota`
         if (data['quota']) { // data not null
-          UserModelQuota.validateJSON(data['quota']);
+          QuotaModel.validateJSON(data['quota']);
         }
-        // validate the optional field `extra_info`
-        if (data['extra_info']) { // data not null
-          ExtraInfo.validateJSON(data['extra_info']);
+        // ensure the json data is a string
+        if (data['username'] && !(typeof data['username'] === 'string' || data['username'] instanceof String)) {
+            throw new Error("Expected the field `username` to be a primitive type in the JSON string but got " + data['username']);
+        }
+        // ensure the json data is a string
+        if (data['uuid'] && !(typeof data['uuid'] === 'string' || data['uuid'] instanceof String)) {
+            throw new Error("Expected the field `uuid` to be a primitive type in the JSON string but got " + data['uuid']);
+        }
+        // ensure the json data is a string
+        if (data['version'] && !(typeof data['version'] === 'string' || data['version'] instanceof String)) {
+            throw new Error("Expected the field `version` to be a primitive type in the JSON string but got " + data['version']);
         }
 
         return true;
@@ -172,57 +164,22 @@ class UserModel {
 
 }
 
-UserModel.RequiredProperties = ["version", "uid", "uuid", "username", "email", "password", "role", "owned_pod_ids", "quota"];
+UserModel.RequiredProperties = ["email", "owned_pod_ids", "password", "quota", "role", "uid", "username", "uuid", "version"];
 
 /**
- * @member {String} version
- */
-UserModel.prototype['version'] = undefined;
-
-/**
- * @member {module:model/ResourceStatusEnum} resource_status
- */
-UserModel.prototype['resource_status'] = undefined;
-
-/**
- * @member {Number} uid
- */
-UserModel.prototype['uid'] = undefined;
-
-/**
- * @member {module:model/Uuid} uuid
- */
-UserModel.prototype['uuid'] = undefined;
-
-/**
- * @member {String} username
- */
-UserModel.prototype['username'] = undefined;
-
-/**
- * @member {module:model/UserStatusEnum} status
- */
-UserModel.prototype['status'] = undefined;
-
-/**
- * @member {module:model/Email2} email
+ * @member {String} email
  */
 UserModel.prototype['email'] = undefined;
 
 /**
- * @member {String} password
+ * @member {Object.<String, Object>} extra_info
  */
-UserModel.prototype['password'] = undefined;
+UserModel.prototype['extra_info'] = undefined;
 
 /**
- * @member {module:model/Htpasswd} htpasswd
+ * @member {String} htpasswd
  */
 UserModel.prototype['htpasswd'] = undefined;
-
-/**
- * @member {module:model/UserRoleEnum} role
- */
-UserModel.prototype['role'] = undefined;
 
 /**
  * @member {Array.<String>} owned_pod_ids
@@ -230,14 +187,49 @@ UserModel.prototype['role'] = undefined;
 UserModel.prototype['owned_pod_ids'] = undefined;
 
 /**
- * @member {module:model/UserModelQuota} quota
+ * @member {String} password
+ */
+UserModel.prototype['password'] = undefined;
+
+/**
+ * @member {module:model/QuotaModel} quota
  */
 UserModel.prototype['quota'] = undefined;
 
 /**
- * @member {module:model/ExtraInfo} extra_info
+ * @member {module:model/ResourceStatusEnum} resource_status
  */
-UserModel.prototype['extra_info'] = undefined;
+UserModel.prototype['resource_status'] = undefined;
+
+/**
+ * @member {module:model/UserRoleEnum} role
+ */
+UserModel.prototype['role'] = undefined;
+
+/**
+ * @member {module:model/UserStatusEnum} status
+ */
+UserModel.prototype['status'] = undefined;
+
+/**
+ * @member {Number} uid
+ */
+UserModel.prototype['uid'] = undefined;
+
+/**
+ * @member {String} username
+ */
+UserModel.prototype['username'] = undefined;
+
+/**
+ * @member {String} uuid
+ */
+UserModel.prototype['uuid'] = undefined;
+
+/**
+ * @member {String} version
+ */
+UserModel.prototype['version'] = undefined;
 
 
 

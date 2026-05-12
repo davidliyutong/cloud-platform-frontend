@@ -22,13 +22,13 @@ class TokenResponse1 {
     /**
      * Constructs a new <code>TokenResponse1</code>.
      * @alias module:model/TokenResponse1
-     * @param status {Number} 
      * @param message {String} 
+     * @param status {Number} 
      * @param token {String} 
      */
-    constructor(status, message, token) { 
+    constructor(message, status, token) { 
         
-        TokenResponse1.initialize(this, status, message, token);
+        TokenResponse1.initialize(this, message, status, token);
     }
 
     /**
@@ -36,9 +36,9 @@ class TokenResponse1 {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, status, message, token) { 
-        obj['status'] = status;
+    static initialize(obj, message, status, token) { 
         obj['message'] = message;
+        obj['status'] = status;
         obj['token'] = token;
     }
 
@@ -56,17 +56,17 @@ class TokenResponse1 {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
-            }
             if (data.hasOwnProperty('message')) {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
-            if (data.hasOwnProperty('token')) {
-                obj['token'] = ApiClient.convertToType(data['token'], 'String');
-            }
             if (data.hasOwnProperty('refresh_token')) {
                 obj['refresh_token'] = ApiClient.convertToType(data['refresh_token'], 'String');
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
+            }
+            if (data.hasOwnProperty('token')) {
+                obj['token'] = ApiClient.convertToType(data['token'], 'String');
             }
         }
         return obj;
@@ -93,12 +93,12 @@ class TokenResponse1 {
             throw new Error("Expected the field `message` to be a primitive type in the JSON string but got " + data['message']);
         }
         // ensure the json data is a string
-        if (data['token'] && !(typeof data['token'] === 'string' || data['token'] instanceof String)) {
-            throw new Error("Expected the field `token` to be a primitive type in the JSON string but got " + data['token']);
-        }
-        // ensure the json data is a string
         if (data['refresh_token'] && !(typeof data['refresh_token'] === 'string' || data['refresh_token'] instanceof String)) {
             throw new Error("Expected the field `refresh_token` to be a primitive type in the JSON string but got " + data['refresh_token']);
+        }
+        // ensure the json data is a string
+        if (data['token'] && !(typeof data['token'] === 'string' || data['token'] instanceof String)) {
+            throw new Error("Expected the field `token` to be a primitive type in the JSON string but got " + data['token']);
         }
 
         return true;
@@ -107,7 +107,7 @@ class TokenResponse1 {
 
 }
 
-TokenResponse1.RequiredProperties = ["status", "message", "token"];
+TokenResponse1.RequiredProperties = ["message", "status", "token"];
 
 /**
  * @member {String} description
@@ -116,25 +116,25 @@ TokenResponse1.RequiredProperties = ["status", "message", "token"];
 TokenResponse1.prototype['description'] = '';
 
 /**
- * @member {Number} status
- */
-TokenResponse1.prototype['status'] = undefined;
-
-/**
  * @member {String} message
  */
 TokenResponse1.prototype['message'] = undefined;
-
-/**
- * @member {String} token
- */
-TokenResponse1.prototype['token'] = undefined;
 
 /**
  * @member {String} refresh_token
  * @default ''
  */
 TokenResponse1.prototype['refresh_token'] = '';
+
+/**
+ * @member {Number} status
+ */
+TokenResponse1.prototype['status'] = undefined;
+
+/**
+ * @member {String} token
+ */
+TokenResponse1.prototype['token'] = undefined;
 
 
 

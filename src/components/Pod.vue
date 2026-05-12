@@ -510,8 +510,8 @@ export default {
     userHasAdminPrivilege() {
       return localStorage.getItem('user_role') === 'admin' || localStorage.getItem('user_role') === 'super_admin';
     },
-    initialize() {
-      if (!checkLogin()) {
+    async initialize() {
+      if (!await checkLogin()) {
         this.$router.push('/')
       }
       this.listPod();

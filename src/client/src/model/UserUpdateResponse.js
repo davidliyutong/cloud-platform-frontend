@@ -24,12 +24,12 @@ class UserUpdateResponse {
      * Constructs a new <code>UserUpdateResponse</code>.
      * Update response for users, the same as get response
      * @alias module:model/UserUpdateResponse
-     * @param status {Number} 
      * @param message {String} 
+     * @param status {Number} 
      */
-    constructor(status, message) { 
+    constructor(message, status) { 
         
-        UserUpdateResponse.initialize(this, status, message);
+        UserUpdateResponse.initialize(this, message, status);
     }
 
     /**
@@ -37,9 +37,9 @@ class UserUpdateResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, status, message) { 
-        obj['status'] = status;
+    static initialize(obj, message, status) { 
         obj['message'] = message;
+        obj['status'] = status;
     }
 
     /**
@@ -56,11 +56,11 @@ class UserUpdateResponse {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
-            }
             if (data.hasOwnProperty('message')) {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
             }
             if (data.hasOwnProperty('user')) {
                 obj['user'] = UserModel.constructFromObject(data['user']);
@@ -100,7 +100,7 @@ class UserUpdateResponse {
 
 }
 
-UserUpdateResponse.RequiredProperties = ["status", "message"];
+UserUpdateResponse.RequiredProperties = ["message", "status"];
 
 /**
  * @member {String} description
@@ -109,14 +109,14 @@ UserUpdateResponse.RequiredProperties = ["status", "message"];
 UserUpdateResponse.prototype['description'] = '';
 
 /**
- * @member {Number} status
- */
-UserUpdateResponse.prototype['status'] = undefined;
-
-/**
  * @member {String} message
  */
 UserUpdateResponse.prototype['message'] = undefined;
+
+/**
+ * @member {Number} status
+ */
+UserUpdateResponse.prototype['status'] = undefined;
 
 /**
  * @member {module:model/UserModel} user

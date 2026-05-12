@@ -1,6 +1,6 @@
 # Api.AdminTemplateApi
 
-All URIs are relative to *http://0.0.0.0*
+All URIs are relative to *http://127.0.0.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

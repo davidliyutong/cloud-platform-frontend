@@ -54,44 +54,14 @@
       //expect(instance).to.be.a(Api.UserModel);
     });
 
-    it('should have the property resourceStatus (base name: "resource_status")', function() {
-      // uncomment below and update the code to test the property resourceStatus
-      //var instance = new Api.UserModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property uid (base name: "uid")', function() {
-      // uncomment below and update the code to test the property uid
-      //var instance = new Api.UserModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property uuid (base name: "uuid")', function() {
-      // uncomment below and update the code to test the property uuid
-      //var instance = new Api.UserModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property username (base name: "username")', function() {
-      // uncomment below and update the code to test the property username
-      //var instance = new Api.UserModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property status (base name: "status")', function() {
-      // uncomment below and update the code to test the property status
-      //var instance = new Api.UserModel();
-      //expect(instance).to.be();
-    });
-
     it('should have the property email (base name: "email")', function() {
       // uncomment below and update the code to test the property email
       //var instance = new Api.UserModel();
       //expect(instance).to.be();
     });
 
-    it('should have the property password (base name: "password")', function() {
-      // uncomment below and update the code to test the property password
+    it('should have the property extraInfo (base name: "extra_info")', function() {
+      // uncomment below and update the code to test the property extraInfo
       //var instance = new Api.UserModel();
       //expect(instance).to.be();
     });
@@ -102,20 +72,62 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property role (base name: "role")', function() {
-      // uncomment below and update the code to test the property role
-      //var instance = new Api.UserModel();
-      //expect(instance).to.be();
-    });
-
     it('should have the property ownedPodIds (base name: "owned_pod_ids")', function() {
       // uncomment below and update the code to test the property ownedPodIds
       //var instance = new Api.UserModel();
       //expect(instance).to.be();
     });
 
+    it('should have the property password (base name: "password")', function() {
+      // uncomment below and update the code to test the property password
+      //var instance = new Api.UserModel();
+      //expect(instance).to.be();
+    });
+
     it('should have the property quota (base name: "quota")', function() {
       // uncomment below and update the code to test the property quota
+      //var instance = new Api.UserModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property resourceStatus (base name: "resource_status")', function() {
+      // uncomment below and update the code to test the property resourceStatus
+      //var instance = new Api.UserModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property role (base name: "role")', function() {
+      // uncomment below and update the code to test the property role
+      //var instance = new Api.UserModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property status (base name: "status")', function() {
+      // uncomment below and update the code to test the property status
+      //var instance = new Api.UserModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uid (base name: "uid")', function() {
+      // uncomment below and update the code to test the property uid
+      //var instance = new Api.UserModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property username (base name: "username")', function() {
+      // uncomment below and update the code to test the property username
+      //var instance = new Api.UserModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property uuid (base name: "uuid")', function() {
+      // uncomment below and update the code to test the property uuid
+      //var instance = new Api.UserModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property version (base name: "version")', function() {
+      // uncomment below and update the code to test the property version
       //var instance = new Api.UserModel();
       //expect(instance).to.be();
     });

@@ -54,8 +54,8 @@
       //expect(instance).to.be.a(Api.TemplateCreateRequest);
     });
 
-    it('should have the property name (base name: "name")', function() {
-      // uncomment below and update the code to test the property name
+    it('should have the property defaults (base name: "defaults")', function() {
+      // uncomment below and update the code to test the property defaults
       //var instance = new Api.TemplateCreateRequest();
       //expect(instance).to.be();
     });
@@ -66,26 +66,26 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property imageRef (base name: "image_ref")', function() {
-      // uncomment below and update the code to test the property imageRef
-      //var instance = new Api.TemplateCreateRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property templateStr (base name: "template_str")', function() {
-      // uncomment below and update the code to test the property templateStr
-      //var instance = new Api.TemplateCreateRequest();
-      //expect(instance).to.be();
-    });
-
     it('should have the property fields (base name: "fields")', function() {
       // uncomment below and update the code to test the property fields
       //var instance = new Api.TemplateCreateRequest();
       //expect(instance).to.be();
     });
 
-    it('should have the property defaults (base name: "defaults")', function() {
-      // uncomment below and update the code to test the property defaults
+    it('should have the property imageRef (base name: "image_ref")', function() {
+      // uncomment below and update the code to test the property imageRef
+      //var instance = new Api.TemplateCreateRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property name (base name: "name")', function() {
+      // uncomment below and update the code to test the property name
+      //var instance = new Api.TemplateCreateRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property templateStr (base name: "template_str")', function() {
+      // uncomment below and update the code to test the property templateStr
       //var instance = new Api.TemplateCreateRequest();
       //expect(instance).to.be();
     });

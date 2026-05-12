@@ -24,12 +24,12 @@ class PodGetResponse {
      * Constructs a new <code>PodGetResponse</code>.
      * Get response for pods, the same as create response
      * @alias module:model/PodGetResponse
-     * @param status {Number} 
      * @param message {String} 
+     * @param status {Number} 
      */
-    constructor(status, message) { 
+    constructor(message, status) { 
         
-        PodGetResponse.initialize(this, status, message);
+        PodGetResponse.initialize(this, message, status);
     }
 
     /**
@@ -37,9 +37,9 @@ class PodGetResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, status, message) { 
-        obj['status'] = status;
+    static initialize(obj, message, status) { 
         obj['message'] = message;
+        obj['status'] = status;
     }
 
     /**
@@ -56,14 +56,14 @@ class PodGetResponse {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
-            }
             if (data.hasOwnProperty('message')) {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
             if (data.hasOwnProperty('pod')) {
                 obj['pod'] = PodModel.constructFromObject(data['pod']);
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
             }
         }
         return obj;
@@ -100,18 +100,13 @@ class PodGetResponse {
 
 }
 
-PodGetResponse.RequiredProperties = ["status", "message"];
+PodGetResponse.RequiredProperties = ["message", "status"];
 
 /**
  * @member {String} description
  * @default ''
  */
 PodGetResponse.prototype['description'] = '';
-
-/**
- * @member {Number} status
- */
-PodGetResponse.prototype['status'] = undefined;
 
 /**
  * @member {String} message
@@ -122,6 +117,11 @@ PodGetResponse.prototype['message'] = undefined;
  * @member {module:model/PodModel} pod
  */
 PodGetResponse.prototype['pod'] = undefined;
+
+/**
+ * @member {Number} status
+ */
+PodGetResponse.prototype['status'] = undefined;
 
 
 

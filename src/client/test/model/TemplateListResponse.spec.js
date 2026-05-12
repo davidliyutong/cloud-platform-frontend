@@ -60,26 +60,26 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property status (base name: "status")', function() {
-      // uncomment below and update the code to test the property status
-      //var instance = new Api.TemplateListResponse();
-      //expect(instance).to.be();
-    });
-
     it('should have the property message (base name: "message")', function() {
       // uncomment below and update the code to test the property message
       //var instance = new Api.TemplateListResponse();
       //expect(instance).to.be();
     });
 
-    it('should have the property totalTemplates (base name: "total_templates")', function() {
-      // uncomment below and update the code to test the property totalTemplates
+    it('should have the property status (base name: "status")', function() {
+      // uncomment below and update the code to test the property status
       //var instance = new Api.TemplateListResponse();
       //expect(instance).to.be();
     });
 
     it('should have the property templates (base name: "templates")', function() {
       // uncomment below and update the code to test the property templates
+      //var instance = new Api.TemplateListResponse();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property totalTemplates (base name: "total_templates")', function() {
+      // uncomment below and update the code to test the property totalTemplates
       //var instance = new Api.TemplateListResponse();
       //expect(instance).to.be();
     });

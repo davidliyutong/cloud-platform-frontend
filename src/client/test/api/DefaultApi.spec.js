@@ -58,6 +58,16 @@
         done();
       });
     });
+    describe('getv1Health', function() {
+      it('should call getv1Health successfully', function(done) {
+        //uncomment below and update the code to test getv1Health
+        //instance.getv1Health(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
   });
 
 }));

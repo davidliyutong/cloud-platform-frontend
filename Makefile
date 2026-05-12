@@ -20,7 +20,15 @@ test.docker:
 	docker run --rm -it -p 8080:80 -e CLPL_BACKEND_URL=https://apiserver.speit.site -e CLPL_DNS_RESOLVER=10.43.0.10 ${AUTHOR}/clpl-frontend:latest
 
 task.generate_client.javascript:
-	openapi-generator-cli generate -g javascript -i http://127.0.0.1:8080/docs/openapi.json --skip-validate-spec -o src/client
+	curl -s http://127.0.0.1:8080/docs/openapi.json -o openapi.json
+	python3 scripts/patch_openapi.py openapi.json
+	openapi-generator-cli generate -g javascript -i openapi.json --skip-validate-spec -o src/client
+	python3 scripts/clean_client.py src/client
+
+task.generate_client.javascript.from_file:
+	python3 scripts/patch_openapi.py openapi.json
+	openapi-generator-cli generate -g javascript -i openapi.json --skip-validate-spec -o src/client
+	python3 scripts/clean_client.py src/client
 
 task.update_branches:
 	git checkout speit && git rebase main || git checkout main

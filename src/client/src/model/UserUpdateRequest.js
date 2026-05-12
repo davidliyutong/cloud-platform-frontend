@@ -12,12 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import Email1 from './Email1';
-import OldPassword from './OldPassword';
-import Password from './Password';
-import Quota from './Quota';
-import Role from './Role';
-import Status from './Status';
 
 /**
  * The UserUpdateRequest model module.
@@ -56,26 +50,26 @@ class UserUpdateRequest {
         if (data) {
             obj = obj || new UserUpdateRequest();
 
-            if (data.hasOwnProperty('username')) {
-                obj['username'] = ApiClient.convertToType(data['username'], 'String');
+            if (data.hasOwnProperty('email')) {
+                obj['email'] = ApiClient.convertToType(data['email'], 'String');
             }
             if (data.hasOwnProperty('old_password')) {
-                obj['old_password'] = OldPassword.constructFromObject(data['old_password']);
+                obj['old_password'] = ApiClient.convertToType(data['old_password'], 'String');
             }
             if (data.hasOwnProperty('password')) {
-                obj['password'] = Password.constructFromObject(data['password']);
-            }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = Status.constructFromObject(data['status']);
-            }
-            if (data.hasOwnProperty('email')) {
-                obj['email'] = Email1.constructFromObject(data['email']);
-            }
-            if (data.hasOwnProperty('role')) {
-                obj['role'] = Role.constructFromObject(data['role']);
+                obj['password'] = ApiClient.convertToType(data['password'], 'String');
             }
             if (data.hasOwnProperty('quota')) {
-                obj['quota'] = Quota.constructFromObject(data['quota']);
+                obj['quota'] = ApiClient.convertToType(data['quota'], {'String': Object});
+            }
+            if (data.hasOwnProperty('role')) {
+                obj['role'] = ApiClient.convertToType(data['role'], 'String');
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'String');
+            }
+            if (data.hasOwnProperty('username')) {
+                obj['username'] = ApiClient.convertToType(data['username'], 'String');
             }
         }
         return obj;
@@ -94,32 +88,28 @@ class UserUpdateRequest {
             }
         }
         // ensure the json data is a string
+        if (data['email'] && !(typeof data['email'] === 'string' || data['email'] instanceof String)) {
+            throw new Error("Expected the field `email` to be a primitive type in the JSON string but got " + data['email']);
+        }
+        // ensure the json data is a string
+        if (data['old_password'] && !(typeof data['old_password'] === 'string' || data['old_password'] instanceof String)) {
+            throw new Error("Expected the field `old_password` to be a primitive type in the JSON string but got " + data['old_password']);
+        }
+        // ensure the json data is a string
+        if (data['password'] && !(typeof data['password'] === 'string' || data['password'] instanceof String)) {
+            throw new Error("Expected the field `password` to be a primitive type in the JSON string but got " + data['password']);
+        }
+        // ensure the json data is a string
+        if (data['role'] && !(typeof data['role'] === 'string' || data['role'] instanceof String)) {
+            throw new Error("Expected the field `role` to be a primitive type in the JSON string but got " + data['role']);
+        }
+        // ensure the json data is a string
+        if (data['status'] && !(typeof data['status'] === 'string' || data['status'] instanceof String)) {
+            throw new Error("Expected the field `status` to be a primitive type in the JSON string but got " + data['status']);
+        }
+        // ensure the json data is a string
         if (data['username'] && !(typeof data['username'] === 'string' || data['username'] instanceof String)) {
             throw new Error("Expected the field `username` to be a primitive type in the JSON string but got " + data['username']);
-        }
-        // validate the optional field `old_password`
-        if (data['old_password']) { // data not null
-          OldPassword.validateJSON(data['old_password']);
-        }
-        // validate the optional field `password`
-        if (data['password']) { // data not null
-          Password.validateJSON(data['password']);
-        }
-        // validate the optional field `status`
-        if (data['status']) { // data not null
-          Status.validateJSON(data['status']);
-        }
-        // validate the optional field `email`
-        if (data['email']) { // data not null
-          Email1.validateJSON(data['email']);
-        }
-        // validate the optional field `role`
-        if (data['role']) { // data not null
-          Role.validateJSON(data['role']);
-        }
-        // validate the optional field `quota`
-        if (data['quota']) { // data not null
-          Quota.validateJSON(data['quota']);
         }
 
         return true;
@@ -131,39 +121,39 @@ class UserUpdateRequest {
 UserUpdateRequest.RequiredProperties = ["username"];
 
 /**
- * @member {String} username
- */
-UserUpdateRequest.prototype['username'] = undefined;
-
-/**
- * @member {module:model/OldPassword} old_password
- */
-UserUpdateRequest.prototype['old_password'] = undefined;
-
-/**
- * @member {module:model/Password} password
- */
-UserUpdateRequest.prototype['password'] = undefined;
-
-/**
- * @member {module:model/Status} status
- */
-UserUpdateRequest.prototype['status'] = undefined;
-
-/**
- * @member {module:model/Email1} email
+ * @member {String} email
  */
 UserUpdateRequest.prototype['email'] = undefined;
 
 /**
- * @member {module:model/Role} role
+ * @member {String} old_password
+ */
+UserUpdateRequest.prototype['old_password'] = undefined;
+
+/**
+ * @member {String} password
+ */
+UserUpdateRequest.prototype['password'] = undefined;
+
+/**
+ * @member {Object.<String, Object>} quota
+ */
+UserUpdateRequest.prototype['quota'] = undefined;
+
+/**
+ * @member {String} role
  */
 UserUpdateRequest.prototype['role'] = undefined;
 
 /**
- * @member {module:model/Quota} quota
+ * @member {String} status
  */
-UserUpdateRequest.prototype['quota'] = undefined;
+UserUpdateRequest.prototype['status'] = undefined;
+
+/**
+ * @member {String} username
+ */
+UserUpdateRequest.prototype['username'] = undefined;
 
 
 

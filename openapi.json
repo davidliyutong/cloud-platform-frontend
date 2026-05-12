@@ -1,0 +1,3066 @@
+{
+  "components": {
+    "schemas": {
+      "FieldTypeEnum": {
+        "description": "Field type enum, used to define field types",
+        "enum": [
+          "str",
+          "int",
+          "float",
+          "bool",
+          "datetime",
+          "list"
+        ],
+        "title": "FieldTypeEnum",
+        "type": "string"
+      },
+      "LoginCredential": {
+        "properties": {
+          "password": {
+            "title": "Password",
+            "type": "string"
+          },
+          "username": {
+            "title": "Username",
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "LoginCredential",
+        "type": "object"
+      },
+      "OIDCStatusResponse": {
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "path"
+        ],
+        "title": "OIDCStatusResponse",
+        "type": "object"
+      },
+      "PodModel": {
+        "description": "Pod model, used to define pod",
+        "properties": {
+          "accessed_at": {
+            "format": "date-time",
+            "title": "Accessed At",
+            "type": "string"
+          },
+          "cpu_lim_m_cpu": {
+            "title": "Cpu Lim M Cpu",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "current_status": {
+            "$ref": "#/components/schemas/PodStatusEnum"
+          },
+          "current_status_reason": {
+            "type": "string",
+            "nullable": true,
+            "default": null,
+            "title": "Current Status Reason"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "gpu": {
+            "default": 0,
+            "title": "Gpu",
+            "type": "integer"
+          },
+          "mem_lim_mb": {
+            "title": "Mem Lim Mb",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "pod_id": {
+            "title": "Pod Id",
+            "type": "string"
+          },
+          "resource_status": {
+            "$ref": "#/components/schemas/ResourceStatusEnum",
+            "default": "pending"
+          },
+          "started_at": {
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          },
+          "storage_lim_mb": {
+            "title": "Storage Lim Mb",
+            "type": "integer"
+          },
+          "target_status": {
+            "$ref": "#/components/schemas/PodStatusEnum"
+          },
+          "template_ref": {
+            "format": "uuid4",
+            "title": "Template Ref",
+            "type": "string"
+          },
+          "template_str": {
+            "type": "string",
+            "nullable": true,
+            "title": "Template Str"
+          },
+          "timeout_s": {
+            "title": "Timeout S",
+            "type": "integer"
+          },
+          "user_uuid": {
+            "format": "uuid4",
+            "title": "User Uuid",
+            "type": "string"
+          },
+          "username": {
+            "title": "Username",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "pod_id",
+          "name",
+          "description",
+          "template_ref",
+          "template_str",
+          "cpu_lim_m_cpu",
+          "mem_lim_mb",
+          "storage_lim_mb",
+          "username",
+          "user_uuid",
+          "created_at",
+          "started_at",
+          "accessed_at",
+          "timeout_s",
+          "current_status",
+          "target_status"
+        ],
+        "title": "PodModel",
+        "type": "object"
+      },
+      "PodStatusEnum": {
+        "description": "Pod status enum, used to define pod status.",
+        "enum": [
+          "pending",
+          "creating",
+          "running",
+          "stopped",
+          "deleting",
+          "failed",
+          "unknown"
+        ],
+        "title": "PodStatusEnum",
+        "type": "string"
+      },
+      "QuotaModel": {
+        "description": "Quota model, used to define user quota",
+        "properties": {
+          "committed": {
+            "default": false,
+            "title": "Committed",
+            "type": "boolean"
+          },
+          "cpu_m": {
+            "title": "Cpu M",
+            "type": "integer"
+          },
+          "gpu": {
+            "default": 0,
+            "title": "Gpu",
+            "type": "integer"
+          },
+          "memory_mb": {
+            "title": "Memory Mb",
+            "type": "integer"
+          },
+          "network_mb": {
+            "default": 0,
+            "title": "Network Mb",
+            "type": "integer"
+          },
+          "pod_n": {
+            "title": "Pod N",
+            "type": "integer"
+          },
+          "storage_mb": {
+            "title": "Storage Mb",
+            "type": "integer"
+          },
+          "version": {
+            "default": "v0.0.8",
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "cpu_m",
+          "memory_mb",
+          "storage_mb",
+          "pod_n"
+        ],
+        "title": "QuotaModel",
+        "type": "object"
+      },
+      "ResourceStatusEnum": {
+        "description": "Resource status enum, used to define resource status. (for error recovery)",
+        "enum": [
+          "committed",
+          "deleted",
+          "pending"
+        ],
+        "title": "ResourceStatusEnum",
+        "type": "string"
+      },
+      "TemplateModel": {
+        "description": "Template model, used to define template",
+        "properties": {
+          "defaults": {
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true,
+            "title": "Defaults"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "fields": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/FieldTypeEnum"
+            },
+            "type": "object",
+            "nullable": true,
+            "title": "Fields"
+          },
+          "image_ref": {
+            "title": "Image Ref",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "resource_status": {
+            "$ref": "#/components/schemas/ResourceStatusEnum",
+            "default": "pending"
+          },
+          "template_id": {
+            "format": "uuid4",
+            "title": "Template Id",
+            "type": "string"
+          },
+          "template_str": {
+            "title": "Template Str",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "template_id",
+          "name",
+          "description",
+          "image_ref",
+          "template_str",
+          "fields",
+          "defaults"
+        ],
+        "title": "TemplateModel",
+        "type": "object"
+      },
+      "TokenResponse": {
+        "properties": {
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "refresh_token": {
+            "default": "",
+            "title": "Refresh Token",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "integer"
+          },
+          "token": {
+            "title": "Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "message",
+          "token"
+        ],
+        "title": "TokenResponse",
+        "type": "object"
+      },
+      "UserModel": {
+        "description": "User model, used to define user",
+        "properties": {
+          "email": {
+            "format": "email",
+            "type": "string",
+            "nullable": true,
+            "title": "Email"
+          },
+          "extra_info": {
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true,
+            "default": null,
+            "title": "Extra Info"
+          },
+          "htpasswd": {
+            "format": "password",
+            "type": "string",
+            "writeOnly": true,
+            "nullable": true,
+            "default": null,
+            "title": "Htpasswd"
+          },
+          "owned_pod_ids": {
+            "items": {
+              "format": "uuid4",
+              "type": "string"
+            },
+            "title": "Owned Pod Ids",
+            "type": "array"
+          },
+          "password": {
+            "format": "password",
+            "title": "Password",
+            "type": "string",
+            "writeOnly": true
+          },
+          "quota": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/QuotaModel"
+              }
+            ],
+            "nullable": true
+          },
+          "resource_status": {
+            "$ref": "#/components/schemas/ResourceStatusEnum",
+            "default": "pending"
+          },
+          "role": {
+            "$ref": "#/components/schemas/UserRoleEnum"
+          },
+          "status": {
+            "$ref": "#/components/schemas/UserStatusEnum",
+            "default": "active"
+          },
+          "uid": {
+            "title": "Uid",
+            "type": "integer"
+          },
+          "username": {
+            "title": "Username",
+            "type": "string"
+          },
+          "uuid": {
+            "format": "uuid4",
+            "type": "string",
+            "nullable": true,
+            "title": "Uuid"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "uid",
+          "uuid",
+          "username",
+          "email",
+          "password",
+          "role",
+          "owned_pod_ids",
+          "quota"
+        ],
+        "title": "UserModel",
+        "type": "object"
+      },
+      "UserRoleEnum": {
+        "description": "User role enum, used to define user roles",
+        "enum": [
+          "super_admin",
+          "admin",
+          "user",
+          "device"
+        ],
+        "title": "UserRoleEnum",
+        "type": "string"
+      },
+      "UserStatusEnum": {
+        "description": "User status enum, used to define user status.",
+        "enum": [
+          "active",
+          "inactive"
+        ],
+        "title": "UserStatusEnum",
+        "type": "string"
+      }
+    },
+    "securitySchemes": {
+      "token": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "contact": {},
+    "title": "API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "get~health",
+        "responses": {
+          "default": {
+            "description": "OK"
+          }
+        },
+        "summary": "Health check. Return a 200 OK response."
+      }
+    },
+    "/v1/admin/pods": {
+      "get": {
+        "operationId": "get~admin_pod.admin_pod_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "index_start",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "index_end",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "extra_query_filter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "List response for pods",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "pods": {
+                      "default": [],
+                      "items": {
+                        "$ref": "#/components/schemas/PodModel"
+                      },
+                      "title": "Pods",
+                      "type": "array"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "total_pods": {
+                      "default": 0,
+                      "title": "Total Pods",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "PodListResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "List all pods.",
+        "tags": [
+          "admin_pod"
+        ]
+      },
+      "post": {
+        "operationId": "post~admin_pod.admin_pod_create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Create request for pods. values is the values for the template (not used).\ntimeout_s is the timeout for the pod to run. max is 86400 seconds (24 hours).",
+                "properties": {
+                  "cpu_lim_m_cpu": {
+                    "title": "Cpu Lim M Cpu",
+                    "type": "integer"
+                  },
+                  "description": {
+                    "title": "Description",
+                    "type": "string"
+                  },
+                  "gpu": {
+                    "default": 0,
+                    "title": "Gpu",
+                    "type": "integer"
+                  },
+                  "mem_lim_mb": {
+                    "title": "Mem Lim Mb",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "title": "Name",
+                    "type": "string"
+                  },
+                  "storage_lim_mb": {
+                    "title": "Storage Lim Mb",
+                    "type": "integer"
+                  },
+                  "template_ref": {
+                    "title": "Template Ref",
+                    "type": "string"
+                  },
+                  "timeout_s": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Timeout S"
+                  },
+                  "username": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Username"
+                  },
+                  "values": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Values"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "template_ref",
+                  "cpu_lim_m_cpu",
+                  "mem_lim_mb",
+                  "storage_lim_mb"
+                ],
+                "title": "PodCreateRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Create response for pods",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "pod": {
+                      "$ref": "#/components/schemas/PodModel",
+                      "default": null
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "PodCreateResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Create a pod.",
+        "tags": [
+          "admin_pod"
+        ]
+      }
+    },
+    "/v1/admin/pods/{pod_id}": {
+      "delete": {
+        "operationId": "delete~admin_pod.admin_pod_delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pod_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Delete response for pods, the same as get response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "pod": {
+                      "$ref": "#/components/schemas/PodModel",
+                      "default": null
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "PodDeleteResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Delete a pod. This will mark the pod as deleted.",
+        "tags": [
+          "admin_pod"
+        ]
+      },
+      "get": {
+        "operationId": "get~admin_pod.admin_pod_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pod_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Get response for pods, the same as create response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "pod": {
+                      "$ref": "#/components/schemas/PodModel",
+                      "default": null
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "PodGetResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Get a pod.",
+        "tags": [
+          "admin_pod"
+        ]
+      },
+      "put": {
+        "operationId": "put~admin_pod.admin_pod_update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pod_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Update request for pods, all fields except pod_id are optional.\ntarget_status is the target status for the pod to reach. Can be either running or stopped.",
+                "properties": {
+                  "cpu_lim_m_cpu": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Cpu Lim M Cpu"
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Description"
+                  },
+                  "force": {
+                    "default": false,
+                    "title": "Force",
+                    "type": "boolean"
+                  },
+                  "gpu": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Gpu"
+                  },
+                  "mem_lim_mb": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Mem Lim Mb"
+                  },
+                  "name": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Name"
+                  },
+                  "pod_id": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Pod Id"
+                  },
+                  "storage_lim_mb": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Storage Lim Mb"
+                  },
+                  "target_status": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PodStatusEnum"
+                      }
+                    ],
+                    "nullable": true,
+                    "default": null
+                  },
+                  "timeout_s": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Timeout S"
+                  },
+                  "user_uuid": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "User Uuid"
+                  },
+                  "username": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Username"
+                  }
+                },
+                "required": [
+                  "pod_id"
+                ],
+                "title": "PodUpdateRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Update response for pods, the same as get response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "pod": {
+                      "$ref": "#/components/schemas/PodModel",
+                      "default": null
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "PodUpdateResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Update a pod.",
+        "tags": [
+          "admin_pod"
+        ]
+      }
+    },
+    "/v1/admin/templates": {
+      "get": {
+        "operationId": "get~admin_template.admin_template_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "index_start",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "index_end",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "extra_query_filter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "List response for templates",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "templates": {
+                      "default": [],
+                      "items": {
+                        "$ref": "#/components/schemas/TemplateModel"
+                      },
+                      "title": "Templates",
+                      "type": "array"
+                    },
+                    "total_templates": {
+                      "default": 0,
+                      "title": "Total Templates",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "TemplateListResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "List all templates.",
+        "tags": [
+          "admin_template"
+        ]
+      },
+      "post": {
+        "operationId": "post~admin_template.admin_template_create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Create request for templates.\nfields and defaults are optional and not yet used.",
+                "properties": {
+                  "defaults": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "nullable": true,
+                    "title": "Defaults"
+                  },
+                  "description": {
+                    "title": "Description",
+                    "type": "string"
+                  },
+                  "fields": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "nullable": true,
+                    "title": "Fields"
+                  },
+                  "image_ref": {
+                    "title": "Image Ref",
+                    "type": "string"
+                  },
+                  "name": {
+                    "title": "Name",
+                    "type": "string"
+                  },
+                  "template_str": {
+                    "title": "Template Str",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "image_ref",
+                  "template_str",
+                  "fields",
+                  "defaults"
+                ],
+                "title": "TemplateCreateRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Create response for templates",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "template": {
+                      "$ref": "#/components/schemas/TemplateModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "TemplateCreateResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Create a template.",
+        "tags": [
+          "admin_template"
+        ]
+      }
+    },
+    "/v1/admin/templates/{template_id}": {
+      "delete": {
+        "operationId": "delete~admin_template.admin_template_delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "template_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Delete response for templates, the same as get response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "template": {
+                      "$ref": "#/components/schemas/TemplateModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "TemplateDeleteResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Delete a template. This will mark the pod as deleted.",
+        "tags": [
+          "admin_template"
+        ]
+      },
+      "get": {
+        "operationId": "get~admin_template.admin_template_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "template_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Get response for templates, the same as create response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "template": {
+                      "$ref": "#/components/schemas/TemplateModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "TemplateGetResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Get a template.",
+        "tags": [
+          "admin_template"
+        ]
+      },
+      "put": {
+        "operationId": "put~admin_template.admin_template_update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "template_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Update request for templates, all fields except template_id are optional.",
+                "properties": {
+                  "defaults": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Defaults"
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Description"
+                  },
+                  "fields": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Fields"
+                  },
+                  "image_ref": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Image Ref"
+                  },
+                  "name": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Name"
+                  },
+                  "template_id": {
+                    "title": "Template Id",
+                    "type": "string"
+                  },
+                  "template_str": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Template Str"
+                  }
+                },
+                "required": [
+                  "template_id"
+                ],
+                "title": "TemplateUpdateRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Update response for templates, the same as get response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "template": {
+                      "$ref": "#/components/schemas/TemplateModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "TemplateUpdateResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Update a template.",
+        "tags": [
+          "admin_template"
+        ]
+      }
+    },
+    "/v1/admin/users": {
+      "get": {
+        "operationId": "get~admin_user.admin_user_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "index_start",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "index_end",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "extra_query_filter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "List response for users",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "total_users": {
+                      "default": 0,
+                      "title": "Total Users",
+                      "type": "integer"
+                    },
+                    "users": {
+                      "default": [],
+                      "items": {
+                        "$ref": "#/components/schemas/UserModel"
+                      },
+                      "title": "Users",
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "UserListResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "List all users.",
+        "tags": [
+          "admin_user"
+        ]
+      },
+      "post": {
+        "operationId": "post~admin_user.admin_user_create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Create request for users",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Email"
+                  },
+                  "password": {
+                    "title": "Password",
+                    "type": "string"
+                  },
+                  "quota": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Quota"
+                  },
+                  "role": {
+                    "title": "Role",
+                    "type": "string"
+                  },
+                  "username": {
+                    "title": "Username",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "username",
+                  "password",
+                  "email",
+                  "role"
+                ],
+                "title": "UserCreateRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Create response for users",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "user": {
+                      "$ref": "#/components/schemas/UserModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "UserCreateResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Create a user.",
+        "tags": [
+          "admin_user"
+        ]
+      }
+    },
+    "/v1/admin/users/{username}": {
+      "delete": {
+        "operationId": "delete~admin_user.admin_user_delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Delete response for users, the same as get response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "user": {
+                      "$ref": "#/components/schemas/UserModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "UserDeleteResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Delete a user. This will mark the user as deleted.",
+        "tags": [
+          "admin_user"
+        ]
+      },
+      "get": {
+        "operationId": "get~admin_user.admin_user_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Get response for users, the same as create response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "user": {
+                      "$ref": "#/components/schemas/UserModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "UserGetResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Get a user.",
+        "tags": [
+          "admin_user"
+        ]
+      },
+      "put": {
+        "operationId": "put~admin_user.admin_user_update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Update request for users, all fields except username are optional.\nNone means no change.",
+                "properties": {
+                  "email": {
+                    "format": "email",
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Email"
+                  },
+                  "old_password": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Old Password"
+                  },
+                  "password": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Password"
+                  },
+                  "quota": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Quota"
+                  },
+                  "role": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Role"
+                  },
+                  "status": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Status"
+                  },
+                  "username": {
+                    "title": "Username",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "username"
+                ],
+                "title": "UserUpdateRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Update response for users, the same as get response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "user": {
+                      "$ref": "#/components/schemas/UserModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "UserUpdateResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Update a user.",
+        "tags": [
+          "admin_user"
+        ]
+      }
+    },
+    "/v1/auth/basic": {
+      "get": {
+        "operationId": "get~auth.basic",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Basic auth for any user",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/basic/{username}": {
+      "get": {
+        "operationId": "get~auth.basic_user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Basic auth for specific user",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/jwt/login": {
+      "post": {
+        "operationId": "post~auth_bp.AuthenticateEndpoint",
+        "responses": {
+          "default": {
+            "description": "OK"
+          }
+        },
+        "summary": "Authenticateendpoint",
+        "tags": [
+          "auth_bp"
+        ]
+      }
+    },
+    "/v1/auth/jwt/me": {
+      "get": {
+        "operationId": "get~auth_bp.RetrieveUserEndpoint",
+        "responses": {
+          "default": {
+            "description": "OK"
+          }
+        },
+        "summary": "Retrieveuserendpoint",
+        "tags": [
+          "auth_bp"
+        ]
+      }
+    },
+    "/v1/auth/jwt/refresh": {
+      "post": {
+        "operationId": "post~auth_bp.RefreshEndpoint",
+        "responses": {
+          "default": {
+            "description": "OK"
+          }
+        },
+        "summary": "Refreshendpoint",
+        "tags": [
+          "auth_bp"
+        ]
+      }
+    },
+    "/v1/auth/jwt/verify": {
+      "get": {
+        "operationId": "get~auth_bp.VerifyEndpoint",
+        "responses": {
+          "default": {
+            "description": "OK"
+          }
+        },
+        "summary": "Verifyendpoint",
+        "tags": [
+          "auth_bp"
+        ]
+      }
+    },
+    "/v1/auth/oidc/authorize": {
+      "get": {
+        "operationId": "get~auth_oidc.authorize",
+        "responses": {
+          "302": {
+            "content": {
+              "*/*": {
+                "schema": {}
+              }
+            },
+            "description": "redirect to authorization url"
+          },
+          "400": {
+            "content": {
+              "*/*": {
+                "schema": {}
+              }
+            },
+            "description": "Authorization Error"
+          }
+        },
+        "summary": "This endpoint is called by identity provider after user login, will redirect to frontend login page with token",
+        "tags": [
+          "auth_oidc"
+        ]
+      }
+    },
+    "/v1/auth/oidc/login": {
+      "get": {
+        "operationId": "get~auth_oidc.login",
+        "responses": {
+          "302": {
+            "content": {
+              "*/*": {
+                "schema": {}
+              }
+            },
+            "description": "redirect to authorization url"
+          }
+        },
+        "summary": "This handler redirect user to IdP login page",
+        "tags": [
+          "auth_oidc"
+        ]
+      }
+    },
+    "/v1/auth/oidc/status": {
+      "get": {
+        "operationId": "get~auth_oidc.status",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "title": "Name",
+                      "type": "string"
+                    },
+                    "path": {
+                      "title": "Path",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "path"
+                  ],
+                  "title": "OIDCStatusResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "summary": "Status",
+        "tags": [
+          "auth_oidc"
+        ]
+      }
+    },
+    "/v1/auth/token/login": {
+      "post": {
+        "operationId": "post~auth.token_login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "password": {
+                    "title": "Password",
+                    "type": "string"
+                  },
+                  "username": {
+                    "title": "Username",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "username",
+                  "password"
+                ],
+                "title": "LoginCredential",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "refresh_token": {
+                      "default": "",
+                      "title": "Refresh Token",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "token": {
+                      "title": "Token",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message",
+                    "token"
+                  ],
+                  "title": "TokenResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "summary": "this is a hack to assign 10yr valid token to user",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/token/refresh": {
+      "post": {
+        "operationId": "post~auth.token_refresh",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "refresh_token": {
+                      "default": "",
+                      "title": "Refresh Token",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "token": {
+                      "title": "Token",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message",
+                    "token"
+                  ],
+                  "title": "TokenResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "this is a hack to verify the long-term token and sign short term token",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/token/validate/{username}": {
+      "get": {
+        "description": "- header.Authorization<br>- urlParam.clpl_auth_token<br><br>If the validation succeed, return 200 OK and set cookie clpl_auth_token=${JWT}",
+        "operationId": "get~auth.token_validate_user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {}
+              }
+            },
+            "description": "Default Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "This function validates the token in:",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/health": {
+      "get": {
+        "operationId": "get~v1_health",
+        "responses": {
+          "default": {
+            "description": "OK"
+          }
+        },
+        "summary": "Health check. Return a 200 OK response."
+      }
+    },
+    "/v1/heartbeat/user": {
+      "get": {
+        "description": "of the given arguments and keywords.",
+        "operationId": "get~heartbeat.heartbeat_user",
+        "responses": {
+          "default": {
+            "description": "OK"
+          }
+        },
+        "summary": "partial(func, *args, **keywords) - new function with partial application",
+        "tags": [
+          "heartbeat"
+        ]
+      }
+    },
+    "/v1/pods": {
+      "get": {
+        "operationId": "get~nonadmin_pod.nonadmin_pod_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "index_start",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "index_end",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "extra_query_filter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "List response for pods",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "pods": {
+                      "default": [],
+                      "items": {
+                        "$ref": "#/components/schemas/PodModel"
+                      },
+                      "title": "Pods",
+                      "type": "array"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "total_pods": {
+                      "default": 0,
+                      "title": "Total Pods",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "PodListResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "List all pods. Only pods owned by the user will be returned.",
+        "tags": [
+          "nonadmin_pod"
+        ]
+      },
+      "post": {
+        "operationId": "post~nonadmin_pod.nonadmin_pod_create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Create request for pods. values is the values for the template (not used).\ntimeout_s is the timeout for the pod to run. max is 86400 seconds (24 hours).",
+                "properties": {
+                  "cpu_lim_m_cpu": {
+                    "title": "Cpu Lim M Cpu",
+                    "type": "integer"
+                  },
+                  "description": {
+                    "title": "Description",
+                    "type": "string"
+                  },
+                  "gpu": {
+                    "default": 0,
+                    "title": "Gpu",
+                    "type": "integer"
+                  },
+                  "mem_lim_mb": {
+                    "title": "Mem Lim Mb",
+                    "type": "integer"
+                  },
+                  "name": {
+                    "title": "Name",
+                    "type": "string"
+                  },
+                  "storage_lim_mb": {
+                    "title": "Storage Lim Mb",
+                    "type": "integer"
+                  },
+                  "template_ref": {
+                    "title": "Template Ref",
+                    "type": "string"
+                  },
+                  "timeout_s": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Timeout S"
+                  },
+                  "username": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Username"
+                  },
+                  "values": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Values"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "template_ref",
+                  "cpu_lim_m_cpu",
+                  "mem_lim_mb",
+                  "storage_lim_mb"
+                ],
+                "title": "PodCreateRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Create response for pods",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "pod": {
+                      "$ref": "#/components/schemas/PodModel",
+                      "default": null
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "PodCreateResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Create a pod owned by the user.",
+        "tags": [
+          "nonadmin_pod"
+        ]
+      }
+    },
+    "/v1/pods/{pod_id}": {
+      "delete": {
+        "operationId": "delete~nonadmin_pod.nonadmin_pod_delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pod_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Delete response for pods, the same as get response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "pod": {
+                      "$ref": "#/components/schemas/PodModel",
+                      "default": null
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "PodDeleteResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Delete a pod owned by the user.",
+        "tags": [
+          "nonadmin_pod"
+        ]
+      },
+      "get": {
+        "operationId": "get~nonadmin_pod.nonadmin_pod_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pod_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Get response for pods, the same as create response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "pod": {
+                      "$ref": "#/components/schemas/PodModel",
+                      "default": null
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "PodGetResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Get a pod owned by the user.",
+        "tags": [
+          "nonadmin_pod"
+        ]
+      },
+      "put": {
+        "operationId": "put~nonadmin_pod.nonadmin_pod_update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "pod_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Update request for pods, all fields except pod_id are optional.\ntarget_status is the target status for the pod to reach. Can be either running or stopped.",
+                "properties": {
+                  "cpu_lim_m_cpu": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Cpu Lim M Cpu"
+                  },
+                  "description": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Description"
+                  },
+                  "force": {
+                    "default": false,
+                    "title": "Force",
+                    "type": "boolean"
+                  },
+                  "gpu": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Gpu"
+                  },
+                  "mem_lim_mb": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Mem Lim Mb"
+                  },
+                  "name": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Name"
+                  },
+                  "pod_id": {
+                    "type": "string",
+                    "nullable": true,
+                    "title": "Pod Id"
+                  },
+                  "storage_lim_mb": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Storage Lim Mb"
+                  },
+                  "target_status": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/PodStatusEnum"
+                      }
+                    ],
+                    "nullable": true,
+                    "default": null
+                  },
+                  "timeout_s": {
+                    "type": "integer",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Timeout S"
+                  },
+                  "user_uuid": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "User Uuid"
+                  },
+                  "username": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Username"
+                  }
+                },
+                "required": [
+                  "pod_id"
+                ],
+                "title": "PodUpdateRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Update response for pods, the same as get response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "pod": {
+                      "$ref": "#/components/schemas/PodModel",
+                      "default": null
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "PodUpdateResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Update a pod owned by the user.",
+        "tags": [
+          "nonadmin_pod"
+        ]
+      }
+    },
+    "/v1/templates": {
+      "get": {
+        "operationId": "get~nonadmin_template.nonadmin_template_list",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "index_start",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "index_end",
+            "required": false,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "extra_query_filter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "List response for templates",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "templates": {
+                      "default": [],
+                      "items": {
+                        "$ref": "#/components/schemas/TemplateModel"
+                      },
+                      "title": "Templates",
+                      "type": "array"
+                    },
+                    "total_templates": {
+                      "default": 0,
+                      "title": "Total Templates",
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "TemplateListResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "List all templates. The same as admin_template_list, but without role check.",
+        "tags": [
+          "nonadmin_template"
+        ]
+      }
+    },
+    "/v1/templates/{template_id}": {
+      "get": {
+        "operationId": "get~nonadmin_template.nonadmin_template_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "template_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Get response for templates, the same as create response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "template": {
+                      "$ref": "#/components/schemas/TemplateModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "TemplateGetResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Get a template by id. The same as admin_template_get, but without role check.",
+        "tags": [
+          "nonadmin_template"
+        ]
+      }
+    },
+    "/v1/users/{username}": {
+      "get": {
+        "operationId": "get~nonadmin_user.nonadmin_user_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Get response for users, the same as create response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "user": {
+                      "$ref": "#/components/schemas/UserModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "UserGetResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Get user by username.",
+        "tags": [
+          "nonadmin_user"
+        ]
+      },
+      "put": {
+        "operationId": "put~nonadmin_user.nonadmin_user_update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Update request for users, all fields except username are optional.\nNone means no change.",
+                "properties": {
+                  "email": {
+                    "format": "email",
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Email"
+                  },
+                  "old_password": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Old Password"
+                  },
+                  "password": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Password"
+                  },
+                  "quota": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Quota"
+                  },
+                  "role": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Role"
+                  },
+                  "status": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Status"
+                  },
+                  "username": {
+                    "title": "Username",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "username"
+                ],
+                "title": "UserUpdateRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Update response for users, the same as get response",
+                  "properties": {
+                    "description": {
+                      "default": "",
+                      "title": "Description",
+                      "type": "string"
+                    },
+                    "message": {
+                      "title": "Message",
+                      "type": "string"
+                    },
+                    "status": {
+                      "title": "Status",
+                      "type": "integer"
+                    },
+                    "user": {
+                      "$ref": "#/components/schemas/UserModel",
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "title": "UserUpdateResponse",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "summary": "Update user by username.",
+        "tags": [
+          "nonadmin_user"
+        ]
+      }
+    }
+  },
+  "security": [],
+  "servers": [
+    {
+      "url": "http://127.0.0.1/",
+      "variables": {}
+    }
+  ],
+  "tags": [
+    {
+      "name": "auth_bp"
+    },
+    {
+      "name": "admin_pod"
+    },
+    {
+      "name": "admin_template"
+    },
+    {
+      "name": "admin_user"
+    },
+    {
+      "name": "auth"
+    },
+    {
+      "name": "auth_oidc"
+    },
+    {
+      "name": "nonadmin_template"
+    },
+    {
+      "name": "nonadmin_pod"
+    },
+    {
+      "name": "heartbeat"
+    },
+    {
+      "name": "nonadmin_user"
+    }
+  ]
+}

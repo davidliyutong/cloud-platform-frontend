@@ -23,17 +23,14 @@ class QuotaModel {
      * Constructs a new <code>QuotaModel</code>.
      * Quota model, used to define user quota
      * @alias module:model/QuotaModel
-     * @param version {String} 
      * @param cpuM {Number} 
      * @param memoryMb {Number} 
-     * @param storageMb {Number} 
-     * @param gpu {Number} 
-     * @param networkMb {Number} 
      * @param podN {Number} 
+     * @param storageMb {Number} 
      */
-    constructor(version, cpuM, memoryMb, storageMb, gpu, networkMb, podN) { 
+    constructor(cpuM, memoryMb, podN, storageMb) { 
         
-        QuotaModel.initialize(this, version, cpuM, memoryMb, storageMb, gpu, networkMb, podN);
+        QuotaModel.initialize(this, cpuM, memoryMb, podN, storageMb);
     }
 
     /**
@@ -41,14 +38,11 @@ class QuotaModel {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, version, cpuM, memoryMb, storageMb, gpu, networkMb, podN) { 
-        obj['version'] = version;
+    static initialize(obj, cpuM, memoryMb, podN, storageMb) { 
         obj['cpu_m'] = cpuM;
         obj['memory_mb'] = memoryMb;
-        obj['storage_mb'] = storageMb;
-        obj['gpu'] = gpu;
-        obj['network_mb'] = networkMb;
         obj['pod_n'] = podN;
+        obj['storage_mb'] = storageMb;
     }
 
     /**
@@ -62,29 +56,29 @@ class QuotaModel {
         if (data) {
             obj = obj || new QuotaModel();
 
-            if (data.hasOwnProperty('version')) {
-                obj['version'] = ApiClient.convertToType(data['version'], 'String');
-            }
             if (data.hasOwnProperty('committed')) {
                 obj['committed'] = ApiClient.convertToType(data['committed'], 'Boolean');
             }
             if (data.hasOwnProperty('cpu_m')) {
                 obj['cpu_m'] = ApiClient.convertToType(data['cpu_m'], 'Number');
             }
-            if (data.hasOwnProperty('memory_mb')) {
-                obj['memory_mb'] = ApiClient.convertToType(data['memory_mb'], 'Number');
-            }
-            if (data.hasOwnProperty('storage_mb')) {
-                obj['storage_mb'] = ApiClient.convertToType(data['storage_mb'], 'Number');
-            }
             if (data.hasOwnProperty('gpu')) {
                 obj['gpu'] = ApiClient.convertToType(data['gpu'], 'Number');
+            }
+            if (data.hasOwnProperty('memory_mb')) {
+                obj['memory_mb'] = ApiClient.convertToType(data['memory_mb'], 'Number');
             }
             if (data.hasOwnProperty('network_mb')) {
                 obj['network_mb'] = ApiClient.convertToType(data['network_mb'], 'Number');
             }
             if (data.hasOwnProperty('pod_n')) {
                 obj['pod_n'] = ApiClient.convertToType(data['pod_n'], 'Number');
+            }
+            if (data.hasOwnProperty('storage_mb')) {
+                obj['storage_mb'] = ApiClient.convertToType(data['storage_mb'], 'Number');
+            }
+            if (data.hasOwnProperty('version')) {
+                obj['version'] = ApiClient.convertToType(data['version'], 'String');
             }
         }
         return obj;
@@ -113,12 +107,7 @@ class QuotaModel {
 
 }
 
-QuotaModel.RequiredProperties = ["version", "cpu_m", "memory_mb", "storage_mb", "gpu", "network_mb", "pod_n"];
-
-/**
- * @member {String} version
- */
-QuotaModel.prototype['version'] = undefined;
+QuotaModel.RequiredProperties = ["cpu_m", "memory_mb", "pod_n", "storage_mb"];
 
 /**
  * @member {Boolean} committed
@@ -132,9 +121,26 @@ QuotaModel.prototype['committed'] = false;
 QuotaModel.prototype['cpu_m'] = undefined;
 
 /**
+ * @member {Number} gpu
+ * @default 0
+ */
+QuotaModel.prototype['gpu'] = 0;
+
+/**
  * @member {Number} memory_mb
  */
 QuotaModel.prototype['memory_mb'] = undefined;
+
+/**
+ * @member {Number} network_mb
+ * @default 0
+ */
+QuotaModel.prototype['network_mb'] = 0;
+
+/**
+ * @member {Number} pod_n
+ */
+QuotaModel.prototype['pod_n'] = undefined;
 
 /**
  * @member {Number} storage_mb
@@ -142,19 +148,10 @@ QuotaModel.prototype['memory_mb'] = undefined;
 QuotaModel.prototype['storage_mb'] = undefined;
 
 /**
- * @member {Number} gpu
+ * @member {String} version
+ * @default 'v0.0.8'
  */
-QuotaModel.prototype['gpu'] = undefined;
-
-/**
- * @member {Number} network_mb
- */
-QuotaModel.prototype['network_mb'] = undefined;
-
-/**
- * @member {Number} pod_n
- */
-QuotaModel.prototype['pod_n'] = undefined;
+QuotaModel.prototype['version'] = 'v0.0.8';
 
 
 

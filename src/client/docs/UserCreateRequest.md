@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**username** | **String** |  | 
+**email** | **String** |  | 
 **password** | **String** |  | 
-**email** | [**Email**](Email.md) |  | 
+**quota** | **{String: Object}** |  | [optional] 
 **role** | **String** |  | 
-**quota** | [**Quota**](Quota.md) |  | [optional] 
+**username** | **String** |  | 
 
 

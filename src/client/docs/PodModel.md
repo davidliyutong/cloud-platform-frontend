@@ -4,24 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **String** |  | 
-**resourceStatus** | [**ResourceStatusEnum**](ResourceStatusEnum.md) |  | [optional] 
-**podId** | **String** |  | 
-**name** | **String** |  | 
-**description** | **String** |  | 
-**templateRef** | **String** |  | 
-**templateStr** | [**TemplateStr1**](TemplateStr1.md) |  | 
-**cpuLimMCpu** | **Number** |  | 
-**memLimMb** | **Number** |  | 
-**storageLimMb** | **Number** |  | 
-**gpu** | **Number** |  | [optional] [default to 0]
-**username** | **String** |  | 
-**userUuid** | **String** |  | 
-**createdAt** | **Date** |  | 
-**startedAt** | **Date** |  | 
 **accessedAt** | **Date** |  | 
-**timeoutS** | **Number** |  | 
+**cpuLimMCpu** | **Number** |  | 
+**createdAt** | **Date** |  | 
 **currentStatus** | [**PodStatusEnum**](PodStatusEnum.md) |  | 
+**currentStatusReason** | **String** |  | [optional] 
+**description** | **String** |  | 
+**gpu** | **Number** |  | [optional] [default to 0]
+**memLimMb** | **Number** |  | 
+**name** | **String** |  | 
+**podId** | **String** |  | 
+**resourceStatus** | [**ResourceStatusEnum**](ResourceStatusEnum.md) |  | [optional] 
+**startedAt** | **Date** |  | 
+**storageLimMb** | **Number** |  | 
 **targetStatus** | [**PodStatusEnum**](PodStatusEnum.md) |  | 
+**templateRef** | **String** |  | 
+**templateStr** | **String** |  | 
+**timeoutS** | **Number** |  | 
+**userUuid** | **String** |  | 
+**username** | **String** |  | 
+**version** | **String** |  | 
 
 

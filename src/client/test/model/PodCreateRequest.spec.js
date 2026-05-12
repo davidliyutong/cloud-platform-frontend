@@ -54,8 +54,8 @@
       //expect(instance).to.be.a(Api.PodCreateRequest);
     });
 
-    it('should have the property name (base name: "name")', function() {
-      // uncomment below and update the code to test the property name
+    it('should have the property cpuLimMCpu (base name: "cpu_lim_m_cpu")', function() {
+      // uncomment below and update the code to test the property cpuLimMCpu
       //var instance = new Api.PodCreateRequest();
       //expect(instance).to.be();
     });
@@ -66,14 +66,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property templateRef (base name: "template_ref")', function() {
-      // uncomment below and update the code to test the property templateRef
-      //var instance = new Api.PodCreateRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property cpuLimMCpu (base name: "cpu_lim_m_cpu")', function() {
-      // uncomment below and update the code to test the property cpuLimMCpu
+    it('should have the property gpu (base name: "gpu")', function() {
+      // uncomment below and update the code to test the property gpu
       //var instance = new Api.PodCreateRequest();
       //expect(instance).to.be();
     });
@@ -84,20 +78,32 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property name (base name: "name")', function() {
+      // uncomment below and update the code to test the property name
+      //var instance = new Api.PodCreateRequest();
+      //expect(instance).to.be();
+    });
+
     it('should have the property storageLimMb (base name: "storage_lim_mb")', function() {
       // uncomment below and update the code to test the property storageLimMb
       //var instance = new Api.PodCreateRequest();
       //expect(instance).to.be();
     });
 
-    it('should have the property username (base name: "username")', function() {
-      // uncomment below and update the code to test the property username
+    it('should have the property templateRef (base name: "template_ref")', function() {
+      // uncomment below and update the code to test the property templateRef
       //var instance = new Api.PodCreateRequest();
       //expect(instance).to.be();
     });
 
     it('should have the property timeoutS (base name: "timeout_s")', function() {
       // uncomment below and update the code to test the property timeoutS
+      //var instance = new Api.PodCreateRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property username (base name: "username")', function() {
+      // uncomment below and update the code to test the property username
       //var instance = new Api.PodCreateRequest();
       //expect(instance).to.be();
     });

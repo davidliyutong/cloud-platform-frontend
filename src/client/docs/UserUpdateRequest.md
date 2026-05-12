@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**email** | **String** |  | [optional] 
+**oldPassword** | **String** |  | [optional] 
+**password** | **String** |  | [optional] 
+**quota** | **{String: Object}** |  | [optional] 
+**role** | **String** |  | [optional] 
+**status** | **String** |  | [optional] 
 **username** | **String** |  | 
-**oldPassword** | [**OldPassword**](OldPassword.md) |  | [optional] 
-**password** | [**Password**](Password.md) |  | [optional] 
-**status** | [**Status**](Status.md) |  | [optional] 
-**email** | [**Email1**](Email1.md) |  | [optional] 
-**role** | [**Role**](Role.md) |  | [optional] 
-**quota** | [**Quota**](Quota.md) |  | [optional] 
 
 

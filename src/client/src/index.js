@@ -13,57 +13,30 @@
 
 
 import ApiClient from './ApiClient';
-import CpuLimMCpu from './model/CpuLimMCpu';
-import Defaults from './model/Defaults';
-import Defaults1 from './model/Defaults1';
-import Description from './model/Description';
-import Email from './model/Email';
-import Email1 from './model/Email1';
-import Email2 from './model/Email2';
-import ExtraInfo from './model/ExtraInfo';
 import FieldTypeEnum from './model/FieldTypeEnum';
-import Fields from './model/Fields';
-import Fields1 from './model/Fields1';
-import Fields2 from './model/Fields2';
-import Gpu from './model/Gpu';
-import Htpasswd from './model/Htpasswd';
-import ImageRef from './model/ImageRef';
 import LoginCredential from './model/LoginCredential';
 import LoginCredential1 from './model/LoginCredential1';
-import MemLimMb from './model/MemLimMb';
-import Name from './model/Name';
 import OIDCStatusResponse from './model/OIDCStatusResponse';
 import OIDCStatusResponse1 from './model/OIDCStatusResponse1';
-import OldPassword from './model/OldPassword';
-import Password from './model/Password';
 import PodCreateRequest from './model/PodCreateRequest';
 import PodCreateResponse from './model/PodCreateResponse';
 import PodDeleteResponse from './model/PodDeleteResponse';
 import PodGetResponse from './model/PodGetResponse';
-import PodId from './model/PodId';
 import PodListResponse from './model/PodListResponse';
 import PodModel from './model/PodModel';
 import PodStatusEnum from './model/PodStatusEnum';
 import PodUpdateRequest from './model/PodUpdateRequest';
-import PodUpdateRequestTargetStatus from './model/PodUpdateRequestTargetStatus';
 import PodUpdateResponse from './model/PodUpdateResponse';
-import Quota from './model/Quota';
 import QuotaModel from './model/QuotaModel';
 import ResourceStatusEnum from './model/ResourceStatusEnum';
-import Role from './model/Role';
-import Status from './model/Status';
-import StorageLimMb from './model/StorageLimMb';
 import TemplateCreateRequest from './model/TemplateCreateRequest';
 import TemplateCreateResponse from './model/TemplateCreateResponse';
 import TemplateDeleteResponse from './model/TemplateDeleteResponse';
 import TemplateGetResponse from './model/TemplateGetResponse';
 import TemplateListResponse from './model/TemplateListResponse';
 import TemplateModel from './model/TemplateModel';
-import TemplateStr from './model/TemplateStr';
-import TemplateStr1 from './model/TemplateStr1';
 import TemplateUpdateRequest from './model/TemplateUpdateRequest';
 import TemplateUpdateResponse from './model/TemplateUpdateResponse';
-import TimeoutS from './model/TimeoutS';
 import TokenResponse from './model/TokenResponse';
 import TokenResponse1 from './model/TokenResponse1';
 import UserCreateRequest from './model/UserCreateRequest';
@@ -72,15 +45,10 @@ import UserDeleteResponse from './model/UserDeleteResponse';
 import UserGetResponse from './model/UserGetResponse';
 import UserListResponse from './model/UserListResponse';
 import UserModel from './model/UserModel';
-import UserModelQuota from './model/UserModelQuota';
 import UserRoleEnum from './model/UserRoleEnum';
 import UserStatusEnum from './model/UserStatusEnum';
 import UserUpdateRequest from './model/UserUpdateRequest';
 import UserUpdateResponse from './model/UserUpdateResponse';
-import UserUuid from './model/UserUuid';
-import Username from './model/Username';
-import Uuid from './model/Uuid';
-import Values from './model/Values';
 import AdminPodApi from './api/AdminPodApi';
 import AdminTemplateApi from './api/AdminTemplateApi';
 import AdminUserApi from './api/AdminUserApi';
@@ -133,94 +101,10 @@ export {
     ApiClient,
 
     /**
-     * The CpuLimMCpu model constructor.
-     * @property {module:model/CpuLimMCpu}
-     */
-    CpuLimMCpu,
-
-    /**
-     * The Defaults model constructor.
-     * @property {module:model/Defaults}
-     */
-    Defaults,
-
-    /**
-     * The Defaults1 model constructor.
-     * @property {module:model/Defaults1}
-     */
-    Defaults1,
-
-    /**
-     * The Description model constructor.
-     * @property {module:model/Description}
-     */
-    Description,
-
-    /**
-     * The Email model constructor.
-     * @property {module:model/Email}
-     */
-    Email,
-
-    /**
-     * The Email1 model constructor.
-     * @property {module:model/Email1}
-     */
-    Email1,
-
-    /**
-     * The Email2 model constructor.
-     * @property {module:model/Email2}
-     */
-    Email2,
-
-    /**
-     * The ExtraInfo model constructor.
-     * @property {module:model/ExtraInfo}
-     */
-    ExtraInfo,
-
-    /**
      * The FieldTypeEnum model constructor.
      * @property {module:model/FieldTypeEnum}
      */
     FieldTypeEnum,
-
-    /**
-     * The Fields model constructor.
-     * @property {module:model/Fields}
-     */
-    Fields,
-
-    /**
-     * The Fields1 model constructor.
-     * @property {module:model/Fields1}
-     */
-    Fields1,
-
-    /**
-     * The Fields2 model constructor.
-     * @property {module:model/Fields2}
-     */
-    Fields2,
-
-    /**
-     * The Gpu model constructor.
-     * @property {module:model/Gpu}
-     */
-    Gpu,
-
-    /**
-     * The Htpasswd model constructor.
-     * @property {module:model/Htpasswd}
-     */
-    Htpasswd,
-
-    /**
-     * The ImageRef model constructor.
-     * @property {module:model/ImageRef}
-     */
-    ImageRef,
 
     /**
      * The LoginCredential model constructor.
@@ -235,18 +119,6 @@ export {
     LoginCredential1,
 
     /**
-     * The MemLimMb model constructor.
-     * @property {module:model/MemLimMb}
-     */
-    MemLimMb,
-
-    /**
-     * The Name model constructor.
-     * @property {module:model/Name}
-     */
-    Name,
-
-    /**
      * The OIDCStatusResponse model constructor.
      * @property {module:model/OIDCStatusResponse}
      */
@@ -257,18 +129,6 @@ export {
      * @property {module:model/OIDCStatusResponse1}
      */
     OIDCStatusResponse1,
-
-    /**
-     * The OldPassword model constructor.
-     * @property {module:model/OldPassword}
-     */
-    OldPassword,
-
-    /**
-     * The Password model constructor.
-     * @property {module:model/Password}
-     */
-    Password,
 
     /**
      * The PodCreateRequest model constructor.
@@ -295,12 +155,6 @@ export {
     PodGetResponse,
 
     /**
-     * The PodId model constructor.
-     * @property {module:model/PodId}
-     */
-    PodId,
-
-    /**
      * The PodListResponse model constructor.
      * @property {module:model/PodListResponse}
      */
@@ -325,22 +179,10 @@ export {
     PodUpdateRequest,
 
     /**
-     * The PodUpdateRequestTargetStatus model constructor.
-     * @property {module:model/PodUpdateRequestTargetStatus}
-     */
-    PodUpdateRequestTargetStatus,
-
-    /**
      * The PodUpdateResponse model constructor.
      * @property {module:model/PodUpdateResponse}
      */
     PodUpdateResponse,
-
-    /**
-     * The Quota model constructor.
-     * @property {module:model/Quota}
-     */
-    Quota,
 
     /**
      * The QuotaModel model constructor.
@@ -353,24 +195,6 @@ export {
      * @property {module:model/ResourceStatusEnum}
      */
     ResourceStatusEnum,
-
-    /**
-     * The Role model constructor.
-     * @property {module:model/Role}
-     */
-    Role,
-
-    /**
-     * The Status model constructor.
-     * @property {module:model/Status}
-     */
-    Status,
-
-    /**
-     * The StorageLimMb model constructor.
-     * @property {module:model/StorageLimMb}
-     */
-    StorageLimMb,
 
     /**
      * The TemplateCreateRequest model constructor.
@@ -409,18 +233,6 @@ export {
     TemplateModel,
 
     /**
-     * The TemplateStr model constructor.
-     * @property {module:model/TemplateStr}
-     */
-    TemplateStr,
-
-    /**
-     * The TemplateStr1 model constructor.
-     * @property {module:model/TemplateStr1}
-     */
-    TemplateStr1,
-
-    /**
      * The TemplateUpdateRequest model constructor.
      * @property {module:model/TemplateUpdateRequest}
      */
@@ -431,12 +243,6 @@ export {
      * @property {module:model/TemplateUpdateResponse}
      */
     TemplateUpdateResponse,
-
-    /**
-     * The TimeoutS model constructor.
-     * @property {module:model/TimeoutS}
-     */
-    TimeoutS,
 
     /**
      * The TokenResponse model constructor.
@@ -487,12 +293,6 @@ export {
     UserModel,
 
     /**
-     * The UserModelQuota model constructor.
-     * @property {module:model/UserModelQuota}
-     */
-    UserModelQuota,
-
-    /**
      * The UserRoleEnum model constructor.
      * @property {module:model/UserRoleEnum}
      */
@@ -515,30 +315,6 @@ export {
      * @property {module:model/UserUpdateResponse}
      */
     UserUpdateResponse,
-
-    /**
-     * The UserUuid model constructor.
-     * @property {module:model/UserUuid}
-     */
-    UserUuid,
-
-    /**
-     * The Username model constructor.
-     * @property {module:model/Username}
-     */
-    Username,
-
-    /**
-     * The Uuid model constructor.
-     * @property {module:model/Uuid}
-     */
-    Uuid,
-
-    /**
-     * The Values model constructor.
-     * @property {module:model/Values}
-     */
-    Values,
 
     /**
     * The AdminPodApi service constructor.

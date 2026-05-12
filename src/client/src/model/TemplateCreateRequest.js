@@ -12,8 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import Defaults from './Defaults';
-import Fields from './Fields';
 
 /**
  * The TemplateCreateRequest model module.
@@ -25,16 +23,16 @@ class TemplateCreateRequest {
      * Constructs a new <code>TemplateCreateRequest</code>.
      * Create request for templates. fields and defaults are optional and not yet used.
      * @alias module:model/TemplateCreateRequest
-     * @param name {String} 
+     * @param defaults {Object.<String, Object>} 
      * @param description {String} 
+     * @param fields {Object.<String, Object>} 
      * @param imageRef {String} 
+     * @param name {String} 
      * @param templateStr {String} 
-     * @param fields {module:model/Fields} 
-     * @param defaults {module:model/Defaults} 
      */
-    constructor(name, description, imageRef, templateStr, fields, defaults) { 
+    constructor(defaults, description, fields, imageRef, name, templateStr) { 
         
-        TemplateCreateRequest.initialize(this, name, description, imageRef, templateStr, fields, defaults);
+        TemplateCreateRequest.initialize(this, defaults, description, fields, imageRef, name, templateStr);
     }
 
     /**
@@ -42,13 +40,13 @@ class TemplateCreateRequest {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, name, description, imageRef, templateStr, fields, defaults) { 
-        obj['name'] = name;
-        obj['description'] = description;
-        obj['image_ref'] = imageRef;
-        obj['template_str'] = templateStr;
-        obj['fields'] = fields;
+    static initialize(obj, defaults, description, fields, imageRef, name, templateStr) { 
         obj['defaults'] = defaults;
+        obj['description'] = description;
+        obj['fields'] = fields;
+        obj['image_ref'] = imageRef;
+        obj['name'] = name;
+        obj['template_str'] = templateStr;
     }
 
     /**
@@ -62,23 +60,23 @@ class TemplateCreateRequest {
         if (data) {
             obj = obj || new TemplateCreateRequest();
 
-            if (data.hasOwnProperty('name')) {
-                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            if (data.hasOwnProperty('defaults')) {
+                obj['defaults'] = ApiClient.convertToType(data['defaults'], {'String': Object});
             }
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
+            if (data.hasOwnProperty('fields')) {
+                obj['fields'] = ApiClient.convertToType(data['fields'], {'String': Object});
+            }
             if (data.hasOwnProperty('image_ref')) {
                 obj['image_ref'] = ApiClient.convertToType(data['image_ref'], 'String');
             }
+            if (data.hasOwnProperty('name')) {
+                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            }
             if (data.hasOwnProperty('template_str')) {
                 obj['template_str'] = ApiClient.convertToType(data['template_str'], 'String');
-            }
-            if (data.hasOwnProperty('fields')) {
-                obj['fields'] = Fields.constructFromObject(data['fields']);
-            }
-            if (data.hasOwnProperty('defaults')) {
-                obj['defaults'] = Defaults.constructFromObject(data['defaults']);
             }
         }
         return obj;
@@ -97,10 +95,6 @@ class TemplateCreateRequest {
             }
         }
         // ensure the json data is a string
-        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
-            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
-        }
-        // ensure the json data is a string
         if (data['description'] && !(typeof data['description'] === 'string' || data['description'] instanceof String)) {
             throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
         }
@@ -109,16 +103,12 @@ class TemplateCreateRequest {
             throw new Error("Expected the field `image_ref` to be a primitive type in the JSON string but got " + data['image_ref']);
         }
         // ensure the json data is a string
+        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        }
+        // ensure the json data is a string
         if (data['template_str'] && !(typeof data['template_str'] === 'string' || data['template_str'] instanceof String)) {
             throw new Error("Expected the field `template_str` to be a primitive type in the JSON string but got " + data['template_str']);
-        }
-        // validate the optional field `fields`
-        if (data['fields']) { // data not null
-          Fields.validateJSON(data['fields']);
-        }
-        // validate the optional field `defaults`
-        if (data['defaults']) { // data not null
-          Defaults.validateJSON(data['defaults']);
         }
 
         return true;
@@ -127,12 +117,12 @@ class TemplateCreateRequest {
 
 }
 
-TemplateCreateRequest.RequiredProperties = ["name", "description", "image_ref", "template_str", "fields", "defaults"];
+TemplateCreateRequest.RequiredProperties = ["defaults", "description", "fields", "image_ref", "name", "template_str"];
 
 /**
- * @member {String} name
+ * @member {Object.<String, Object>} defaults
  */
-TemplateCreateRequest.prototype['name'] = undefined;
+TemplateCreateRequest.prototype['defaults'] = undefined;
 
 /**
  * @member {String} description
@@ -140,24 +130,24 @@ TemplateCreateRequest.prototype['name'] = undefined;
 TemplateCreateRequest.prototype['description'] = undefined;
 
 /**
+ * @member {Object.<String, Object>} fields
+ */
+TemplateCreateRequest.prototype['fields'] = undefined;
+
+/**
  * @member {String} image_ref
  */
 TemplateCreateRequest.prototype['image_ref'] = undefined;
 
 /**
+ * @member {String} name
+ */
+TemplateCreateRequest.prototype['name'] = undefined;
+
+/**
  * @member {String} template_str
  */
 TemplateCreateRequest.prototype['template_str'] = undefined;
-
-/**
- * @member {module:model/Fields} fields
- */
-TemplateCreateRequest.prototype['fields'] = undefined;
-
-/**
- * @member {module:model/Defaults} defaults
- */
-TemplateCreateRequest.prototype['defaults'] = undefined;
 
 
 

@@ -12,8 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import Defaults from './Defaults';
-import Fields2 from './Fields2';
+import FieldTypeEnum from './FieldTypeEnum';
 import ResourceStatusEnum from './ResourceStatusEnum';
 
 /**
@@ -26,18 +25,18 @@ class TemplateModel {
      * Constructs a new <code>TemplateModel</code>.
      * Template model, used to define template
      * @alias module:model/TemplateModel
-     * @param version {String} 
-     * @param templateId {String} 
-     * @param name {String} 
+     * @param defaults {Object.<String, Object>} 
      * @param description {String} 
+     * @param fields {Object.<String, module:model/FieldTypeEnum>} 
      * @param imageRef {String} 
+     * @param name {String} 
+     * @param templateId {String} 
      * @param templateStr {String} 
-     * @param fields {module:model/Fields2} 
-     * @param defaults {module:model/Defaults} 
+     * @param version {String} 
      */
-    constructor(version, templateId, name, description, imageRef, templateStr, fields, defaults) { 
+    constructor(defaults, description, fields, imageRef, name, templateId, templateStr, version) { 
         
-        TemplateModel.initialize(this, version, templateId, name, description, imageRef, templateStr, fields, defaults);
+        TemplateModel.initialize(this, defaults, description, fields, imageRef, name, templateId, templateStr, version);
     }
 
     /**
@@ -45,15 +44,15 @@ class TemplateModel {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, version, templateId, name, description, imageRef, templateStr, fields, defaults) { 
-        obj['version'] = version;
-        obj['template_id'] = templateId;
-        obj['name'] = name;
-        obj['description'] = description;
-        obj['image_ref'] = imageRef;
-        obj['template_str'] = templateStr;
-        obj['fields'] = fields;
+    static initialize(obj, defaults, description, fields, imageRef, name, templateId, templateStr, version) { 
         obj['defaults'] = defaults;
+        obj['description'] = description;
+        obj['fields'] = fields;
+        obj['image_ref'] = imageRef;
+        obj['name'] = name;
+        obj['template_id'] = templateId;
+        obj['template_str'] = templateStr;
+        obj['version'] = version;
     }
 
     /**
@@ -67,8 +66,20 @@ class TemplateModel {
         if (data) {
             obj = obj || new TemplateModel();
 
-            if (data.hasOwnProperty('version')) {
-                obj['version'] = ApiClient.convertToType(data['version'], 'String');
+            if (data.hasOwnProperty('defaults')) {
+                obj['defaults'] = ApiClient.convertToType(data['defaults'], {'String': Object});
+            }
+            if (data.hasOwnProperty('description')) {
+                obj['description'] = ApiClient.convertToType(data['description'], 'String');
+            }
+            if (data.hasOwnProperty('fields')) {
+                obj['fields'] = ApiClient.convertToType(data['fields'], {'String': FieldTypeEnum});
+            }
+            if (data.hasOwnProperty('image_ref')) {
+                obj['image_ref'] = ApiClient.convertToType(data['image_ref'], 'String');
+            }
+            if (data.hasOwnProperty('name')) {
+                obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
             if (data.hasOwnProperty('resource_status')) {
                 obj['resource_status'] = ResourceStatusEnum.constructFromObject(data['resource_status']);
@@ -76,23 +87,11 @@ class TemplateModel {
             if (data.hasOwnProperty('template_id')) {
                 obj['template_id'] = ApiClient.convertToType(data['template_id'], 'String');
             }
-            if (data.hasOwnProperty('name')) {
-                obj['name'] = ApiClient.convertToType(data['name'], 'String');
-            }
-            if (data.hasOwnProperty('description')) {
-                obj['description'] = ApiClient.convertToType(data['description'], 'String');
-            }
-            if (data.hasOwnProperty('image_ref')) {
-                obj['image_ref'] = ApiClient.convertToType(data['image_ref'], 'String');
-            }
             if (data.hasOwnProperty('template_str')) {
                 obj['template_str'] = ApiClient.convertToType(data['template_str'], 'String');
             }
-            if (data.hasOwnProperty('fields')) {
-                obj['fields'] = Fields2.constructFromObject(data['fields']);
-            }
-            if (data.hasOwnProperty('defaults')) {
-                obj['defaults'] = Defaults.constructFromObject(data['defaults']);
+            if (data.hasOwnProperty('version')) {
+                obj['version'] = ApiClient.convertToType(data['version'], 'String');
             }
         }
         return obj;
@@ -111,18 +110,6 @@ class TemplateModel {
             }
         }
         // ensure the json data is a string
-        if (data['version'] && !(typeof data['version'] === 'string' || data['version'] instanceof String)) {
-            throw new Error("Expected the field `version` to be a primitive type in the JSON string but got " + data['version']);
-        }
-        // ensure the json data is a string
-        if (data['template_id'] && !(typeof data['template_id'] === 'string' || data['template_id'] instanceof String)) {
-            throw new Error("Expected the field `template_id` to be a primitive type in the JSON string but got " + data['template_id']);
-        }
-        // ensure the json data is a string
-        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
-            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
-        }
-        // ensure the json data is a string
         if (data['description'] && !(typeof data['description'] === 'string' || data['description'] instanceof String)) {
             throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
         }
@@ -131,16 +118,20 @@ class TemplateModel {
             throw new Error("Expected the field `image_ref` to be a primitive type in the JSON string but got " + data['image_ref']);
         }
         // ensure the json data is a string
+        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        }
+        // ensure the json data is a string
+        if (data['template_id'] && !(typeof data['template_id'] === 'string' || data['template_id'] instanceof String)) {
+            throw new Error("Expected the field `template_id` to be a primitive type in the JSON string but got " + data['template_id']);
+        }
+        // ensure the json data is a string
         if (data['template_str'] && !(typeof data['template_str'] === 'string' || data['template_str'] instanceof String)) {
             throw new Error("Expected the field `template_str` to be a primitive type in the JSON string but got " + data['template_str']);
         }
-        // validate the optional field `fields`
-        if (data['fields']) { // data not null
-          Fields2.validateJSON(data['fields']);
-        }
-        // validate the optional field `defaults`
-        if (data['defaults']) { // data not null
-          Defaults.validateJSON(data['defaults']);
+        // ensure the json data is a string
+        if (data['version'] && !(typeof data['version'] === 'string' || data['version'] instanceof String)) {
+            throw new Error("Expected the field `version` to be a primitive type in the JSON string but got " + data['version']);
         }
 
         return true;
@@ -149,12 +140,32 @@ class TemplateModel {
 
 }
 
-TemplateModel.RequiredProperties = ["version", "template_id", "name", "description", "image_ref", "template_str", "fields", "defaults"];
+TemplateModel.RequiredProperties = ["defaults", "description", "fields", "image_ref", "name", "template_id", "template_str", "version"];
 
 /**
- * @member {String} version
+ * @member {Object.<String, Object>} defaults
  */
-TemplateModel.prototype['version'] = undefined;
+TemplateModel.prototype['defaults'] = undefined;
+
+/**
+ * @member {String} description
+ */
+TemplateModel.prototype['description'] = undefined;
+
+/**
+ * @member {Object.<String, module:model/FieldTypeEnum>} fields
+ */
+TemplateModel.prototype['fields'] = undefined;
+
+/**
+ * @member {String} image_ref
+ */
+TemplateModel.prototype['image_ref'] = undefined;
+
+/**
+ * @member {String} name
+ */
+TemplateModel.prototype['name'] = undefined;
 
 /**
  * @member {module:model/ResourceStatusEnum} resource_status
@@ -167,34 +178,14 @@ TemplateModel.prototype['resource_status'] = undefined;
 TemplateModel.prototype['template_id'] = undefined;
 
 /**
- * @member {String} name
- */
-TemplateModel.prototype['name'] = undefined;
-
-/**
- * @member {String} description
- */
-TemplateModel.prototype['description'] = undefined;
-
-/**
- * @member {String} image_ref
- */
-TemplateModel.prototype['image_ref'] = undefined;
-
-/**
  * @member {String} template_str
  */
 TemplateModel.prototype['template_str'] = undefined;
 
 /**
- * @member {module:model/Fields2} fields
+ * @member {String} version
  */
-TemplateModel.prototype['fields'] = undefined;
-
-/**
- * @member {module:model/Defaults} defaults
- */
-TemplateModel.prototype['defaults'] = undefined;
+TemplateModel.prototype['version'] = undefined;
 
 
 

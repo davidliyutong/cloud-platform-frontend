@@ -296,8 +296,8 @@ export default {
     this.setGlobalTitle();
   },
   methods: {
-    initialize() {
-      if (!checkLogin()) {
+    async initialize() {
+      if (!await checkLogin()) {
         this.$router.push('/');
       }
       this.listTemplates();

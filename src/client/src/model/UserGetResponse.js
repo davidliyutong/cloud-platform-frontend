@@ -24,12 +24,12 @@ class UserGetResponse {
      * Constructs a new <code>UserGetResponse</code>.
      * Get response for users, the same as create response
      * @alias module:model/UserGetResponse
-     * @param status {Number} 
      * @param message {String} 
+     * @param status {Number} 
      */
-    constructor(status, message) { 
+    constructor(message, status) { 
         
-        UserGetResponse.initialize(this, status, message);
+        UserGetResponse.initialize(this, message, status);
     }
 
     /**
@@ -37,9 +37,9 @@ class UserGetResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, status, message) { 
-        obj['status'] = status;
+    static initialize(obj, message, status) { 
         obj['message'] = message;
+        obj['status'] = status;
     }
 
     /**
@@ -56,11 +56,11 @@ class UserGetResponse {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
-            }
             if (data.hasOwnProperty('message')) {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
             }
             if (data.hasOwnProperty('user')) {
                 obj['user'] = UserModel.constructFromObject(data['user']);
@@ -100,7 +100,7 @@ class UserGetResponse {
 
 }
 
-UserGetResponse.RequiredProperties = ["status", "message"];
+UserGetResponse.RequiredProperties = ["message", "status"];
 
 /**
  * @member {String} description
@@ -109,14 +109,14 @@ UserGetResponse.RequiredProperties = ["status", "message"];
 UserGetResponse.prototype['description'] = '';
 
 /**
- * @member {Number} status
- */
-UserGetResponse.prototype['status'] = undefined;
-
-/**
  * @member {String} message
  */
 UserGetResponse.prototype['message'] = undefined;
+
+/**
+ * @member {Number} status
+ */
+UserGetResponse.prototype['status'] = undefined;
 
 /**
  * @member {module:model/UserModel} user

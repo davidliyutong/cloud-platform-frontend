@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** |  | 
-**description** | **String** |  | 
-**templateRef** | **String** |  | 
 **cpuLimMCpu** | **Number** |  | 
-**memLimMb** | **Number** |  | 
-**storageLimMb** | **Number** |  | 
+**description** | **String** |  | 
 **gpu** | **Number** |  | [optional] [default to 0]
-**username** | [**Username**](Username.md) |  | [optional] 
-**timeoutS** | [**TimeoutS**](TimeoutS.md) |  | [optional] 
-**values** | [**Values**](Values.md) |  | [optional] 
+**memLimMb** | **Number** |  | 
+**name** | **String** |  | 
+**storageLimMb** | **Number** |  | 
+**templateRef** | **String** |  | 
+**timeoutS** | **Number** |  | [optional] 
+**username** | **String** |  | [optional] 
+**values** | **{String: Object}** |  | [optional] 
 
 

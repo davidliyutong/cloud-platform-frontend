@@ -12,17 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import CpuLimMCpu from './CpuLimMCpu';
-import Description from './Description';
-import Gpu from './Gpu';
-import MemLimMb from './MemLimMb';
-import Name from './Name';
-import PodId from './PodId';
-import PodUpdateRequestTargetStatus from './PodUpdateRequestTargetStatus';
-import StorageLimMb from './StorageLimMb';
-import TimeoutS from './TimeoutS';
-import UserUuid from './UserUuid';
-import Username from './Username';
+import PodStatusEnum from './PodStatusEnum';
 
 /**
  * The PodUpdateRequest model module.
@@ -34,7 +24,7 @@ class PodUpdateRequest {
      * Constructs a new <code>PodUpdateRequest</code>.
      * Update request for pods, all fields except pod_id are optional. target_status is the target status for the pod to reach. Can be either running or stopped.
      * @alias module:model/PodUpdateRequest
-     * @param podId {module:model/PodId} 
+     * @param podId {String} 
      */
     constructor(podId) { 
         
@@ -61,41 +51,41 @@ class PodUpdateRequest {
         if (data) {
             obj = obj || new PodUpdateRequest();
 
-            if (data.hasOwnProperty('pod_id')) {
-                obj['pod_id'] = PodId.constructFromObject(data['pod_id']);
-            }
-            if (data.hasOwnProperty('name')) {
-                obj['name'] = Name.constructFromObject(data['name']);
+            if (data.hasOwnProperty('cpu_lim_m_cpu')) {
+                obj['cpu_lim_m_cpu'] = ApiClient.convertToType(data['cpu_lim_m_cpu'], 'Number');
             }
             if (data.hasOwnProperty('description')) {
-                obj['description'] = Description.constructFromObject(data['description']);
-            }
-            if (data.hasOwnProperty('cpu_lim_m_cpu')) {
-                obj['cpu_lim_m_cpu'] = CpuLimMCpu.constructFromObject(data['cpu_lim_m_cpu']);
-            }
-            if (data.hasOwnProperty('mem_lim_mb')) {
-                obj['mem_lim_mb'] = MemLimMb.constructFromObject(data['mem_lim_mb']);
-            }
-            if (data.hasOwnProperty('storage_lim_mb')) {
-                obj['storage_lim_mb'] = StorageLimMb.constructFromObject(data['storage_lim_mb']);
-            }
-            if (data.hasOwnProperty('gpu')) {
-                obj['gpu'] = Gpu.constructFromObject(data['gpu']);
-            }
-            if (data.hasOwnProperty('username')) {
-                obj['username'] = Username.constructFromObject(data['username']);
-            }
-            if (data.hasOwnProperty('user_uuid')) {
-                obj['user_uuid'] = UserUuid.constructFromObject(data['user_uuid']);
-            }
-            if (data.hasOwnProperty('timeout_s')) {
-                obj['timeout_s'] = TimeoutS.constructFromObject(data['timeout_s']);
-            }
-            if (data.hasOwnProperty('target_status')) {
-                obj['target_status'] = PodUpdateRequestTargetStatus.constructFromObject(data['target_status']);
+                obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
             if (data.hasOwnProperty('force')) {
                 obj['force'] = ApiClient.convertToType(data['force'], 'Boolean');
+            }
+            if (data.hasOwnProperty('gpu')) {
+                obj['gpu'] = ApiClient.convertToType(data['gpu'], 'Number');
+            }
+            if (data.hasOwnProperty('mem_lim_mb')) {
+                obj['mem_lim_mb'] = ApiClient.convertToType(data['mem_lim_mb'], 'Number');
+            }
+            if (data.hasOwnProperty('name')) {
+                obj['name'] = ApiClient.convertToType(data['name'], 'String');
+            }
+            if (data.hasOwnProperty('pod_id')) {
+                obj['pod_id'] = ApiClient.convertToType(data['pod_id'], 'String');
+            }
+            if (data.hasOwnProperty('storage_lim_mb')) {
+                obj['storage_lim_mb'] = ApiClient.convertToType(data['storage_lim_mb'], 'Number');
+            }
+            if (data.hasOwnProperty('target_status')) {
+                obj['target_status'] = ApiClient.convertToType(data['target_status'], PodStatusEnum);
+            }
+            if (data.hasOwnProperty('timeout_s')) {
+                obj['timeout_s'] = ApiClient.convertToType(data['timeout_s'], 'Number');
+            }
+            if (data.hasOwnProperty('user_uuid')) {
+                obj['user_uuid'] = ApiClient.convertToType(data['user_uuid'], 'String');
+            }
+            if (data.hasOwnProperty('username')) {
+                obj['username'] = ApiClient.convertToType(data['username'], 'String');
             }
         }
         return obj;
@@ -113,49 +103,25 @@ class PodUpdateRequest {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
-        // validate the optional field `pod_id`
-        if (data['pod_id']) { // data not null
-          PodId.validateJSON(data['pod_id']);
+        // ensure the json data is a string
+        if (data['description'] && !(typeof data['description'] === 'string' || data['description'] instanceof String)) {
+            throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
         }
-        // validate the optional field `name`
-        if (data['name']) { // data not null
-          Name.validateJSON(data['name']);
+        // ensure the json data is a string
+        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
         }
-        // validate the optional field `description`
-        if (data['description']) { // data not null
-          Description.validateJSON(data['description']);
+        // ensure the json data is a string
+        if (data['pod_id'] && !(typeof data['pod_id'] === 'string' || data['pod_id'] instanceof String)) {
+            throw new Error("Expected the field `pod_id` to be a primitive type in the JSON string but got " + data['pod_id']);
         }
-        // validate the optional field `cpu_lim_m_cpu`
-        if (data['cpu_lim_m_cpu']) { // data not null
-          CpuLimMCpu.validateJSON(data['cpu_lim_m_cpu']);
+        // ensure the json data is a string
+        if (data['user_uuid'] && !(typeof data['user_uuid'] === 'string' || data['user_uuid'] instanceof String)) {
+            throw new Error("Expected the field `user_uuid` to be a primitive type in the JSON string but got " + data['user_uuid']);
         }
-        // validate the optional field `mem_lim_mb`
-        if (data['mem_lim_mb']) { // data not null
-          MemLimMb.validateJSON(data['mem_lim_mb']);
-        }
-        // validate the optional field `storage_lim_mb`
-        if (data['storage_lim_mb']) { // data not null
-          StorageLimMb.validateJSON(data['storage_lim_mb']);
-        }
-        // validate the optional field `gpu`
-        if (data['gpu']) { // data not null
-          Gpu.validateJSON(data['gpu']);
-        }
-        // validate the optional field `username`
-        if (data['username']) { // data not null
-          Username.validateJSON(data['username']);
-        }
-        // validate the optional field `user_uuid`
-        if (data['user_uuid']) { // data not null
-          UserUuid.validateJSON(data['user_uuid']);
-        }
-        // validate the optional field `timeout_s`
-        if (data['timeout_s']) { // data not null
-          TimeoutS.validateJSON(data['timeout_s']);
-        }
-        // validate the optional field `target_status`
-        if (data['target_status']) { // data not null
-          PodUpdateRequestTargetStatus.validateJSON(data['target_status']);
+        // ensure the json data is a string
+        if (data['username'] && !(typeof data['username'] === 'string' || data['username'] instanceof String)) {
+            throw new Error("Expected the field `username` to be a primitive type in the JSON string but got " + data['username']);
         }
 
         return true;
@@ -167,65 +133,65 @@ class PodUpdateRequest {
 PodUpdateRequest.RequiredProperties = ["pod_id"];
 
 /**
- * @member {module:model/PodId} pod_id
- */
-PodUpdateRequest.prototype['pod_id'] = undefined;
-
-/**
- * @member {module:model/Name} name
- */
-PodUpdateRequest.prototype['name'] = undefined;
-
-/**
- * @member {module:model/Description} description
- */
-PodUpdateRequest.prototype['description'] = undefined;
-
-/**
- * @member {module:model/CpuLimMCpu} cpu_lim_m_cpu
+ * @member {Number} cpu_lim_m_cpu
  */
 PodUpdateRequest.prototype['cpu_lim_m_cpu'] = undefined;
 
 /**
- * @member {module:model/MemLimMb} mem_lim_mb
+ * @member {String} description
  */
-PodUpdateRequest.prototype['mem_lim_mb'] = undefined;
-
-/**
- * @member {module:model/StorageLimMb} storage_lim_mb
- */
-PodUpdateRequest.prototype['storage_lim_mb'] = undefined;
-
-/**
- * @member {module:model/Gpu} gpu
- */
-PodUpdateRequest.prototype['gpu'] = undefined;
-
-/**
- * @member {module:model/Username} username
- */
-PodUpdateRequest.prototype['username'] = undefined;
-
-/**
- * @member {module:model/UserUuid} user_uuid
- */
-PodUpdateRequest.prototype['user_uuid'] = undefined;
-
-/**
- * @member {module:model/TimeoutS} timeout_s
- */
-PodUpdateRequest.prototype['timeout_s'] = undefined;
-
-/**
- * @member {module:model/PodUpdateRequestTargetStatus} target_status
- */
-PodUpdateRequest.prototype['target_status'] = undefined;
+PodUpdateRequest.prototype['description'] = undefined;
 
 /**
  * @member {Boolean} force
  * @default false
  */
 PodUpdateRequest.prototype['force'] = false;
+
+/**
+ * @member {Number} gpu
+ */
+PodUpdateRequest.prototype['gpu'] = undefined;
+
+/**
+ * @member {Number} mem_lim_mb
+ */
+PodUpdateRequest.prototype['mem_lim_mb'] = undefined;
+
+/**
+ * @member {String} name
+ */
+PodUpdateRequest.prototype['name'] = undefined;
+
+/**
+ * @member {String} pod_id
+ */
+PodUpdateRequest.prototype['pod_id'] = undefined;
+
+/**
+ * @member {Number} storage_lim_mb
+ */
+PodUpdateRequest.prototype['storage_lim_mb'] = undefined;
+
+/**
+ * @member {module:model/PodStatusEnum} target_status
+ */
+PodUpdateRequest.prototype['target_status'] = undefined;
+
+/**
+ * @member {Number} timeout_s
+ */
+PodUpdateRequest.prototype['timeout_s'] = undefined;
+
+/**
+ * @member {String} user_uuid
+ */
+PodUpdateRequest.prototype['user_uuid'] = undefined;
+
+/**
+ * @member {String} username
+ */
+PodUpdateRequest.prototype['username'] = undefined;
 
 
 

@@ -24,12 +24,12 @@ class TemplateCreateResponse {
      * Constructs a new <code>TemplateCreateResponse</code>.
      * Create response for templates
      * @alias module:model/TemplateCreateResponse
-     * @param status {Number} 
      * @param message {String} 
+     * @param status {Number} 
      */
-    constructor(status, message) { 
+    constructor(message, status) { 
         
-        TemplateCreateResponse.initialize(this, status, message);
+        TemplateCreateResponse.initialize(this, message, status);
     }
 
     /**
@@ -37,9 +37,9 @@ class TemplateCreateResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, status, message) { 
-        obj['status'] = status;
+    static initialize(obj, message, status) { 
         obj['message'] = message;
+        obj['status'] = status;
     }
 
     /**
@@ -56,11 +56,11 @@ class TemplateCreateResponse {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
-            }
             if (data.hasOwnProperty('message')) {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
             }
             if (data.hasOwnProperty('template')) {
                 obj['template'] = TemplateModel.constructFromObject(data['template']);
@@ -100,7 +100,7 @@ class TemplateCreateResponse {
 
 }
 
-TemplateCreateResponse.RequiredProperties = ["status", "message"];
+TemplateCreateResponse.RequiredProperties = ["message", "status"];
 
 /**
  * @member {String} description
@@ -109,14 +109,14 @@ TemplateCreateResponse.RequiredProperties = ["status", "message"];
 TemplateCreateResponse.prototype['description'] = '';
 
 /**
- * @member {Number} status
- */
-TemplateCreateResponse.prototype['status'] = undefined;
-
-/**
  * @member {String} message
  */
 TemplateCreateResponse.prototype['message'] = undefined;
+
+/**
+ * @member {Number} status
+ */
+TemplateCreateResponse.prototype['status'] = undefined;
 
 /**
  * @member {module:model/TemplateModel} template

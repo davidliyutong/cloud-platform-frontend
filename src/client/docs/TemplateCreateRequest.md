@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **String** |  | 
+**defaults** | **{String: Object}** |  | 
 **description** | **String** |  | 
+**fields** | **{String: Object}** |  | 
 **imageRef** | **String** |  | 
+**name** | **String** |  | 
 **templateStr** | **String** |  | 
-**fields** | [**Fields**](Fields.md) |  | 
-**defaults** | [**Defaults**](Defaults.md) |  | 
 
 

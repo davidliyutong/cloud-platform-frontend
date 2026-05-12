@@ -143,7 +143,7 @@ export default {
       window.location.replace(url);
     }
   },
-  mounted() {
+  async mounted() {
     this.getOIDCConfig();
     const urlParams = new URLSearchParams(window.location.search);
     this.token = urlParams.get("token");
@@ -170,7 +170,7 @@ export default {
     }
 
 
-    if (checkLogin()) {
+    if (await checkLogin()) {
       let decoded = jwt_decode(localStorage.getItem('token'));
       localStorage.setItem('username', decoded.username);
       this.$router.push('/home');

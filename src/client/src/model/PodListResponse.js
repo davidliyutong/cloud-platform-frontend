@@ -24,12 +24,12 @@ class PodListResponse {
      * Constructs a new <code>PodListResponse</code>.
      * List response for pods
      * @alias module:model/PodListResponse
-     * @param status {Number} 
      * @param message {String} 
+     * @param status {Number} 
      */
-    constructor(status, message) { 
+    constructor(message, status) { 
         
-        PodListResponse.initialize(this, status, message);
+        PodListResponse.initialize(this, message, status);
     }
 
     /**
@@ -37,9 +37,9 @@ class PodListResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, status, message) { 
-        obj['status'] = status;
+    static initialize(obj, message, status) { 
         obj['message'] = message;
+        obj['status'] = status;
     }
 
     /**
@@ -56,17 +56,17 @@ class PodListResponse {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
-            }
             if (data.hasOwnProperty('message')) {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
             }
-            if (data.hasOwnProperty('total_pods')) {
-                obj['total_pods'] = ApiClient.convertToType(data['total_pods'], 'Number');
-            }
             if (data.hasOwnProperty('pods')) {
                 obj['pods'] = ApiClient.convertToType(data['pods'], [PodModel]);
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
+            }
+            if (data.hasOwnProperty('total_pods')) {
+                obj['total_pods'] = ApiClient.convertToType(data['total_pods'], 'Number');
             }
         }
         return obj;
@@ -109,7 +109,7 @@ class PodListResponse {
 
 }
 
-PodListResponse.RequiredProperties = ["status", "message"];
+PodListResponse.RequiredProperties = ["message", "status"];
 
 /**
  * @member {String} description
@@ -118,25 +118,25 @@ PodListResponse.RequiredProperties = ["status", "message"];
 PodListResponse.prototype['description'] = '';
 
 /**
- * @member {Number} status
- */
-PodListResponse.prototype['status'] = undefined;
-
-/**
  * @member {String} message
  */
 PodListResponse.prototype['message'] = undefined;
+
+/**
+ * @member {Array.<module:model/PodModel>} pods
+ */
+PodListResponse.prototype['pods'] = undefined;
+
+/**
+ * @member {Number} status
+ */
+PodListResponse.prototype['status'] = undefined;
 
 /**
  * @member {Number} total_pods
  * @default 0
  */
 PodListResponse.prototype['total_pods'] = 0;
-
-/**
- * @member {Array.<module:model/PodModel>} pods
- */
-PodListResponse.prototype['pods'] = undefined;
 
 
 

@@ -24,12 +24,12 @@ class TemplateGetResponse {
      * Constructs a new <code>TemplateGetResponse</code>.
      * Get response for templates, the same as create response
      * @alias module:model/TemplateGetResponse
-     * @param status {Number} 
      * @param message {String} 
+     * @param status {Number} 
      */
-    constructor(status, message) { 
+    constructor(message, status) { 
         
-        TemplateGetResponse.initialize(this, status, message);
+        TemplateGetResponse.initialize(this, message, status);
     }
 
     /**
@@ -37,9 +37,9 @@ class TemplateGetResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, status, message) { 
-        obj['status'] = status;
+    static initialize(obj, message, status) { 
         obj['message'] = message;
+        obj['status'] = status;
     }
 
     /**
@@ -56,11 +56,11 @@ class TemplateGetResponse {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
-            }
             if (data.hasOwnProperty('message')) {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
             }
             if (data.hasOwnProperty('template')) {
                 obj['template'] = TemplateModel.constructFromObject(data['template']);
@@ -100,7 +100,7 @@ class TemplateGetResponse {
 
 }
 
-TemplateGetResponse.RequiredProperties = ["status", "message"];
+TemplateGetResponse.RequiredProperties = ["message", "status"];
 
 /**
  * @member {String} description
@@ -109,14 +109,14 @@ TemplateGetResponse.RequiredProperties = ["status", "message"];
 TemplateGetResponse.prototype['description'] = '';
 
 /**
- * @member {Number} status
- */
-TemplateGetResponse.prototype['status'] = undefined;
-
-/**
  * @member {String} message
  */
 TemplateGetResponse.prototype['message'] = undefined;
+
+/**
+ * @member {Number} status
+ */
+TemplateGetResponse.prototype['status'] = undefined;
 
 /**
  * @member {module:model/TemplateModel} template

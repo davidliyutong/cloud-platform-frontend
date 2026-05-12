@@ -48,40 +48,50 @@
   }
 
   describe('AuthApi', function() {
-    describe('getauthAuthBasic', function() {
-      it('should call getauthAuthBasic successfully', function(done) {
-        //uncomment below and update the code to test getauthAuthBasic
-        //instance.getauthAuthBasic(function(error) {
+    describe('getauthBasic', function() {
+      it('should call getauthBasic successfully', function(done) {
+        //uncomment below and update the code to test getauthBasic
+        //instance.getauthBasic(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('getauthAuthBasicUser', function() {
-      it('should call getauthAuthBasicUser successfully', function(done) {
-        //uncomment below and update the code to test getauthAuthBasicUser
-        //instance.getauthAuthBasicUser(function(error) {
+    describe('getauthBasicUser', function() {
+      it('should call getauthBasicUser successfully', function(done) {
+        //uncomment below and update the code to test getauthBasicUser
+        //instance.getauthBasicUser(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('postauthAuthTokenLogin', function() {
-      it('should call postauthAuthTokenLogin successfully', function(done) {
-        //uncomment below and update the code to test postauthAuthTokenLogin
-        //instance.postauthAuthTokenLogin(function(error) {
+    describe('getauthTokenValidateUser', function() {
+      it('should call getauthTokenValidateUser successfully', function(done) {
+        //uncomment below and update the code to test getauthTokenValidateUser
+        //instance.getauthTokenValidateUser(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('postauthAuthTokenRefresh', function() {
-      it('should call postauthAuthTokenRefresh successfully', function(done) {
-        //uncomment below and update the code to test postauthAuthTokenRefresh
-        //instance.postauthAuthTokenRefresh(function(error) {
+    describe('postauthTokenLogin', function() {
+      it('should call postauthTokenLogin successfully', function(done) {
+        //uncomment below and update the code to test postauthTokenLogin
+        //instance.postauthTokenLogin(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
+    describe('postauthTokenRefresh', function() {
+      it('should call postauthTokenRefresh successfully', function(done) {
+        //uncomment below and update the code to test postauthTokenRefresh
+        //instance.postauthTokenRefresh(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

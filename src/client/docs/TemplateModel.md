@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**version** | **String** |  | 
+**defaults** | **{String: Object}** |  | 
+**description** | **String** |  | 
+**fields** | [**{String: FieldTypeEnum}**](FieldTypeEnum.md) |  | 
+**imageRef** | **String** |  | 
+**name** | **String** |  | 
 **resourceStatus** | [**ResourceStatusEnum**](ResourceStatusEnum.md) |  | [optional] 
 **templateId** | **String** |  | 
-**name** | **String** |  | 
-**description** | **String** |  | 
-**imageRef** | **String** |  | 
 **templateStr** | **String** |  | 
-**fields** | [**Fields2**](Fields2.md) |  | 
-**defaults** | [**Defaults**](Defaults.md) |  | 
+**version** | **String** |  | 
 
 

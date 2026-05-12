@@ -14,7 +14,6 @@
 import ApiClient from '../ApiClient';
 import PodStatusEnum from './PodStatusEnum';
 import ResourceStatusEnum from './ResourceStatusEnum';
-import TemplateStr1 from './TemplateStr1';
 
 /**
  * The PodModel model module.
@@ -26,27 +25,27 @@ class PodModel {
      * Constructs a new <code>PodModel</code>.
      * Pod model, used to define pod
      * @alias module:model/PodModel
-     * @param version {String} 
-     * @param podId {String} 
-     * @param name {String} 
-     * @param description {String} 
-     * @param templateRef {String} 
-     * @param templateStr {module:model/TemplateStr1} 
-     * @param cpuLimMCpu {Number} 
-     * @param memLimMb {Number} 
-     * @param storageLimMb {Number} 
-     * @param username {String} 
-     * @param userUuid {String} 
-     * @param createdAt {Date} 
-     * @param startedAt {Date} 
      * @param accessedAt {Date} 
-     * @param timeoutS {Number} 
+     * @param cpuLimMCpu {Number} 
+     * @param createdAt {Date} 
      * @param currentStatus {module:model/PodStatusEnum} 
+     * @param description {String} 
+     * @param memLimMb {Number} 
+     * @param name {String} 
+     * @param podId {String} 
+     * @param startedAt {Date} 
+     * @param storageLimMb {Number} 
      * @param targetStatus {module:model/PodStatusEnum} 
+     * @param templateRef {String} 
+     * @param templateStr {String} 
+     * @param timeoutS {Number} 
+     * @param userUuid {String} 
+     * @param username {String} 
+     * @param version {String} 
      */
-    constructor(version, podId, name, description, templateRef, templateStr, cpuLimMCpu, memLimMb, storageLimMb, username, userUuid, createdAt, startedAt, accessedAt, timeoutS, currentStatus, targetStatus) { 
+    constructor(accessedAt, cpuLimMCpu, createdAt, currentStatus, description, memLimMb, name, podId, startedAt, storageLimMb, targetStatus, templateRef, templateStr, timeoutS, userUuid, username, version) { 
         
-        PodModel.initialize(this, version, podId, name, description, templateRef, templateStr, cpuLimMCpu, memLimMb, storageLimMb, username, userUuid, createdAt, startedAt, accessedAt, timeoutS, currentStatus, targetStatus);
+        PodModel.initialize(this, accessedAt, cpuLimMCpu, createdAt, currentStatus, description, memLimMb, name, podId, startedAt, storageLimMb, targetStatus, templateRef, templateStr, timeoutS, userUuid, username, version);
     }
 
     /**
@@ -54,24 +53,24 @@ class PodModel {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, version, podId, name, description, templateRef, templateStr, cpuLimMCpu, memLimMb, storageLimMb, username, userUuid, createdAt, startedAt, accessedAt, timeoutS, currentStatus, targetStatus) { 
-        obj['version'] = version;
-        obj['pod_id'] = podId;
-        obj['name'] = name;
+    static initialize(obj, accessedAt, cpuLimMCpu, createdAt, currentStatus, description, memLimMb, name, podId, startedAt, storageLimMb, targetStatus, templateRef, templateStr, timeoutS, userUuid, username, version) { 
+        obj['accessed_at'] = accessedAt;
+        obj['cpu_lim_m_cpu'] = cpuLimMCpu;
+        obj['created_at'] = createdAt;
+        obj['current_status'] = currentStatus;
         obj['description'] = description;
+        obj['mem_lim_mb'] = memLimMb;
+        obj['name'] = name;
+        obj['pod_id'] = podId;
+        obj['started_at'] = startedAt;
+        obj['storage_lim_mb'] = storageLimMb;
+        obj['target_status'] = targetStatus;
         obj['template_ref'] = templateRef;
         obj['template_str'] = templateStr;
-        obj['cpu_lim_m_cpu'] = cpuLimMCpu;
-        obj['mem_lim_mb'] = memLimMb;
-        obj['storage_lim_mb'] = storageLimMb;
-        obj['username'] = username;
-        obj['user_uuid'] = userUuid;
-        obj['created_at'] = createdAt;
-        obj['started_at'] = startedAt;
-        obj['accessed_at'] = accessedAt;
         obj['timeout_s'] = timeoutS;
-        obj['current_status'] = currentStatus;
-        obj['target_status'] = targetStatus;
+        obj['user_uuid'] = userUuid;
+        obj['username'] = username;
+        obj['version'] = version;
     }
 
     /**
@@ -85,62 +84,65 @@ class PodModel {
         if (data) {
             obj = obj || new PodModel();
 
-            if (data.hasOwnProperty('version')) {
-                obj['version'] = ApiClient.convertToType(data['version'], 'String');
+            if (data.hasOwnProperty('accessed_at')) {
+                obj['accessed_at'] = ApiClient.convertToType(data['accessed_at'], 'Date');
             }
-            if (data.hasOwnProperty('resource_status')) {
-                obj['resource_status'] = ResourceStatusEnum.constructFromObject(data['resource_status']);
+            if (data.hasOwnProperty('cpu_lim_m_cpu')) {
+                obj['cpu_lim_m_cpu'] = ApiClient.convertToType(data['cpu_lim_m_cpu'], 'Number');
             }
-            if (data.hasOwnProperty('pod_id')) {
-                obj['pod_id'] = ApiClient.convertToType(data['pod_id'], 'String');
+            if (data.hasOwnProperty('created_at')) {
+                obj['created_at'] = ApiClient.convertToType(data['created_at'], 'Date');
+            }
+            if (data.hasOwnProperty('current_status')) {
+                obj['current_status'] = PodStatusEnum.constructFromObject(data['current_status']);
+            }
+            if (data.hasOwnProperty('current_status_reason')) {
+                obj['current_status_reason'] = ApiClient.convertToType(data['current_status_reason'], 'String');
+            }
+            if (data.hasOwnProperty('description')) {
+                obj['description'] = ApiClient.convertToType(data['description'], 'String');
+            }
+            if (data.hasOwnProperty('gpu')) {
+                obj['gpu'] = ApiClient.convertToType(data['gpu'], 'Number');
+            }
+            if (data.hasOwnProperty('mem_lim_mb')) {
+                obj['mem_lim_mb'] = ApiClient.convertToType(data['mem_lim_mb'], 'Number');
             }
             if (data.hasOwnProperty('name')) {
                 obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
-            if (data.hasOwnProperty('description')) {
-                obj['description'] = ApiClient.convertToType(data['description'], 'String');
+            if (data.hasOwnProperty('pod_id')) {
+                obj['pod_id'] = ApiClient.convertToType(data['pod_id'], 'String');
+            }
+            if (data.hasOwnProperty('resource_status')) {
+                obj['resource_status'] = ResourceStatusEnum.constructFromObject(data['resource_status']);
+            }
+            if (data.hasOwnProperty('started_at')) {
+                obj['started_at'] = ApiClient.convertToType(data['started_at'], 'Date');
+            }
+            if (data.hasOwnProperty('storage_lim_mb')) {
+                obj['storage_lim_mb'] = ApiClient.convertToType(data['storage_lim_mb'], 'Number');
+            }
+            if (data.hasOwnProperty('target_status')) {
+                obj['target_status'] = PodStatusEnum.constructFromObject(data['target_status']);
             }
             if (data.hasOwnProperty('template_ref')) {
                 obj['template_ref'] = ApiClient.convertToType(data['template_ref'], 'String');
             }
             if (data.hasOwnProperty('template_str')) {
-                obj['template_str'] = TemplateStr1.constructFromObject(data['template_str']);
-            }
-            if (data.hasOwnProperty('cpu_lim_m_cpu')) {
-                obj['cpu_lim_m_cpu'] = ApiClient.convertToType(data['cpu_lim_m_cpu'], 'Number');
-            }
-            if (data.hasOwnProperty('mem_lim_mb')) {
-                obj['mem_lim_mb'] = ApiClient.convertToType(data['mem_lim_mb'], 'Number');
-            }
-            if (data.hasOwnProperty('storage_lim_mb')) {
-                obj['storage_lim_mb'] = ApiClient.convertToType(data['storage_lim_mb'], 'Number');
-            }
-            if (data.hasOwnProperty('gpu')) {
-                obj['gpu'] = ApiClient.convertToType(data['gpu'], 'Number');
-            }
-            if (data.hasOwnProperty('username')) {
-                obj['username'] = ApiClient.convertToType(data['username'], 'String');
-            }
-            if (data.hasOwnProperty('user_uuid')) {
-                obj['user_uuid'] = ApiClient.convertToType(data['user_uuid'], 'String');
-            }
-            if (data.hasOwnProperty('created_at')) {
-                obj['created_at'] = ApiClient.convertToType(data['created_at'], 'Date');
-            }
-            if (data.hasOwnProperty('started_at')) {
-                obj['started_at'] = ApiClient.convertToType(data['started_at'], 'Date');
-            }
-            if (data.hasOwnProperty('accessed_at')) {
-                obj['accessed_at'] = ApiClient.convertToType(data['accessed_at'], 'Date');
+                obj['template_str'] = ApiClient.convertToType(data['template_str'], 'String');
             }
             if (data.hasOwnProperty('timeout_s')) {
                 obj['timeout_s'] = ApiClient.convertToType(data['timeout_s'], 'Number');
             }
-            if (data.hasOwnProperty('current_status')) {
-                obj['current_status'] = PodStatusEnum.constructFromObject(data['current_status']);
+            if (data.hasOwnProperty('user_uuid')) {
+                obj['user_uuid'] = ApiClient.convertToType(data['user_uuid'], 'String');
             }
-            if (data.hasOwnProperty('target_status')) {
-                obj['target_status'] = PodStatusEnum.constructFromObject(data['target_status']);
+            if (data.hasOwnProperty('username')) {
+                obj['username'] = ApiClient.convertToType(data['username'], 'String');
+            }
+            if (data.hasOwnProperty('version')) {
+                obj['version'] = ApiClient.convertToType(data['version'], 'String');
             }
         }
         return obj;
@@ -159,36 +161,40 @@ class PodModel {
             }
         }
         // ensure the json data is a string
-        if (data['version'] && !(typeof data['version'] === 'string' || data['version'] instanceof String)) {
-            throw new Error("Expected the field `version` to be a primitive type in the JSON string but got " + data['version']);
-        }
-        // ensure the json data is a string
-        if (data['pod_id'] && !(typeof data['pod_id'] === 'string' || data['pod_id'] instanceof String)) {
-            throw new Error("Expected the field `pod_id` to be a primitive type in the JSON string but got " + data['pod_id']);
-        }
-        // ensure the json data is a string
-        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
-            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        if (data['current_status_reason'] && !(typeof data['current_status_reason'] === 'string' || data['current_status_reason'] instanceof String)) {
+            throw new Error("Expected the field `current_status_reason` to be a primitive type in the JSON string but got " + data['current_status_reason']);
         }
         // ensure the json data is a string
         if (data['description'] && !(typeof data['description'] === 'string' || data['description'] instanceof String)) {
             throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
         }
         // ensure the json data is a string
+        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
+            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
+        }
+        // ensure the json data is a string
+        if (data['pod_id'] && !(typeof data['pod_id'] === 'string' || data['pod_id'] instanceof String)) {
+            throw new Error("Expected the field `pod_id` to be a primitive type in the JSON string but got " + data['pod_id']);
+        }
+        // ensure the json data is a string
         if (data['template_ref'] && !(typeof data['template_ref'] === 'string' || data['template_ref'] instanceof String)) {
             throw new Error("Expected the field `template_ref` to be a primitive type in the JSON string but got " + data['template_ref']);
         }
-        // validate the optional field `template_str`
-        if (data['template_str']) { // data not null
-          TemplateStr1.validateJSON(data['template_str']);
+        // ensure the json data is a string
+        if (data['template_str'] && !(typeof data['template_str'] === 'string' || data['template_str'] instanceof String)) {
+            throw new Error("Expected the field `template_str` to be a primitive type in the JSON string but got " + data['template_str']);
+        }
+        // ensure the json data is a string
+        if (data['user_uuid'] && !(typeof data['user_uuid'] === 'string' || data['user_uuid'] instanceof String)) {
+            throw new Error("Expected the field `user_uuid` to be a primitive type in the JSON string but got " + data['user_uuid']);
         }
         // ensure the json data is a string
         if (data['username'] && !(typeof data['username'] === 'string' || data['username'] instanceof String)) {
             throw new Error("Expected the field `username` to be a primitive type in the JSON string but got " + data['username']);
         }
         // ensure the json data is a string
-        if (data['user_uuid'] && !(typeof data['user_uuid'] === 'string' || data['user_uuid'] instanceof String)) {
-            throw new Error("Expected the field `user_uuid` to be a primitive type in the JSON string but got " + data['user_uuid']);
+        if (data['version'] && !(typeof data['version'] === 'string' || data['version'] instanceof String)) {
+            throw new Error("Expected the field `version` to be a primitive type in the JSON string but got " + data['version']);
         }
 
         return true;
@@ -197,42 +203,12 @@ class PodModel {
 
 }
 
-PodModel.RequiredProperties = ["version", "pod_id", "name", "description", "template_ref", "template_str", "cpu_lim_m_cpu", "mem_lim_mb", "storage_lim_mb", "username", "user_uuid", "created_at", "started_at", "accessed_at", "timeout_s", "current_status", "target_status"];
+PodModel.RequiredProperties = ["accessed_at", "cpu_lim_m_cpu", "created_at", "current_status", "description", "mem_lim_mb", "name", "pod_id", "started_at", "storage_lim_mb", "target_status", "template_ref", "template_str", "timeout_s", "user_uuid", "username", "version"];
 
 /**
- * @member {String} version
+ * @member {Date} accessed_at
  */
-PodModel.prototype['version'] = undefined;
-
-/**
- * @member {module:model/ResourceStatusEnum} resource_status
- */
-PodModel.prototype['resource_status'] = undefined;
-
-/**
- * @member {String} pod_id
- */
-PodModel.prototype['pod_id'] = undefined;
-
-/**
- * @member {String} name
- */
-PodModel.prototype['name'] = undefined;
-
-/**
- * @member {String} description
- */
-PodModel.prototype['description'] = undefined;
-
-/**
- * @member {String} template_ref
- */
-PodModel.prototype['template_ref'] = undefined;
-
-/**
- * @member {module:model/TemplateStr1} template_str
- */
-PodModel.prototype['template_str'] = undefined;
+PodModel.prototype['accessed_at'] = undefined;
 
 /**
  * @member {Number} cpu_lim_m_cpu
@@ -240,14 +216,24 @@ PodModel.prototype['template_str'] = undefined;
 PodModel.prototype['cpu_lim_m_cpu'] = undefined;
 
 /**
- * @member {Number} mem_lim_mb
+ * @member {Date} created_at
  */
-PodModel.prototype['mem_lim_mb'] = undefined;
+PodModel.prototype['created_at'] = undefined;
 
 /**
- * @member {Number} storage_lim_mb
+ * @member {module:model/PodStatusEnum} current_status
  */
-PodModel.prototype['storage_lim_mb'] = undefined;
+PodModel.prototype['current_status'] = undefined;
+
+/**
+ * @member {String} current_status_reason
+ */
+PodModel.prototype['current_status_reason'] = undefined;
+
+/**
+ * @member {String} description
+ */
+PodModel.prototype['description'] = undefined;
 
 /**
  * @member {Number} gpu
@@ -256,19 +242,24 @@ PodModel.prototype['storage_lim_mb'] = undefined;
 PodModel.prototype['gpu'] = 0;
 
 /**
- * @member {String} username
+ * @member {Number} mem_lim_mb
  */
-PodModel.prototype['username'] = undefined;
+PodModel.prototype['mem_lim_mb'] = undefined;
 
 /**
- * @member {String} user_uuid
+ * @member {String} name
  */
-PodModel.prototype['user_uuid'] = undefined;
+PodModel.prototype['name'] = undefined;
 
 /**
- * @member {Date} created_at
+ * @member {String} pod_id
  */
-PodModel.prototype['created_at'] = undefined;
+PodModel.prototype['pod_id'] = undefined;
+
+/**
+ * @member {module:model/ResourceStatusEnum} resource_status
+ */
+PodModel.prototype['resource_status'] = undefined;
 
 /**
  * @member {Date} started_at
@@ -276,9 +267,24 @@ PodModel.prototype['created_at'] = undefined;
 PodModel.prototype['started_at'] = undefined;
 
 /**
- * @member {Date} accessed_at
+ * @member {Number} storage_lim_mb
  */
-PodModel.prototype['accessed_at'] = undefined;
+PodModel.prototype['storage_lim_mb'] = undefined;
+
+/**
+ * @member {module:model/PodStatusEnum} target_status
+ */
+PodModel.prototype['target_status'] = undefined;
+
+/**
+ * @member {String} template_ref
+ */
+PodModel.prototype['template_ref'] = undefined;
+
+/**
+ * @member {String} template_str
+ */
+PodModel.prototype['template_str'] = undefined;
 
 /**
  * @member {Number} timeout_s
@@ -286,14 +292,19 @@ PodModel.prototype['accessed_at'] = undefined;
 PodModel.prototype['timeout_s'] = undefined;
 
 /**
- * @member {module:model/PodStatusEnum} current_status
+ * @member {String} user_uuid
  */
-PodModel.prototype['current_status'] = undefined;
+PodModel.prototype['user_uuid'] = undefined;
 
 /**
- * @member {module:model/PodStatusEnum} target_status
+ * @member {String} username
  */
-PodModel.prototype['target_status'] = undefined;
+PodModel.prototype['username'] = undefined;
+
+/**
+ * @member {String} version
+ */
+PodModel.prototype['version'] = undefined;
 
 
 

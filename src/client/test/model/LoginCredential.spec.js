@@ -54,14 +54,14 @@
       //expect(instance).to.be.a(Api.LoginCredential);
     });
 
-    it('should have the property username (base name: "username")', function() {
-      // uncomment below and update the code to test the property username
+    it('should have the property password (base name: "password")', function() {
+      // uncomment below and update the code to test the property password
       //var instance = new Api.LoginCredential();
       //expect(instance).to.be();
     });
 
-    it('should have the property password (base name: "password")', function() {
-      // uncomment below and update the code to test the property password
+    it('should have the property username (base name: "username")', function() {
+      // uncomment below and update the code to test the property username
       //var instance = new Api.LoginCredential();
       //expect(instance).to.be();
     });

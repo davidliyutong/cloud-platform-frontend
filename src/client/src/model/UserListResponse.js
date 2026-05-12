@@ -24,12 +24,12 @@ class UserListResponse {
      * Constructs a new <code>UserListResponse</code>.
      * List response for users
      * @alias module:model/UserListResponse
-     * @param status {Number} 
      * @param message {String} 
+     * @param status {Number} 
      */
-    constructor(status, message) { 
+    constructor(message, status) { 
         
-        UserListResponse.initialize(this, status, message);
+        UserListResponse.initialize(this, message, status);
     }
 
     /**
@@ -37,9 +37,9 @@ class UserListResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, status, message) { 
-        obj['status'] = status;
+    static initialize(obj, message, status) { 
         obj['message'] = message;
+        obj['status'] = status;
     }
 
     /**
@@ -56,11 +56,11 @@ class UserListResponse {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
-            }
             if (data.hasOwnProperty('message')) {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
             }
             if (data.hasOwnProperty('total_users')) {
                 obj['total_users'] = ApiClient.convertToType(data['total_users'], 'Number');
@@ -109,7 +109,7 @@ class UserListResponse {
 
 }
 
-UserListResponse.RequiredProperties = ["status", "message"];
+UserListResponse.RequiredProperties = ["message", "status"];
 
 /**
  * @member {String} description
@@ -118,14 +118,14 @@ UserListResponse.RequiredProperties = ["status", "message"];
 UserListResponse.prototype['description'] = '';
 
 /**
- * @member {Number} status
- */
-UserListResponse.prototype['status'] = undefined;
-
-/**
  * @member {String} message
  */
 UserListResponse.prototype['message'] = undefined;
+
+/**
+ * @member {Number} status
+ */
+UserListResponse.prototype['status'] = undefined;
 
 /**
  * @member {Number} total_users

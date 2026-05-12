@@ -54,8 +54,14 @@
       //expect(instance).to.be.a(Api.UserUpdateRequest);
     });
 
-    it('should have the property username (base name: "username")', function() {
-      // uncomment below and update the code to test the property username
+    it('should have the property email (base name: "email")', function() {
+      // uncomment below and update the code to test the property email
+      //var instance = new Api.UserUpdateRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property oldPassword (base name: "old_password")', function() {
+      // uncomment below and update the code to test the property oldPassword
       //var instance = new Api.UserUpdateRequest();
       //expect(instance).to.be();
     });
@@ -66,14 +72,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property status (base name: "status")', function() {
-      // uncomment below and update the code to test the property status
-      //var instance = new Api.UserUpdateRequest();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property email (base name: "email")', function() {
-      // uncomment below and update the code to test the property email
+    it('should have the property quota (base name: "quota")', function() {
+      // uncomment below and update the code to test the property quota
       //var instance = new Api.UserUpdateRequest();
       //expect(instance).to.be();
     });
@@ -84,8 +84,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property quota (base name: "quota")', function() {
-      // uncomment below and update the code to test the property quota
+    it('should have the property status (base name: "status")', function() {
+      // uncomment below and update the code to test the property status
+      //var instance = new Api.UserUpdateRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property username (base name: "username")', function() {
+      // uncomment below and update the code to test the property username
       //var instance = new Api.UserUpdateRequest();
       //expect(instance).to.be();
     });

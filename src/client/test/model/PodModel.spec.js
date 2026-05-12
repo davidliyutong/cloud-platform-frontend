@@ -54,32 +54,8 @@
       //expect(instance).to.be.a(Api.PodModel);
     });
 
-    it('should have the property resourceStatus (base name: "resource_status")', function() {
-      // uncomment below and update the code to test the property resourceStatus
-      //var instance = new Api.PodModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property podId (base name: "pod_id")', function() {
-      // uncomment below and update the code to test the property podId
-      //var instance = new Api.PodModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property name (base name: "name")', function() {
-      // uncomment below and update the code to test the property name
-      //var instance = new Api.PodModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property description (base name: "description")', function() {
-      // uncomment below and update the code to test the property description
-      //var instance = new Api.PodModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property templateRef (base name: "template_ref")', function() {
-      // uncomment below and update the code to test the property templateRef
+    it('should have the property accessedAt (base name: "accessed_at")', function() {
+      // uncomment below and update the code to test the property accessedAt
       //var instance = new Api.PodModel();
       //expect(instance).to.be();
     });
@@ -90,44 +66,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property memLimMb (base name: "mem_lim_mb")', function() {
-      // uncomment below and update the code to test the property memLimMb
-      //var instance = new Api.PodModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property storageLimMb (base name: "storage_lim_mb")', function() {
-      // uncomment below and update the code to test the property storageLimMb
-      //var instance = new Api.PodModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property username (base name: "username")', function() {
-      // uncomment below and update the code to test the property username
-      //var instance = new Api.PodModel();
-      //expect(instance).to.be();
-    });
-
     it('should have the property createdAt (base name: "created_at")', function() {
       // uncomment below and update the code to test the property createdAt
-      //var instance = new Api.PodModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property startedAt (base name: "started_at")', function() {
-      // uncomment below and update the code to test the property startedAt
-      //var instance = new Api.PodModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property accessedAt (base name: "accessed_at")', function() {
-      // uncomment below and update the code to test the property accessedAt
-      //var instance = new Api.PodModel();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property timeoutS (base name: "timeout_s")', function() {
-      // uncomment below and update the code to test the property timeoutS
       //var instance = new Api.PodModel();
       //expect(instance).to.be();
     });
@@ -138,8 +78,98 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property currentStatusReason (base name: "current_status_reason")', function() {
+      // uncomment below and update the code to test the property currentStatusReason
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property description (base name: "description")', function() {
+      // uncomment below and update the code to test the property description
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property gpu (base name: "gpu")', function() {
+      // uncomment below and update the code to test the property gpu
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property memLimMb (base name: "mem_lim_mb")', function() {
+      // uncomment below and update the code to test the property memLimMb
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property name (base name: "name")', function() {
+      // uncomment below and update the code to test the property name
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property podId (base name: "pod_id")', function() {
+      // uncomment below and update the code to test the property podId
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property resourceStatus (base name: "resource_status")', function() {
+      // uncomment below and update the code to test the property resourceStatus
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property startedAt (base name: "started_at")', function() {
+      // uncomment below and update the code to test the property startedAt
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property storageLimMb (base name: "storage_lim_mb")', function() {
+      // uncomment below and update the code to test the property storageLimMb
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
     it('should have the property targetStatus (base name: "target_status")', function() {
       // uncomment below and update the code to test the property targetStatus
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property templateRef (base name: "template_ref")', function() {
+      // uncomment below and update the code to test the property templateRef
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property templateStr (base name: "template_str")', function() {
+      // uncomment below and update the code to test the property templateStr
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property timeoutS (base name: "timeout_s")', function() {
+      // uncomment below and update the code to test the property timeoutS
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property userUuid (base name: "user_uuid")', function() {
+      // uncomment below and update the code to test the property userUuid
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property username (base name: "username")', function() {
+      // uncomment below and update the code to test the property username
+      //var instance = new Api.PodModel();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property version (base name: "version")', function() {
+      // uncomment below and update the code to test the property version
       //var instance = new Api.PodModel();
       //expect(instance).to.be();
     });

@@ -24,12 +24,12 @@ class UserDeleteResponse {
      * Constructs a new <code>UserDeleteResponse</code>.
      * Delete response for users, the same as get response
      * @alias module:model/UserDeleteResponse
-     * @param status {Number} 
      * @param message {String} 
+     * @param status {Number} 
      */
-    constructor(status, message) { 
+    constructor(message, status) { 
         
-        UserDeleteResponse.initialize(this, status, message);
+        UserDeleteResponse.initialize(this, message, status);
     }
 
     /**
@@ -37,9 +37,9 @@ class UserDeleteResponse {
      * This method is used by the constructors of any subclasses, in order to implement multiple inheritance (mix-ins).
      * Only for internal use.
      */
-    static initialize(obj, status, message) { 
-        obj['status'] = status;
+    static initialize(obj, message, status) { 
         obj['message'] = message;
+        obj['status'] = status;
     }
 
     /**
@@ -56,11 +56,11 @@ class UserDeleteResponse {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('status')) {
-                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
-            }
             if (data.hasOwnProperty('message')) {
                 obj['message'] = ApiClient.convertToType(data['message'], 'String');
+            }
+            if (data.hasOwnProperty('status')) {
+                obj['status'] = ApiClient.convertToType(data['status'], 'Number');
             }
             if (data.hasOwnProperty('user')) {
                 obj['user'] = UserModel.constructFromObject(data['user']);
@@ -100,7 +100,7 @@ class UserDeleteResponse {
 
 }
 
-UserDeleteResponse.RequiredProperties = ["status", "message"];
+UserDeleteResponse.RequiredProperties = ["message", "status"];
 
 /**
  * @member {String} description
@@ -109,14 +109,14 @@ UserDeleteResponse.RequiredProperties = ["status", "message"];
 UserDeleteResponse.prototype['description'] = '';
 
 /**
- * @member {Number} status
- */
-UserDeleteResponse.prototype['status'] = undefined;
-
-/**
  * @member {String} message
  */
 UserDeleteResponse.prototype['message'] = undefined;
+
+/**
+ * @member {Number} status
+ */
+UserDeleteResponse.prototype['status'] = undefined;
 
 /**
  * @member {module:model/UserModel} user
