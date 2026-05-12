@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **podId** | **String** |  | 
 **storageLimMb** | **Number** |  | [optional] 
 **targetStatus** | [**PodStatusEnum**](PodStatusEnum.md) |  | [optional] 
+**templateRef** | **String** |  | [optional] 
 **timeoutS** | **Number** |  | [optional] 
 **userUuid** | **String** |  | [optional] 
 **username** | **String** |  | [optional] 

@@ -115,11 +115,13 @@
                       :items="target_status_list"
                       label="Target Status"
                   ></v-select>
-                  <v-text-field
-                      label="Template Reference (s)"
-                      disabled
+                  <v-select
                       v-model="editingPod.template_ref"
-                  ></v-text-field>
+                      :items="templates"
+                      item-text="friendlyName"
+                      item-value="template_id"
+                      label="Template"
+                  ></v-select>
 
                 </v-form>
 
@@ -249,11 +251,13 @@
                             :items="target_status_list"
                             label="Target Status"
                         ></v-select>
-                        <v-text-field
-                            label="Template Reference (s)"
-                            disabled
+                        <v-select
                             v-model="updatingPod.template_ref"
-                        ></v-text-field>
+                            :items="templates"
+                            item-text="friendlyName"
+                            item-value="template_id"
+                            label="Template"
+                        ></v-select>
 
                       </v-form>
                     </v-card-text>
@@ -624,7 +628,6 @@ export default {
       this.updateDialog = false;
     },
     saveUpdateForm: function () {
-      // console.log(this.updatingPod);
       this.updatePod(
           this.updatingPod.pod_id,
           this.updatingPod.name,
@@ -635,6 +638,7 @@ export default {
           this.updatingPod.mem_lim_mb,
           null,
           this.updatingPod.gpu,
+          this.updatingPod.template_ref,
       );
       this.updateDialog = false;
     },
@@ -657,14 +661,15 @@ export default {
           this.editingPod.mem_lim_mb,
           null,
           this.editingPod.gpu,
+          this.editingPod.template_ref,
       );
       this.editDialog = false;
     },
     powerPod: function (pod_id, status) {
       if (status) {
-        this.updatePod(pod_id, null, null, null, 'running', null, null, null, null);
+        this.updatePod(pod_id, null, null, null, 'running', null, null, null, null, null);
       } else {
-        this.updatePod(pod_id, null, null, null, 'stopped', null, null, null, null);
+        this.updatePod(pod_id, null, null, null, 'stopped', null, null, null, null, null);
       }
     },
     actionDeletePod: function (pod_id) {
@@ -814,7 +819,8 @@ export default {
         cpuLimMCpu = null,
         memLimMb = null,
         storageLimMb = null,
-        gpu = null) {
+        gpu = null,
+        templateRef = null) {
       let apiInstance = new Api.NonadminPodApi();
       let token = defaultClient.authentications['token'];
       token.accessToken = localStorage.getItem("token");
@@ -830,6 +836,7 @@ export default {
       if (memLimMb != null) updateRequest.mem_lim_mb = parseInt(memLimMb);
       if (storageLimMb != null) updateRequest.storage_lim_mb = parseInt(storageLimMb);
       if (gpu != null) updateRequest.gpu = parseInt(gpu);
+      if (templateRef != null) updateRequest.template_ref = templateRef;
 
       let payload = {
         'podUpdateRequest': updateRequest
@@ -864,7 +871,8 @@ export default {
         cpuLimMCpu = null,
         memLimMb = null,
         storageLimMb = null,
-        gpu = null) {
+        gpu = null,
+        templateRef = null) {
       let apiInstance = new Api.AdminPodApi();
       let token = defaultClient.authentications['token'];
       token.accessToken = localStorage.getItem("token");
@@ -880,6 +888,7 @@ export default {
       if (memLimMb != null) updateRequest.mem_lim_mb = parseInt(memLimMb);
       if (storageLimMb != null) updateRequest.storage_lim_mb = parseInt(storageLimMb);
       if (gpu != null) updateRequest.gpu = parseInt(gpu);
+      if (templateRef != null) updateRequest.template_ref = templateRef;
 
       let payload = {
         'podUpdateRequest': updateRequest

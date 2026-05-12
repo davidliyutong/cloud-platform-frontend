@@ -864,6 +864,12 @@
                     "nullable": true,
                     "default": null
                   },
+                  "template_ref": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Template Ref"
+                  },
                   "timeout_s": {
                     "type": "integer",
                     "nullable": true,
@@ -2619,6 +2625,12 @@
                     ],
                     "nullable": true,
                     "default": null
+                  },
+                  "template_ref": {
+                    "type": "string",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Template Ref"
                   },
                   "timeout_s": {
                     "type": "integer",

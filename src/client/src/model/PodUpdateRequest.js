@@ -78,6 +78,9 @@ class PodUpdateRequest {
             if (data.hasOwnProperty('target_status')) {
                 obj['target_status'] = ApiClient.convertToType(data['target_status'], PodStatusEnum);
             }
+            if (data.hasOwnProperty('template_ref')) {
+                obj['template_ref'] = ApiClient.convertToType(data['template_ref'], 'String');
+            }
             if (data.hasOwnProperty('timeout_s')) {
                 obj['timeout_s'] = ApiClient.convertToType(data['timeout_s'], 'Number');
             }
@@ -114,6 +117,10 @@ class PodUpdateRequest {
         // ensure the json data is a string
         if (data['pod_id'] && !(typeof data['pod_id'] === 'string' || data['pod_id'] instanceof String)) {
             throw new Error("Expected the field `pod_id` to be a primitive type in the JSON string but got " + data['pod_id']);
+        }
+        // ensure the json data is a string
+        if (data['template_ref'] && !(typeof data['template_ref'] === 'string' || data['template_ref'] instanceof String)) {
+            throw new Error("Expected the field `template_ref` to be a primitive type in the JSON string but got " + data['template_ref']);
         }
         // ensure the json data is a string
         if (data['user_uuid'] && !(typeof data['user_uuid'] === 'string' || data['user_uuid'] instanceof String)) {
@@ -177,6 +184,11 @@ PodUpdateRequest.prototype['storage_lim_mb'] = undefined;
  * @member {module:model/PodStatusEnum} target_status
  */
 PodUpdateRequest.prototype['target_status'] = undefined;
+
+/**
+ * @member {String} template_ref
+ */
+PodUpdateRequest.prototype['template_ref'] = undefined;
 
 /**
  * @member {Number} timeout_s
