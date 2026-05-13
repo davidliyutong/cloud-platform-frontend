@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**getadminTemplateAdminTemplateGet**](AdminTemplateApi.md#getadminTemplateAdminTemplateGet) | **GET** /v1/admin/templates/{template_id} | Get a template.
 [**getadminTemplateAdminTemplateList**](AdminTemplateApi.md#getadminTemplateAdminTemplateList) | **GET** /v1/admin/templates | List all templates.
 [**postadminTemplateAdminTemplateCreate**](AdminTemplateApi.md#postadminTemplateAdminTemplateCreate) | **POST** /v1/admin/templates | Create a template.
-[**putadminTemplateAdminTemplateUpdate**](AdminTemplateApi.md#putadminTemplateAdminTemplateUpdate) | **PUT** /v1/admin/templates/{template_id} | Update a template.
+[**putadminTemplateAdminTemplateUpdate**](AdminTemplateApi.md#putadminTemplateAdminTemplateUpdate) | **PUT** /v1/admin/templates/{template_id} | Update a template. Supports toggling the enabled field to hide/show
 
 
 
@@ -212,7 +212,9 @@ Name | Type | Description  | Notes
 
 > TemplateUpdateResponse putadminTemplateAdminTemplateUpdate(templateId, opts)
 
-Update a template.
+Update a template. Supports toggling the enabled field to hide/show
+
+the template from non-admin users without deleting it.
 
 ### Example
 

@@ -133,7 +133,7 @@ Class | Method | HTTP request | Description
 *Api.AdminTemplateApi* | [**getadminTemplateAdminTemplateGet**](docs/AdminTemplateApi.md#getadminTemplateAdminTemplateGet) | **GET** /v1/admin/templates/{template_id} | Get a template.
 *Api.AdminTemplateApi* | [**getadminTemplateAdminTemplateList**](docs/AdminTemplateApi.md#getadminTemplateAdminTemplateList) | **GET** /v1/admin/templates | List all templates.
 *Api.AdminTemplateApi* | [**postadminTemplateAdminTemplateCreate**](docs/AdminTemplateApi.md#postadminTemplateAdminTemplateCreate) | **POST** /v1/admin/templates | Create a template.
-*Api.AdminTemplateApi* | [**putadminTemplateAdminTemplateUpdate**](docs/AdminTemplateApi.md#putadminTemplateAdminTemplateUpdate) | **PUT** /v1/admin/templates/{template_id} | Update a template.
+*Api.AdminTemplateApi* | [**putadminTemplateAdminTemplateUpdate**](docs/AdminTemplateApi.md#putadminTemplateAdminTemplateUpdate) | **PUT** /v1/admin/templates/{template_id} | Update a template. Supports toggling the enabled field to hide/show
 *Api.AdminUserApi* | [**deleteadminUserAdminUserDelete**](docs/AdminUserApi.md#deleteadminUserAdminUserDelete) | **DELETE** /v1/admin/users/{username} | Delete a user. This will mark the user as deleted.
 *Api.AdminUserApi* | [**getadminUserAdminUserGet**](docs/AdminUserApi.md#getadminUserAdminUserGet) | **GET** /v1/admin/users/{username} | Get a user.
 *Api.AdminUserApi* | [**getadminUserAdminUserList**](docs/AdminUserApi.md#getadminUserAdminUserList) | **GET** /v1/admin/users | List all users.
@@ -159,8 +159,8 @@ Class | Method | HTTP request | Description
 *Api.NonadminPodApi* | [**getnonadminPodNonadminPodList**](docs/NonadminPodApi.md#getnonadminPodNonadminPodList) | **GET** /v1/pods | List all pods. Only pods owned by the user will be returned.
 *Api.NonadminPodApi* | [**postnonadminPodNonadminPodCreate**](docs/NonadminPodApi.md#postnonadminPodNonadminPodCreate) | **POST** /v1/pods | Create a pod owned by the user.
 *Api.NonadminPodApi* | [**putnonadminPodNonadminPodUpdate**](docs/NonadminPodApi.md#putnonadminPodNonadminPodUpdate) | **PUT** /v1/pods/{pod_id} | Update a pod owned by the user.
-*Api.NonadminTemplateApi* | [**getnonadminTemplateNonadminTemplateGet**](docs/NonadminTemplateApi.md#getnonadminTemplateNonadminTemplateGet) | **GET** /v1/templates/{template_id} | Get a template by id. The same as admin_template_get, but without role check.
-*Api.NonadminTemplateApi* | [**getnonadminTemplateNonadminTemplateList**](docs/NonadminTemplateApi.md#getnonadminTemplateNonadminTemplateList) | **GET** /v1/templates | List all templates. The same as admin_template_list, but without role check.
+*Api.NonadminTemplateApi* | [**getnonadminTemplateNonadminTemplateGet**](docs/NonadminTemplateApi.md#getnonadminTemplateNonadminTemplateGet) | **GET** /v1/templates/{template_id} | Get a template by id. Returns 404 if the template does not exist or is disabled.
+*Api.NonadminTemplateApi* | [**getnonadminTemplateNonadminTemplateList**](docs/NonadminTemplateApi.md#getnonadminTemplateNonadminTemplateList) | **GET** /v1/templates | List enabled templates. Only templates with enabled&#x3D;true are returned;
 *Api.NonadminUserApi* | [**getnonadminUserNonadminUserGet**](docs/NonadminUserApi.md#getnonadminUserNonadminUserGet) | **GET** /v1/users/{username} | Get user by username.
 *Api.NonadminUserApi* | [**putnonadminUserNonadminUserUpdate**](docs/NonadminUserApi.md#putnonadminUserNonadminUserUpdate) | **PUT** /v1/users/{username} | Update user by username.
 

@@ -149,9 +149,9 @@ QuotaModel.prototype['storage_mb'] = undefined;
 
 /**
  * @member {String} version
- * @default 'v0.0.8'
+ * @default 'v0.0.11'
  */
-QuotaModel.prototype['version'] = 'v0.0.8';
+QuotaModel.prototype['version'] = 'v0.0.11';
 
 
 

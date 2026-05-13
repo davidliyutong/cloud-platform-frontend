@@ -216,7 +216,8 @@ export default class AdminTemplateApi {
      */
 
     /**
-     * Update a template.
+     * Update a template. Supports toggling the enabled field to hide/show
+     * the template from non-admin users without deleting it.
      * @param {String} templateId 
      * @param {Object} opts Optional parameters
      * @param {module:model/TemplateUpdateRequest} [templateUpdateRequest] 

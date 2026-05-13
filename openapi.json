@@ -212,7 +212,7 @@
             "type": "integer"
           },
           "version": {
-            "default": "v0.0.8",
+            "default": "v0.0.11",
             "title": "Version",
             "type": "string"
           }
@@ -248,6 +248,11 @@
           "description": {
             "title": "Description",
             "type": "string"
+          },
+          "enabled": {
+            "default": true,
+            "title": "Enabled",
+            "type": "boolean"
           },
           "fields": {
             "additionalProperties": {
@@ -1252,6 +1257,7 @@
         ]
       },
       "put": {
+        "description": "the template from non-admin users without deleting it.",
         "operationId": "put~admin_template.admin_template_update",
         "parameters": [
           {
@@ -1281,6 +1287,12 @@
                     "nullable": true,
                     "default": null,
                     "title": "Description"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "nullable": true,
+                    "default": null,
+                    "title": "Enabled"
                   },
                   "fields": {
                     "additionalProperties": true,
@@ -1363,7 +1375,7 @@
             "token": []
           }
         ],
-        "summary": "Update a template.",
+        "summary": "Update a template. Supports toggling the enabled field to hide/show",
         "tags": [
           "admin_template"
         ]
@@ -2710,6 +2722,7 @@
     },
     "/v1/templates": {
       "get": {
+        "description": "disabled templates are invisible to non-admin users.",
         "operationId": "get~nonadmin_template.nonadmin_template_list",
         "parameters": [
           {
@@ -2790,7 +2803,7 @@
             "token": []
           }
         ],
-        "summary": "List all templates. The same as admin_template_list, but without role check.",
+        "summary": "List enabled templates. Only templates with enabled=true are returned;",
         "tags": [
           "nonadmin_template"
         ]
@@ -2851,7 +2864,7 @@
             "token": []
           }
         ],
-        "summary": "Get a template by id. The same as admin_template_get, but without role check.",
+        "summary": "Get a template by id. Returns 404 if the template does not exist or is disabled.",
         "tags": [
           "nonadmin_template"
         ]

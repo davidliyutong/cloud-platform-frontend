@@ -72,6 +72,9 @@ class TemplateModel {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
+            if (data.hasOwnProperty('enabled')) {
+                obj['enabled'] = ApiClient.convertToType(data['enabled'], 'Boolean');
+            }
             if (data.hasOwnProperty('fields')) {
                 obj['fields'] = ApiClient.convertToType(data['fields'], {'String': FieldTypeEnum});
             }
@@ -151,6 +154,12 @@ TemplateModel.prototype['defaults'] = undefined;
  * @member {String} description
  */
 TemplateModel.prototype['description'] = undefined;
+
+/**
+ * @member {Boolean} enabled
+ * @default true
+ */
+TemplateModel.prototype['enabled'] = true;
 
 /**
  * @member {Object.<String, module:model/FieldTypeEnum>} fields

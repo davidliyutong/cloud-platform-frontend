@@ -56,6 +56,9 @@ class TemplateUpdateRequest {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
+            if (data.hasOwnProperty('enabled')) {
+                obj['enabled'] = ApiClient.convertToType(data['enabled'], 'Boolean');
+            }
             if (data.hasOwnProperty('fields')) {
                 obj['fields'] = ApiClient.convertToType(data['fields'], {'String': Object});
             }
@@ -125,6 +128,11 @@ TemplateUpdateRequest.prototype['defaults'] = undefined;
  * @member {String} description
  */
 TemplateUpdateRequest.prototype['description'] = undefined;
+
+/**
+ * @member {Boolean} enabled
+ */
+TemplateUpdateRequest.prototype['enabled'] = undefined;
 
 /**
  * @member {Object.<String, Object>} fields

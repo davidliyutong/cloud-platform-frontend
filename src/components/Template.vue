@@ -21,6 +21,12 @@
             <v-list-item-content>
               <div class="overline mb-2 text-h6">
                 <span class="font-weight-bold">{{ template.name }}</span>
+                <v-chip
+                    x-small
+                    class="ml-2"
+                    :color="template.enabled !== false ? 'green' : 'grey'"
+                    dark
+                >{{ template.enabled !== false ? 'Enabled' : 'Disabled' }}</v-chip>
               </div>
               <v-list-item-subtitle
                   class="text--primary"
@@ -37,6 +43,16 @@
 
             <v-list-item-action>
               <v-col>
+                <v-btn
+                    :color="template.enabled !== false ? 'orange' : 'green'"
+                    bottom
+                    right
+                    class="mx-2 white--text"
+                    @click="toggleEnabled(template)"
+                >
+                  <v-icon>{{ template.enabled !== false ? 'mdi-toggle-switch-off' : 'mdi-toggle-switch' }}</v-icon>
+                  {{ template.enabled !== false ? 'Disable' : 'Enable' }}
+                </v-btn>
                 <v-btn
                     :color="'blue'"
                     bottom
@@ -154,6 +170,12 @@
                   placeholder="Provide the image"
                   v-model="editingTemplate.image_ref"
               ></v-text-field>
+              <v-switch
+                  v-model="editingTemplate.enabled"
+                  label="Enabled"
+                  color="green"
+                  class="mt-2"
+              ></v-switch>
               <h3>Template String *</h3>
               <textarea v-model="editingTemplate.template_str" ref="templateStrInput"></textarea>
             </v-form>
@@ -215,7 +237,8 @@ export default {
       "description": "",
       "image_ref": "",
       "template_str": "",
-      "template_id": ""
+      "template_id": "",
+      "enabled": true,
     },
     deletingTemplate: {
       "name": "",
@@ -255,7 +278,7 @@ export default {
     },
     openCreateDialog: function () {
       this.formDialogMode = 'create';
-      this.editingTemplate = { name: "", description: "", image_ref: "", template_str: "", template_id: "" };
+      this.editingTemplate = { name: "", description: "", image_ref: "", template_str: "", template_id: "", enabled: true };
     },
     openEditDialog: function (template) {
       this.formDialogMode = 'update';
@@ -265,6 +288,7 @@ export default {
         image_ref: template.image_ref,
         template_str: template.template_str,
         template_id: template.template_id,
+        enabled: template.enabled !== false,
       };
       this.formDialog = true;
     },
@@ -297,6 +321,7 @@ export default {
             this.editingTemplate.description,
             this.editingTemplate.image_ref,
             templateStr,
+            this.editingTemplate.enabled,
         );
       }
       this.formDialog = false;
@@ -360,25 +385,30 @@ export default {
       })
 
     },
+    async toggleEnabled(template) {
+      const newEnabled = template.enabled === false;
+      await this.updateTemplate(template.template_id, null, null, null, null, newEnabled);
+      this.listTemplates();
+    },
     async updateTemplate(
         templateID = null,
         name = null,
         description = null,
         imageRef = null,
-        templateStr = null) {
+        templateStr = null,
+        enabled = null) {
       let apiInstance = new Api.AdminTemplateApi();
       let token = defaultClient.authentications['token'];
       token.accessToken = localStorage.getItem("token");
 
-      let payload = {
-        'templateUpdateRequest': {
-          template_id: templateID,
-          name: name,
-          description: description,
-          image_ref: imageRef,
-          template_str: templateStr,
-        }
-      }
+      let updateRequest = { template_id: templateID };
+      if (name !== null) updateRequest.name = name;
+      if (description !== null) updateRequest.description = description;
+      if (imageRef !== null) updateRequest.image_ref = imageRef;
+      if (templateStr !== null) updateRequest.template_str = templateStr;
+      if (enabled !== null) updateRequest.enabled = enabled;
+
+      let payload = { 'templateUpdateRequest': updateRequest };
 
       // console.log( defaultClient.authentications['token'] );
       apiInstance.putadminTemplateAdminTemplateUpdate(templateID, payload, (error, data, response) => {

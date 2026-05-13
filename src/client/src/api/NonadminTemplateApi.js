@@ -44,7 +44,7 @@ export default class NonadminTemplateApi {
      */
 
     /**
-     * Get a template by id. The same as admin_template_get, but without role check.
+     * Get a template by id. Returns 404 if the template does not exist or is disabled.
      * @param {String} templateId 
      * @param {module:api/NonadminTemplateApi~getnonadminTemplateNonadminTemplateGetCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/TemplateGetResponse}
@@ -86,7 +86,8 @@ export default class NonadminTemplateApi {
      */
 
     /**
-     * List all templates. The same as admin_template_list, but without role check.
+     * List enabled templates. Only templates with enabled=true are returned;
+     * disabled templates are invisible to non-admin users.
      * @param {Object} opts Optional parameters
      * @param {Number} [indexStart] 
      * @param {Number} [indexEnd] 

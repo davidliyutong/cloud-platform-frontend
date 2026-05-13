@@ -11,6 +11,6 @@ Name | Type | Description | Notes
 **networkMb** | **Number** |  | [optional] [default to 0]
 **podN** | **Number** |  | 
 **storageMb** | **Number** |  | 
-**version** | **String** |  | [optional] [default to &#39;v0.0.8&#39;]
+**version** | **String** |  | [optional] [default to &#39;v0.0.11&#39;]
 
 

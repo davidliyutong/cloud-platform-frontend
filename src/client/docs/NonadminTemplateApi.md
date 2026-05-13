@@ -4,8 +4,8 @@ All URIs are relative to *http://127.0.0.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getnonadminTemplateNonadminTemplateGet**](NonadminTemplateApi.md#getnonadminTemplateNonadminTemplateGet) | **GET** /v1/templates/{template_id} | Get a template by id. The same as admin_template_get, but without role check.
-[**getnonadminTemplateNonadminTemplateList**](NonadminTemplateApi.md#getnonadminTemplateNonadminTemplateList) | **GET** /v1/templates | List all templates. The same as admin_template_list, but without role check.
+[**getnonadminTemplateNonadminTemplateGet**](NonadminTemplateApi.md#getnonadminTemplateNonadminTemplateGet) | **GET** /v1/templates/{template_id} | Get a template by id. Returns 404 if the template does not exist or is disabled.
+[**getnonadminTemplateNonadminTemplateList**](NonadminTemplateApi.md#getnonadminTemplateNonadminTemplateList) | **GET** /v1/templates | List enabled templates. Only templates with enabled&#x3D;true are returned;
 
 
 
@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 > TemplateGetResponse getnonadminTemplateNonadminTemplateGet(templateId)
 
-Get a template by id. The same as admin_template_get, but without role check.
+Get a template by id. Returns 404 if the template does not exist or is disabled.
 
 ### Example
 
@@ -60,7 +60,9 @@ Name | Type | Description  | Notes
 
 > TemplateListResponse getnonadminTemplateNonadminTemplateList(opts)
 
-List all templates. The same as admin_template_list, but without role check.
+List enabled templates. Only templates with enabled&#x3D;true are returned;
+
+disabled templates are invisible to non-admin users.
 
 ### Example
 
